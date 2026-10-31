@@ -1,0 +1,14 @@
+# Godot 4
+.godot/
+*.import.tmp
+export_presets.cfg.bak
+/project/android/build/
+*.apk
+*.aab
+*.keystore
+
+# Obsidian (estado local por máquina)
+vault/.obsidian/workspace.json
+vault/.obsidian/workspace-mobile.json
+vault/.obsidian/cache
+vault/.trash/
