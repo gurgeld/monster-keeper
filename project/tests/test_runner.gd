@@ -19,6 +19,12 @@ func _initialize() -> void:
 		"test_different_seeds_give_different_monsters",
 		"test_growth_rates_vary_within_10_percent",
 		"test_initial_stats_vary_within_10_percent",
+		"test_training_gain_uses_growth_rate",
+		"test_fatigue_reduces_gain",
+		"test_fatigue_stays_between_0_and_100",
+		"test_stats_cap_at_999",
+		"test_game_ends_after_52_weeks",
+		"test_grade_letters",
 	]
 	for t: String in tests:
 		if call(t) != true:
@@ -102,4 +108,76 @@ func test_initial_stats_vary_within_10_percent() -> bool:
 				if stat < roundi(base * 0.9) or stat > roundi(base * 1.1):
 					all_ok = false
 		check(all_ok, "%s initial stats stay within base ±10%%" % breed.name)
+	return true
+
+
+# A monster with known values, so the expected numbers are easy to compute.
+func make_test_monster() -> Monster:
+	var monster := Monster.new()
+	monster.growth_rates.assign([1.0, 1.5, 0.5, 1.0, 1.0, 1.0])
+	monster.stats.assign([100, 100, 100, 100, 100, 100])
+	return monster
+
+
+# Rules from vault/Treino semanal.md.
+func test_training_gain_uses_growth_rate() -> bool:
+	var monster := make_test_monster()
+	check(monster.train(Monster.Stat.POWER) == 15, "gain = 10 × 1.5 with no fatigue")
+	check(monster.stats[Monster.Stat.POWER] == 115, "POWER goes from 100 to 115")
+	check(monster.stats[Monster.Stat.LIFE] == 100, "training POWER does not change LIFE")
+	return true
+
+
+func test_fatigue_reduces_gain() -> bool:
+	var monster := make_test_monster()
+	monster.train(Monster.Stat.LIFE)
+	check(monster.fatigue == 20, "one training adds 20 fatigue")
+	check(monster.train(Monster.Stat.LIFE) == 9, "fatigue 20 gives gain 10 × 0.9")
+	monster.fatigue = 100
+	check(monster.train(Monster.Stat.LIFE) == 5, "fatigue 100 gives gain 10 × 0.5")
+	monster.rest()
+	check(monster.fatigue == 60, "rest removes 40 fatigue")
+	return true
+
+
+func test_fatigue_stays_between_0_and_100() -> bool:
+	var monster := make_test_monster()
+	for i in 10:
+		monster.train(Monster.Stat.LIFE)
+	check(monster.fatigue == 100, "fatigue stops at 100")
+	for i in 5:
+		monster.rest()
+	check(monster.fatigue == 0, "fatigue stops at 0")
+	return true
+
+
+func test_stats_cap_at_999() -> bool:
+	var monster := make_test_monster()
+	monster.stats[Monster.Stat.LIFE] = 995
+	monster.train(Monster.Stat.LIFE)
+	check(monster.stats[Monster.Stat.LIFE] == 999, "stat stops at 999")
+	return true
+
+
+func test_game_ends_after_52_weeks() -> bool:
+	var game := Game.new(make_test_monster())
+	check(game.week == 1 and not game.is_over(), "game starts at week 1")
+	for i in 51:
+		if i % 2 == 0:
+			game.train(Monster.Stat.LIFE)
+		else:
+			game.rest()
+	check(game.week == 52 and not game.is_over(), "week 52 is still playable")
+	game.rest()
+	check(game.is_over(), "game is over after 52 actions")
+	return true
+
+
+func test_grade_letters() -> bool:
+	check(Monster.grade(0.5) == "E", "0.5 is E")
+	check(Monster.grade(0.7) == "D", "0.7 is D")
+	check(Monster.grade(1.0) == "C", "1.0 is C")
+	check(Monster.grade(1.1) == "B", "1.1 is B")
+	check(Monster.grade(1.3) == "A", "1.3 is A")
+	check(Monster.grade(1.54) == "A", "above 1.5 shows A for now")
 	return true
