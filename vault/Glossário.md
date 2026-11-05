@@ -35,6 +35,15 @@ _Evitar_: campeonato.
 **Nível**: categoria de um torneio (ex.: regional). Monstros mais fortes acessam níveis mais altos. Ver [[Progressão]].
 _Evitar_: liga, divisão.
 
+**Tick**: passo de tempo da batalha. A barra de cada monstro enche a cada tick, mais rápido com mais Velocidade. Ver [[Batalha]].
+_Evitar_: turno, rodada.
+
+**Habilidade**: golpe de batalha de uma raça. Tem tipo de dano, stat que a fortalece e espera em ticks. Toda ação do monstro na luta é uma habilidade. Ver [[Batalha]].
+_Evitar_: ataque, golpe, magia.
+
+**Tipo de dano**: cortante, perfurante ou impactante. Cada habilidade tem um. Cada raça tem 1 fraqueza, 1 resistência e 1 neutro. Ver [[Batalha]].
+_Evitar_: elemento.
+
 **Semana**: unidade de tempo do jogo. Cada semana tem uma ação.
 
 **Fase (de idade)**: um dos 3 períodos da vida do monstro: jovem, auge e velho. Cada fase muda o ganho do treino. Ver [[Treino semanal]].
