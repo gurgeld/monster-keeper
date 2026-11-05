@@ -37,4 +37,9 @@ _Evitar_: liga, divisão.
 
 **Semana**: unidade de tempo do jogo. Cada semana tem uma ação.
 
+**Fase (de idade)**: um dos 3 períodos da vida do monstro: jovem, auge e velho. Cada fase muda o ganho do treino. Ver [[Treino semanal]].
+_Evitar_: estágio, era.
+
+**Memorial**: tela com o registro dos monstros que morreram. Não tem efeito no jogo. Ver [[Treino semanal]].
+
 **Seed da partida**: número que define toda a aleatoriedade de uma partida. Também serve como "variável do save" da palavra. Ver [[Aleatoriedade determinística]].

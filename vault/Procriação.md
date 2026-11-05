@@ -11,6 +11,7 @@ Forma de criar novos monstros a partir de dois pais. Parte de [[Visão geral]].
 - É a **regra única** de criação: ovos de loja, expedição e torneio vêm de pais fictícios (ver [[Ovo]]).
 - A [[Mutação]] não é herdada.
 - Herança segue [[Aleatoriedade determinística]].
+- Os pais precisam estar **vivos** e na fase **auge ou velho**. O jovem não procria. O monstro morto não procria. Ver [[Treino semanal]], seção "Tempo de vida".
 
 ## Genética da taxa de ganho: alelos
 
