@@ -1,0 +1,211 @@
+{
+  "main": {
+    "id": "c5a3b5a0ca73ab2a",
+    "type": "split",
+    "children": [
+      {
+        "id": "19b34963e3ff76e7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "39b8b75f53c4bf90",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Raças.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Raças"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "ed4a8733bcb8fec8",
+    "type": "split",
+    "children": [
+      {
+        "id": "81e31bf346b53bdb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8af00a57945ed096",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de arquivos"
+            }
+          },
+          {
+            "id": "2120d3296db299c6",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Procurar"
+            }
+          },
+          {
+            "id": "462e074821c91269",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "1e09629d550b4a16",
+    "type": "split",
+    "children": [
+      {
+        "id": "f4ecd5e65bba2751",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "1141f45bee269a03",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Raças.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Links inversos"
+            }
+          },
+          {
+            "id": "3c288db9bbf00c51",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Raças.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Links de saída"
+            }
+          },
+          {
+            "id": "9d2fde0b03ac7e07",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "3e33d8a1555af4f0",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas as propriedades"
+            }
+          },
+          {
+            "id": "6b973106d509277b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Raças.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumário"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false
+    }
+  },
+  "active": "39b8b75f53c4bf90",
+  "lastOpenFiles": [
+    "Ovo, palavra e incubação.md",
+    "Visão geral.md",
+    "Visão geral.md.tmp.7080.ff010b89a041",
+    "Ovo, palavra e incubação.md.tmp.7080.33caa5724335",
+    "Ovo, palavra e incubação.md.tmp.7080.979a07809950",
+    "Stats.md.tmp.7080.f4ec73f27e65",
+    "Stats.md.tmp.7080.65bfbd6979e7",
+    "Raças.md",
+    "Raças.md.tmp.7080.3f1dc3779bd6",
+    "Procriação.md",
+    "Batalha.md",
+    "Aleatoriedade determinística.md",
+    "Stats.md",
+    "Stats.md.tmp.7080.4addcc7474bc",
+    "Stats.md.tmp.7080.3e120529ebe5",
+    "Visão geral.md.tmp.7080.12988c503955",
+    "Procriação.md.tmp.7080.859a3d3a50e0"
+  ]
+}
