@@ -21,7 +21,9 @@ Parte de [[Visão geral]].
   | A | 1,3 a 1,5 |
 
 - Valores base de cada raça: ver [[Raças]].
-- Os **stats iniciais** do recém-nascido também vêm da base da raça mais uma variação rolada no ovo.
+- Os **stats iniciais** do recém-nascido também vêm da base da raça mais uma variação de **±10%** rolada no ovo.
+- A variação **pode passar** dos limites 0,5 e 1,5 (ex.: 1,4 × 1,1 = 1,54). Não há corte.
+  **Por quê:** abre espaço para monstros excepcionais, sobretudo via [[Procriação]].
 - A [[Ovo, palavra e incubação|palavra]] aplica bônus e penalidades sobre essa taxa.
 - Na [[Procriação]], o filho herda a taxa de ganho, não os stats acumulados.
 
@@ -31,5 +33,4 @@ Parte de [[Visão geral]].
 
 ## Em aberto
 
-- A variação de ±10% pode passar dos limites 0,5 e 1,5? (ex.: 1,4 × 1,1 = 1,54)
-- Tamanho da variação dos stats iniciais (também ±10%?).
+- Qual letra mostrar para taxa acima de 1,5 ou abaixo de 0,5? (uma letra S?)
