@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Breed" format=3]
+
+[ext_resource type="Script" path="res://scripts/logic/breed.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+name = "Tatuço"
+growth_rates = Array[float]([1.4, 1.0, 0.7, 0.8, 0.7, 1.4])
+initial_stats = Array[int]([80, 50, 20, 40, 25, 85])
