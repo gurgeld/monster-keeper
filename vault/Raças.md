@@ -1,11 +1,12 @@
 # Raças
 
-Parte de [[Visão geral]]. O ovo define a raça (ver [[Ovo, palavra e incubação]]).
+Parte de [[Visão geral]]. O ovo define a raça (ver [[Ovo]]).
 
 ## Decidido
 
 - Tema visual: **animais fantásticos**.
 - Primeiro protótipo: 3 raças, cada uma com um arquétipo claro.
+- Cada raça tem um **conjunto de habilidades** de batalha. As habilidades de cada raça escalam mais com um stat do que com outro (ex.: uma raça usa Força como modificador; outra, Velocidade). Ver [[Batalha]].
 
 | Raça | Animal | Arquétipo | Stats fortes |
 |---|---|---|---|
@@ -38,4 +39,5 @@ Regra: **a soma dos stats iniciais é 300 em todas as raças**.
 ## Em aberto
 
 - Força fica média em todas as raças. Uma 4ª raça futura pode ser a "bruta" (Força alta).
+- Quais habilidades cada raça tem?
 - A regra de soma igual é provisória. Talvez uma raça mais difícil de achar mereça soma maior.

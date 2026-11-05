@@ -4,9 +4,10 @@ Parte de [[Visão geral]].
 
 ## Decidido
 
-- O tempo passa em semanas. O treino acontece por semana.
-- Equipamentos melhoram o treino.
-- Excesso de treino sem descanso gera doença, estresse e frustração.
+- O tempo passa em semanas. A cada semana o jogador decide o treino de **cada monstro** do rancho (ver [[Progressão]]).
+- Alguns treinos **dependem de equipamentos especiais**. Quanto melhor o equipamento, melhor o treino.
+- Excesso de treino sem descanso gera doença, estresse, frustração etc.
+- A [[Palavra]] age sobre a taxa de ganho, e a taxa multiplica o ganho do treino (ver [[Stats]]).
 
 ## Protótipo jogável (versão 1)
 
@@ -27,6 +28,5 @@ Regras simples para a primeira versão jogável. Ver [[Protótipo jogável]].
 
 ## Em aberto
 
-- Como a [[Ovo, palavra e incubação|palavra]] altera o ganho de cada treino?
 - O monstro envelhece e morre? Qual o tempo de vida?
 - Treinos leves e pesados (pesado sobe um stat e baixa outro, como no MR2)?

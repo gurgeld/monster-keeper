@@ -8,4 +8,4 @@ Toda mecânica com aleatoriedade (rolagem de ovo, efeito de palavra, mutação, 
 
 **Por quê:** permite testes automáticos e reproduzir bugs.
 
-Usado em: [[Ovo, palavra e incubação]], [[Procriação]].
+Usado em: [[Ovo]], [[Palavra]], [[Personalidade]], [[Mutação]], [[Procriação]].
