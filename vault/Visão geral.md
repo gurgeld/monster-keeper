@@ -18,3 +18,4 @@ Versão atual: [[Protótipo jogável]].
 - [[Stats]]
 - [[Raças]]
 - [[Aleatoriedade determinística]]
+- [[Exportação web]]
