@@ -8,20 +8,26 @@ Parte da criação de monstro, junto com [[Palavra]] e [[Personalidade|incubaç�
 
 - O ovo define a **raça**. Ver [[Raças]].
 - O jogador consegue ovos de 5 formas:
-  - escolhe 1 de 3 ovos no início do jogo;
-  - compra em uma loja;
+  - compra em uma loja (no início do jogo, é a única forma);
   - encontra em expedições;
   - ganha em torneios;
   - gera procriando monstros (ver [[Procriação]]).
 - **Todo ovo tem pai e mãe.** Ovos que não vêm de procriação (comprados, achados, ganhos) são gerados a partir de um pai e uma mãe **fictícios**. Assim existe uma regra só para criar monstros: a [[Procriação]].
-- O jogador vê só as informações dos pais do ovo (raça, personalidades, stats etc.). O resultado é probabilístico.
+- **Pais fictícios:** mesma raça do ovo. Cada alelo = base da raça × (1 ± 10%), sorteado com [[Aleatoriedade determinística]].
+- O jogador vê só as informações dos pais do ovo (raça, taxas etc.). O resultado é probabilístico.
 - A rolagem do ovo também decide a [[Mutação]].
-- Primeiro protótipo: **3 raças**.
+- Stats iniciais do recém-nascido: base da raça ±10% (ver [[Stats]]).
 
-## Implementação atual (provisória)
+## Loja (versão 2 do protótipo)
 
-O código ainda não tem pais. O ovo é a base da raça com variação de ±10% (ver [[Stats]]). Isso fica até a [[Procriação]] ser implementada; depois, o ovo comprado vira uma procriação de pais fictícios.
+- O jogo começa com **1000** de dinheiro.
+- A loja mostra **5 ovos**, de raças sorteadas entre as [[Raças]]. Podem repetir.
+- Para cada ovo, o jogador vê raça, preço e as letras de taxa do pai e da mãe.
+- **Preço** depende da qualidade esperada: q = média da soma das taxas dos dois pais.
+  Preço = 650 + (q − 6,0) × 1250, arredondado para dezena, limitado a **400–900**.
+- O jogador compra 1 ovo. O dinheiro que sobra fica guardado para usos futuros (ainda sem uso).
+  **Aviso:** sem forma de ganhar ou gastar dinheiro, a escolha do preço ainda não pesa. Faz sentido quando entrarem torneios e equipamentos (ver [[Progressão]]).
 
 ## Em aberto
 
-- Como gerar os pais fictícios? (ex.: base da raça + variação, e a loja vende ovos de "qualidade" diferente?)
+- Ovos de "qualidade" diferente em lojas diferentes?

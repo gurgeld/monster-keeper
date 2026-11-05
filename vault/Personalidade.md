@@ -24,5 +24,5 @@ Inclui a incubação, que é a parte da criação de monstro que molda a persona
 
 - Quais aspectos existem? Quais custos e benefícios cada um tem?
 - Como as variáveis de incubação levam a cada aspecto?
-- Quanto tempo dura a incubação? Em semanas do jogo?
+- A incubação dura 4 semanas do calendário no protótipo (ver [[Protótipo jogável]]). É a duração final?
 - Como "encorajar ou desencorajar" um aspecto durante a criação?
