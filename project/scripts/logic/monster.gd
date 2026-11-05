@@ -1,11 +1,9 @@
-## A monster: its breed, its own growth rates and its current stats.
+## A monster: its breed, its genes, its growth rates and its current stats.
 class_name Monster
 extends Resource
 
 enum Stat { LIFE, POWER, INTELLIGENCE, SKILL, SPEED, DEFENSE }
 const STAT_COUNT := 6
-## Each egg rolls a variation of ±10% over the breed base (vault/Stats.md).
-const EGG_VARIATION := 0.1
 ## Training rules (vault/Treino semanal.md).
 const TRAINING_BASE_GAIN := 10.0
 const FATIGUE_PER_TRAINING := 20
@@ -14,22 +12,13 @@ const MAX_FATIGUE := 100
 const MAX_STAT := 999
 
 @export var breed: Breed
+## Two alleles per stat (vault/Procriação.md). Hidden from the player.
+@export var alleles_a: Array[float] = []
+@export var alleles_b: Array[float] = []
+## Final growth rates: allele mean plus the word modifier.
 @export var growth_rates: Array[float] = []
 @export var stats: Array[int] = []
 @export var fatigue: int = 0
-
-
-## Creates a newborn monster. The same breed and seed always give the same monster.
-static func hatch(from_breed: Breed, seed_value: int) -> Monster:
-	var rng := RandomNumberGenerator.new()
-	rng.seed = seed_value
-	var monster := Monster.new()
-	monster.breed = from_breed
-	for i in STAT_COUNT:
-		monster.growth_rates.append(from_breed.growth_rates[i] * _roll_variation(rng))
-	for i in STAT_COUNT:
-		monster.stats.append(roundi(from_breed.initial_stats[i] * _roll_variation(rng)))
-	return monster
 
 
 ## Trains one stat and returns how much it went up.
@@ -57,7 +46,3 @@ static func grade(rate: float) -> String:
 	if rate < 1.3:
 		return "B"
 	return "A"
-
-
-static func _roll_variation(rng: RandomNumberGenerator) -> float:
-	return rng.randf_range(1.0 - EGG_VARIATION, 1.0 + EGG_VARIATION)
