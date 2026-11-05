@@ -11,6 +11,8 @@ Plataforma: exportação HTML, publicada no GitHub Pages.
 3. Competir e explorar → [[Batalha]]
 4. Criar novos monstros para progredir → [[Procriação]]
 
+Versão atual: [[Protótipo jogável]].
+
 ## Regras transversais
 
 - [[Stats]]
