@@ -8,7 +8,8 @@ Forma de criar novos monstros a partir de dois pais. Parte de [[Visão geral]].
   *Mudança (ticket "Habilidades das raças"):* antes, a procriação misturava as habilidades dos pais com pesos. No teste, alelos de peso quase não mudaram a luta: com ±10% não houve mudança de uso, e com ±50% a habilidade favorecida ganhou só de 1 a 3 pontos. Herdar a habilidade já liberada contraria a regra de não herdar poder acumulado.
 - A herança de stats é uma questão separada (ver "Em aberto").
 - O filho herda a **facilidade de progresso** (taxa de ganho, ver [[Stats]]), não o poder acumulado.
-- O filho herda **um aspecto de personalidade aleatório de cada pai**. O aspecto do pai não pode repetir o da mãe nem ser o oposto dele (ver [[Personalidade]]).
+- O filho herda **um aspecto de personalidade aleatório de cada pai**, sorteado quando o ovo choca. A incubação vem primeiro: a mãe não pode passar o aspecto da incubação nem o oposto dele. O pai também não pode passar esses aspectos, nem o aspecto da mãe ou o oposto dele (ver [[Personalidade]]).
+- O **perfil do ovo não é herdado**: cada ovo sorteia o próprio perfil (ver [[Personalidade]]).
 - O resultado da procriação é um [[Ovo]].
 - É a **regra única** de criação: ovos de loja, expedição e torneio vêm de pais fictícios (ver [[Ovo]]).
 - A [[Mutação]] não é herdada.
