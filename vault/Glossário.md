@@ -23,7 +23,17 @@ _Evitar_: crescimento, potencial, facilidade (usar só "taxa de ganho").
 
 **Incubação**: período entre lançar a palavra e o ovo chocar. Também é onde se forma 1 aspecto de personalidade. Ver [[Personalidade]].
 
-**Aspecto de personalidade**: traço do monstro com custo e benefício. Todo monstro tem 3 (mãe, pai, incubação).
+**Aspecto de personalidade**: traço do monstro com custo e benefício. Fica fixo por toda a vida. Todo monstro tem 3 (mãe, pai, incubação), diferentes e sem opostos. Ver [[Personalidade]].
+
+**Aspecto oposto**: aspecto que não pode existir no mesmo monstro que o seu par (ex.: Rebelde e Leal). Ver [[Personalidade]].
+
+**Atributo de estado**: variável que muda durante a vida do monstro e afeta treinos e batalhas: fadiga, estresse, satisfação e obediência. Não é stat. Ver [[Atributos de estado]].
+_Evitar_: estado mental, humor.
+
+**Satisfação**: atributo de estado. As regras ainda estão em aberto. Ver [[Atributos de estado]].
+_Evitar_: felicidade.
+
+**Obediência**: atributo de estado que influencia se o monstro segue a estratégia. Ver [[Atributos de estado]] e [[Batalha]].
 
 **Mutação**: bônus raro rolado no ovo, não herdado. Ver [[Mutação]].
 

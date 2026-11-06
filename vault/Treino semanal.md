@@ -8,6 +8,7 @@ Parte de [[Visão geral]].
 - Alguns treinos **dependem de equipamentos especiais**. Quanto melhor o equipamento, melhor o treino.
 - Excesso de treino sem descanso gera doença, estresse, frustração etc.
 - A [[Palavra]] age sobre a taxa de ganho, e a taxa multiplica o ganho do treino (ver [[Stats]]).
+- Os aspectos de [[Personalidade]] mudam o ganho do treino e a fadiga. O ganho é multiplicado por (1 + soma dos efeitos dos aspectos). A fadiga que o treino soma e a que o descanso tira também mudam conforme o aspecto. O descanso sempre usa 1 semana.
 
 ## Protótipo jogável (versão 1)
 

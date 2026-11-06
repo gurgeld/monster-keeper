@@ -6,7 +6,7 @@ Forma de criar novos monstros a partir de dois pais. Parte de [[Visão geral]].
 
 - Mistura a linhagem: stats e habilidades de batalha dos pais, ponderados.
 - O filho herda a **facilidade de progresso** (taxa de ganho, ver [[Stats]]), não o poder acumulado.
-- O filho herda **um aspecto de personalidade aleatório de cada pai** (ver [[Personalidade]]).
+- O filho herda **um aspecto de personalidade aleatório de cada pai**. O aspecto do pai não pode repetir o da mãe nem ser o oposto dele (ver [[Personalidade]]).
 - O resultado da procriação é um [[Ovo]].
 - É a **regra única** de criação: ovos de loja, expedição e torneio vêm de pais fictícios (ver [[Ovo]]).
 - A [[Mutação]] não é herdada.

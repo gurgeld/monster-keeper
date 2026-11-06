@@ -57,7 +57,7 @@ Decidido no mapa de design (ticket "Formato da simulação de batalha").
 ## Em aberto
 
 - Quais estratégias o jogador pode escolher? (ticket de estratégia e obediência)
-- Obediência é um atributo próprio ou vem da [[Personalidade]]?
+- Como a obediência muda e como decide a ação? Ela é um atributo próprio, e os aspectos de [[Personalidade]] só a modificam. Ver [[Atributos de estado]].
 - Como o estresse é medido? (a fadiga já existe, ver [[Treino semanal]])
 - O jogador vê os tipos e fraquezas do oponente antes da luta?
 - Números: dano, acerto, esquiva, limite de ticks, tamanho das esperas. Ajustar depois do protótipo.
