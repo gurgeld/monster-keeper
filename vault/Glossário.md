@@ -69,11 +69,24 @@ _Evitar_: turno, rodada.
 **Habilidade**: golpe de batalha de uma raça. Tem tipo de dano, stat que a fortalece e espera. Toda ação do monstro na luta é uma habilidade. Ver [[Batalha]].
 _Evitar_: ataque, golpe, magia.
 
+**Posição (de habilidade)**: lugar da habilidade na estrutura igual a toda raça: 1. Básica, 2. Forte, 3. Cobertura, 4. Precisa. Ver [[Raças]].
+
+**Habilidade liberada**: habilidade que o monstro pode usar, porque o stat chegou ao mínimo. Depois de liberada, não se perde. A básica vem desde o nascimento. Ver [[Raças]].
+_Evitar_: aprendida, desbloqueada.
+
+**Potência**: número que define a força de uma habilidade na fórmula de dano. Escondido do jogador. Ver [[Raças]].
+
+**Peso (de habilidade)**: número que define a chance de sorteio de uma habilidade entre as disponíveis. Escondido do jogador. Ver [[Batalha]].
+
 **Espera**: número de ações do próprio monstro em que uma habilidade fica indisponível depois do uso. Ver [[Batalha]].
 _Evitar_: cooldown, recarga.
 
 **Tipo de dano**: cortante, perfurante ou impactante. Cada habilidade tem um. Cada raça tem 1 fraqueza, 1 resistência e 1 neutro. Ver [[Batalha]].
 _Evitar_: elemento.
+
+**Tipo principal**: tipo de dano da maioria das habilidades de uma raça. Cria o ciclo entre as raças. Ver [[Raças]].
+
+**Tipo secundário**: tipo de dano da Cobertura. É a fraqueza da própria raça. Ver [[Raças]].
 
 **Semana**: unidade de tempo do jogo. Todos os monstros usam a mesma semana. Cada monstro tem uma ação por semana. Ver [[Treino semanal]].
 

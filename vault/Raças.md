@@ -24,7 +24,66 @@ Regras em [[Batalha]]. Cada raça tem 1 fraqueza, 1 resistência e 1 neutro. For
 | Vulpi | impactante | cortante | perfurante |
 | Runoxa | perfurante | impactante | cortante |
 
-Cada raça tem 1 habilidade básica sem espera, além das outras habilidades. Cada habilidade tem tipo de dano, stat de escala e espera.
+### Tipo principal e tipo secundário
+
+Decidido no mapa de design (ticket "Habilidades das raças"). Cada raça usa só 2 tipos de dano:
+
+| Raça | Tipo principal | Tipo secundário | Tipo que não usa |
+|---|---|---|---|
+| Tatuço | cortante | impactante | perfurante |
+| Vulpi | impactante | perfurante | cortante |
+| Runoxa | perfurante | cortante | impactante |
+
+- O **tipo secundário** é a fraqueza da própria raça.
+- A raça não usa o tipo que causa ×1,5 na raça que a vence.
+
+**Por quê:** esta regra cria o ciclo Tatuço > Runoxa > Vulpi > Tatuço. Com os 3 tipos em toda raça, todas exploram a mesma fraqueza. O tipo secundário causa ×1,5 no espelho (mesma raça dos dois lados), que é comum porque 2 dos 3 oponentes são da raça predominante.
+
+### Habilidades
+
+Decidido no mapa de design (ticket "Habilidades das raças"). Os números são iniciais, para ajustar no balanceamento.
+
+Cada raça tem 4 habilidades, com a mesma estrutura de 4 posições:
+
+| Posição | Tipo de dano | Stat de escala | Espera | Peso | Potência |
+|---|---|---|---|---|---|
+| 1. Básica | principal | stat da raça | 0 | 1 | 30 (Tatuço: 40) |
+| 2. Forte | principal | stat forte da raça | 2 | 3 | 45 |
+| 3. Cobertura | secundário | Força | 3 | 3 | 55 |
+| 4. Precisa | principal | Precisão | 4 | 2 | 60 |
+
+| Raça | 1. Básica | 2. Forte | 3. Cobertura | 4. Precisa |
+|---|---|---|---|---|
+| Tatuço | Garrada (Força) | Rolo blindado (Defesa) | Cabeçada | Lâmina de placa |
+| Vulpi | Rajada (Velocidade) | Vendaval (Velocidade) | Mordida | Ciclone certeiro |
+| Runoxa | Dardo rúnico (Inteligência) | Lança de runas (Inteligência) | Garra de coruja | Olhar rúnico |
+
+**Por quê 4 habilidades e estes pesos:** com 3 habilidades e pesos 5/3/2, a básica ficou em 71% a 74% das ações contra outra raça. Com a lista atual, ficou em 38% a 40%, e em 30% a 34% no espelho. A meta é ficar abaixo de 50% no monstro com todas as habilidades liberadas.
+
+**Por quê a Cobertura usa Força:** a Força fica média em todas as raças, e assim tem uso em todas.
+
+**Por quê a posição 4 usa Precisão:** em um espelho com 30% a mais de Precisão, as vitórias subiram de 65% a 67% para 70% a 84%. Um campo de "acerto próprio", com golpe forte que erra mais, não mudou esse valor (60% a 68%) e foi descartado.
+
+**Por quê a Inteligência não escala em Tatuço e Vulpi:** isso enfraqueceria o arquétipo Místico da Runoxa. Nessas raças, a Inteligência age na escolha da habilidade e na obediência. Reavaliar depois da fórmula de obediência.
+
+### Habilidade liberada
+
+- O monstro nasce com a básica. As outras são liberadas quando o stat chega a um **mínimo fixo por raça**. Não há tela nem treino próprio para isso.
+- Depois de liberada, a habilidade **não se perde**, mesmo se o stat cair na velhice.
+- Os oponentes gerados recebem as habilidades da mesma forma, pelos próprios stats.
+- A tela mostra as 4 habilidades, com tipo de dano e stat. As bloqueadas mostram o mínimo. Peso e potência ficam escondidos. O jogo avisa quando uma habilidade é liberada.
+
+| Posição | Stat | Treinos desde a base | Tatuço | Vulpi | Runoxa |
+|---|---|---|---|---|---|
+| 2. Forte | stat de escala | cerca de 5 | Defesa 155 | Velocidade 145 | Inteligência 155 |
+| 3. Cobertura | Força | cerca de 5 | Força 100 | Força 100 | Força 60 |
+| 4. Precisa | Precisão | cerca de 10 | Precisão 120 | Precisão 200 | Precisão 185 |
+
+Os mínimos usam a taxa de ganho da raça e o ganho de 10 × taxa por treino (ver [[Treino semanal]]), para que o esforço seja igual em toda raça.
+
+**Por quê desbloqueio por stat:** mostra progresso na luta, dá um objetivo de treino e não cria uma regra nova na rotina.
+
+**Por quê a habilidade não se perde:** perder golpes pioraria a fase velha sem criar uma decisão para o jogador.
 
 ## Proposta inicial de números (ajustar em teste)
 
@@ -51,5 +110,4 @@ Regra: **a soma dos stats iniciais é 300 em todas as raças**.
 ## Em aberto
 
 - Força fica média em todas as raças. Uma 4ª raça futura pode ser a "bruta" (Força alta).
-- Quais habilidades cada raça tem?
 - A regra de soma igual é provisória. Talvez uma raça mais difícil de achar mereça soma maior.

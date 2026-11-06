@@ -92,7 +92,7 @@ A fonte de verdade do design está em `vault/`. Antes de implementar qualquer me
 Resumo do loop: criar monstro → treinar e cuidar → competir e explorar → criar novos monstros para progredir. Pilares de design (detalhes no vault):
 
 - **Ovo + palavra + incubação** substituem o CD do original. O ovo define a raça; a palavra (3 a 7 letras) define bônus e penalidades na facilidade de ganhar stats e depende de uma variável gerada por save; a incubação (temperatura, umidade, música) molda os aspectos de personalidade.
-- **Procriação** mistura linhagem (stats e habilidades ponderados) e herda a facilidade de progresso, não o poder acumulado.
+- **Procriação** mistura linhagem (stats ponderados) e herda a facilidade de progresso, não o poder acumulado. As habilidades vêm da raça, não dos pais.
 - **Batalha** é simulação: o monstro decide, o jogador só define a estratégia antes, e a obediência depende de atributos do monstro.
 - **Treino semanal** com equipamentos que melhoram o treino; excesso sem descanso gera doença, estresse e frustração.
 
