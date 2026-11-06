@@ -66,8 +66,11 @@ _Evitar_: liga, divisão.
 **Tick**: passo de tempo da batalha. A barra de cada monstro enche a cada tick, mais rápido com mais Velocidade. Ver [[Batalha]].
 _Evitar_: turno, rodada.
 
-**Habilidade**: golpe de batalha de uma raça. Tem tipo de dano, stat que a fortalece e espera em ticks. Toda ação do monstro na luta é uma habilidade. Ver [[Batalha]].
+**Habilidade**: golpe de batalha de uma raça. Tem tipo de dano, stat que a fortalece e espera. Toda ação do monstro na luta é uma habilidade. Ver [[Batalha]].
 _Evitar_: ataque, golpe, magia.
+
+**Espera**: número de ações do próprio monstro em que uma habilidade fica indisponível depois do uso. Ver [[Batalha]].
+_Evitar_: cooldown, recarga.
 
 **Tipo de dano**: cortante, perfurante ou impactante. Cada habilidade tem um. Cada raça tem 1 fraqueza, 1 resistência e 1 neutro. Ver [[Batalha]].
 _Evitar_: elemento.

@@ -21,7 +21,8 @@ Decidido no mapa de design (ticket "Formato da simulação de batalha").
 ### Ações
 
 - O monstro só usa **habilidades**. Todo golpe é uma habilidade.
-- Cada raça tem 1 **habilidade básica sem espera**. As outras têm **espera em ticks** depois do uso. Assim o monstro nunca fica sem opção.
+- Cada raça tem 1 **habilidade básica sem espera**. As outras têm **espera** depois do uso, contada em **ações do próprio monstro**. Assim o monstro nunca fica sem opção.
+  *Mudança (protótipo de batalha):* antes, a espera era em ticks. Com ticks, o monstro rápido agia mais vezes durante a mesma espera e usava menos as habilidades fortes, e a variedade caía conforme ele treinava Velocidade.
 - O monstro escolhe a habilidade por **sorteio com pesos**, pela seed. A estratégia do jogador muda os pesos. A Inteligência define quanto o monstro segue os pesos e se escolhe a habilidade que explora o ponto fraco do oponente.
 - O monstro **pode pular a ação** por fadiga ou desobediência. A fórmula fica no ticket de obediência.
 - **Defesa e esquiva são passivas**: reagem ao golpe do oponente. Não existe ação "Defender".
@@ -53,6 +54,20 @@ Decidido no mapa de design (ticket "Formato da simulação de batalha").
 **Por quê Vida não persiste:** ferimento entre lutas exigiria doença e cura, que estão fora de escopo.
 
 **Fora de escopo:** elementos e tabela de tipos estilo Pokémon; times; ferimento persistente.
+
+### Decisões do protótipo
+
+Decidido no mapa de design (ticket "Protótipo de batalha simulada no terminal"). As habilidades e fórmulas do protótipo eram provisórias, então os percentuais mostram só tendências.
+
+- **Duração:** o alvo é de **13 a 25 ações por luta**, somando os dois monstros. O balanceamento do dano deve respeitar esse alvo.
+- **Sem sistema de sorte:** o monstro mais treinado deve vencer. A surpresa vem da desobediência, não de uma rolagem extra.
+- **Multiplicadores de tipo:** ficam em ×1,5 e ×0,5.
+
+**Por quê lutas longas:** com 4 a 8 ações, um único golpe podia tirar quase toda a Vida. O jogador vê poucas lutas por torneio, então cada luta precisa ter o que acompanhar.
+
+**Por quê sem sistema de sorte:** no teste, 10% a mais em todos os stats venceu 89% a 100% das lutas, mesmo com variação de dano de ±50%. Em 20 ações, a variação de dano se compensa. Já pular 25% das ações reduziu as vitórias a 4% a 15%. A desobediência também liga o estresse à luta.
+
+**Por quê manter ×1,5 e ×0,5:** com pesos menores, o ciclo entre as raças se quebrou no teste, e o Tatuço passou a vencer a Runoxa e a empatar com o Vulpi. Isso tira o sentido de escolher a raça certa. O custo é que a raça errada quase sempre perde com o mesmo treino, e venceu 96% a 100% com 25% a mais em todos os stats. O jogador vê a raça predominante no calendário e pode se preparar.
 
 ## Torneio
 
@@ -111,4 +126,4 @@ Decidido no mapa de design (ticket "Torneio e níveis"). Os números são inicia
 - Quais estratégias o jogador pode escolher? (ticket de estratégia e obediência)
 - Como a obediência muda e como decide a ação? Ela é um atributo próprio, e os aspectos de [[Personalidade]] só a modificam. Ver [[Atributos de estado]].
 - O jogador vê os tipos e fraquezas do oponente antes da luta?
-- Números: dano, acerto, esquiva, limite de ticks, tamanho das esperas. Ajustar depois do protótipo.
+- Números: dano, acerto, esquiva, limite de ticks, tamanho das esperas. No teste, Inteligência e Precisão renderam pouco em algumas raças. O protótipo está na branch `prototype/battle-sim`.
