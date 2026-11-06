@@ -4,12 +4,12 @@ Como o jogo fica maior e mais difícil com o tempo. Parte de [[Visão geral]].
 
 ## Decidido
 
-- **Início:** o jogador não tem monstro. Ele escolhe 1 de 3 ovos (ver [[Ovo]]), tem um rancho mal equipado e compete em campeonatos regionais.
+- **Início:** o jogador não tem monstro. Ele escolhe 1 de 3 ovos (ver [[Ovo]]), tem um rancho mal equipado e compete em torneios regionais.
 - **Com o tempo**, o jogador ganha:
   - experiência para criar monstros melhores (ver [[Procriação]], [[Palavra]]);
   - dinheiro para comprar equipamentos melhores (ver [[Treino semanal]]);
   - um rancho maior, com **vários monstros ao mesmo tempo**;
-  - acesso a explorações e campeonatos mais difíceis (ver [[Batalha]]).
+  - acesso a explorações e torneios mais difíceis (ver [[Batalha]]).
 
 ## Rancho
 
@@ -37,8 +37,23 @@ Decidido no mapa de design (ticket "Rancho"). Os números são iniciais, para aj
 
 **Por quê o ovo em incubação não pode ser vendido:** o jogador poderia testar palavras e vender o ovo quando o resultado fosse ruim.
 
+## Níveis
+
+Decidido no mapa de design (ticket "Torneio e níveis"). Regras do torneio em [[Batalha]].
+
+- Esta versão tem **3 níveis: Regional, Nacional e Mundial.**
+- **O nível pertence ao monstro.** Todo monstro começa no Regional. O filho não herda o nível dos pais.
+- **Ganhar um torneio do nível atual abre o próximo.** O monstro nunca desce de nível.
+- O monstro pode lutar no **nível atual ou em qualquer nível abaixo**.
+- Não há limite de idade para lutar.
+
+**Por quê por vitória, e não por soma de stats:** o jogador precisa provar a força do monstro em uma luta. Um monstro bem criado passa rápido pelos níveis baixos, então a boa genética dá uma vantagem visível.
+
+**Por quê o filho não herda o nível:** segue a regra da [[Procriação]]. O filho herda a facilidade de progresso, não o poder acumulado.
+
+**Por quê pode lutar em nível abaixo:** se o monstro só pudesse lutar no nível atual, um jogador sem dinheiro para a taxa do Nacional não teria de onde ganhar dinheiro. Ele também não receberia o ovo grátis, porque ainda tem monstro. O risco é um monstro forte ganhar sempre no Regional. O intervalo de 4 semanas limita isso, e o prêmio do Regional deve ser baixo (decisão de economia).
+
 ## Em aberto
 
-- Quais são os níveis de campeonato (regional → ...)?
 - Como funciona a exploração?
 - Como o jogador ganha dinheiro além de torneios?

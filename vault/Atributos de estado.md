@@ -44,14 +44,17 @@ Decidido no mapa de design (ticket "Estresse"). Números iniciais, para ajustar 
 | Sensível | +50% | +50% |
 
   O resultado é arredondado ao inteiro mais próximo (0,5 sobe). Ex.: Calmo perde uma luta: +8. Sensível perde: +23.
+- **No torneio:** cada luta conta, mas o jogo aplica a soma só no fim do torneio. As 3 lutas usam o mesmo estresse inicial. O resultado vai de −30 (3 vitórias) a +45 (3 derrotas), antes dos aspectos. Ver [[Batalha]], seção "Torneio".
 - **Efeito do estresse alto: só reduz a [[Batalha|obediência]].** Não muda o treino (a fadiga já faz isso) nem dano ou acerto. Quanto reduz, e a partir de qual valor, fica na decisão de obediência.
 - Em 100 não há efeito extra: sem doença e sem recusa de treino.
 
 **Por quê:** dois ponteiros com ritmos diferentes dão ao jogador uma segunda decisão (descansar mesmo sem fadiga alta). Limitar o efeito à obediência evita um segundo sistema igual à fadiga e liga o custo do excesso de treino à parte da luta que é do monstro. Derrota pesa mais que vitória para criar o ciclo "perdeu, estressou, desobedece, perde" que o descanso desfaz.
 
+**Por quê aplicar no fim do torneio:** o estresse é pressão lenta. Uma sequência de derrotas fica entre torneios, não dentro de um torneio. O jogador ainda paga por inscrever um monstro fraco: +45 pede cerca de 5 semanas de descanso.
+
 **Fora de escopo:** doença, frustração, recusa de treino por estresse, efeito do estresse no ganho do treino.
 
-**Depende de outras decisões:** se a luta usa a ação da semana (ticket de torneio); quanto o estresse reduz a obediência (ticket de estratégia e obediência).
+**Depende de outras decisões:** quanto o estresse reduz a obediência (ticket de estratégia e obediência).
 
 ## Em aberto
 

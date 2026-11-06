@@ -54,6 +54,58 @@ Decidido no mapa de design (ticket "Formato da simulação de batalha").
 
 **Fora de escopo:** elementos e tabela de tipos estilo Pokémon; times; ferimento persistente.
 
+## Torneio
+
+Decidido no mapa de design (ticket "Torneio e níveis"). Os números são iniciais, para ajustar no balanceamento. Os níveis ficam em [[Progressão]].
+
+### Formato
+
+- **Pontos corridos com 4 monstros:** o monstro do jogador e 3 oponentes. Todos lutam contra todos, então o monstro do jogador faz 3 lutas.
+- **Lutas entre oponentes:** o jogo simula estas lutas pela seed ([[Aleatoriedade determinística]]). O jogador vê só o resultado na tabela.
+- **Tabela:** cada vitória vale 1 ponto. O desempate usa a maior soma de Vida restante em %. Se o empate continuar, a seed decide.
+
+### Calendário
+
+- O calendário é **fixo** e o jogador vê as próximas edições com antecedência.
+- Cada nível tem seu intervalo: Regional a cada 4 semanas, Nacional a cada 8, Mundial a cada 12.
+- Cada edição tem uma **raça predominante**, que aparece no calendário. 2 dos 3 oponentes são dessa raça. O terceiro é sorteado pela seed entre todas as raças.
+
+### Oponentes
+
+- O jogo gera os oponentes pela seed. Cada nível tem uma faixa fixa de stats, que não acompanha a força do jogador.
+- O jogador sabe a raça predominante antes da luta. O que mais ele vê sobre os oponentes fica no ticket de estratégia e obediência.
+
+### Inscrição
+
+- O jogador inscreve **1 monstro por edição**. Em semanas com mais de um nível, monstros diferentes podem lutar em níveis diferentes.
+- O prazo vai até o clique que passa a semana do torneio.
+- O Regional é **grátis**. Nacional e Mundial cobram taxa na inscrição.
+- Cancelar antes desse clique, ou vender o monstro inscrito, devolve a taxa.
+
+### Prêmio
+
+- O campeão e o vice recebem dinheiro. Os valores ficam na decisão de economia.
+- Só o campeão recebe ovo, de pais fictícios. A qualidade do ovo sobe com o nível. Ver [[Ovo]].
+
+### Efeito no tempo e no estado
+
+- O torneio inteiro gasta 1 semana e usa a ação da semana. Ver [[Treino semanal]].
+- As 3 lutas usam o mesmo estado inicial. A fadiga e o estresse mudam só no fim do torneio. Ver [[Atributos de estado]].
+
+**Por quê pontos corridos:** escolha do Daniel. Todo monstro faz as 3 lutas, mesmo quando perde a primeira.
+
+**Por quê 4 monstros:** o jogador vê poucas lutas por torneio, e o torneio continua curto.
+
+**Por quê calendário fixo:** no modo livre, o jogador pode lutar toda semana no nível mais fácil para ganhar dinheiro. A data fixa também obriga a preparar o monstro para ela.
+
+**Por quê raça predominante:** as fraquezas existem para dar sentido a escolher a raça certa para cada torneio. Com oponentes sempre aleatórios, essa razão não tem efeito. Com 3 de 3, uma raça ganharia quase sem risco.
+
+**Por quê faixa fixa de stats:** se a faixa acompanhar o jogador, treinar mais não dá vantagem clara.
+
+**Por quê 1 monstro por edição:** 2 monstros do mesmo jogador se enfrentariam, e ele poderia combinar o resultado na tabela.
+
+**Por quê o Regional é grátis:** um jogador sem dinheiro precisa de um modo de ganhar dinheiro. Ver [[Progressão]], seção "Níveis".
+
 ## Em aberto
 
 - Quais estratégias o jogador pode escolher? (ticket de estratégia e obediência)

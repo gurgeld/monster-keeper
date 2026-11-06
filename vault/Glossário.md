@@ -49,10 +49,18 @@ _Evitar_: felicidade.
 **Estresse**: atributo de 0 a 100. Pressão acumulada: sobe devagar com treino cansado e derrota, desce com descanso e vitória. Só reduz a obediência. Ver [[Atributos de estado]].
 _Evitar_: tensão, nervosismo.
 
-**Torneio**: evento com uma série de batalhas. O jogador inscreve um monstro, luta e pode ganhar prêmio. Ver [[Batalha]].
+**Torneio**: evento de pontos corridos com 4 monstros. O jogador inscreve um monstro, que faz 3 lutas e pode ganhar prêmio. Ver [[Batalha]].
 _Evitar_: campeonato.
 
-**Nível**: categoria de um torneio (ex.: regional). Monstros mais fortes acessam níveis mais altos. Ver [[Progressão]].
+**Edição**: uma ocorrência de um torneio no calendário, em uma semana fixa. Ver [[Batalha]].
+
+**Tabela**: colocação dos 4 monstros de uma edição, por pontos. Ver [[Batalha]].
+
+**Raça predominante**: raça de 2 dos 3 oponentes de uma edição. Aparece no calendário. Ver [[Batalha]].
+
+**Título**: um torneio ganho por um monstro. Aparece no memorial. Ver [[Treino semanal]].
+
+**Nível**: categoria de um torneio: Regional, Nacional ou Mundial. Cada monstro tem o seu nível, e sobe ao ganhar um torneio do nível atual. Ver [[Progressão]].
 _Evitar_: liga, divisão.
 
 **Tick**: passo de tempo da batalha. A barra de cada monstro enche a cada tick, mais rápido com mais Velocidade. Ver [[Batalha]].
