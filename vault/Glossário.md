@@ -30,7 +30,14 @@ _Evitar_: efeito recessivo (faz pensar em genética, e a palavra não é genéti
 
 **Incubação**: período entre lançar a palavra e o ovo chocar. Também é onde se forma 1 aspecto de personalidade. Ver [[Personalidade]].
 
-**Aspecto de personalidade**: traço do monstro com custo e benefício. Fica fixo por toda a vida. Todo monstro tem 3 (mãe, pai, incubação), diferentes e sem opostos. Ver [[Personalidade]].
+**Balança**: regra da incubação em que a música escolhe um par de aspectos, e a temperatura e a umidade escolhem o lado do par. Ver [[Personalidade]].
+
+**Perfil (do ovo)**: as 2 zonas pequenas da grade de temperatura e umidade, 1 para cada aspecto do par. A seed de cada ovo sorteia o perfil, e ele não é herdado. Ver [[Personalidade]].
+_Evitar_: perfil de combinação.
+
+**Indefinido**: resultado da balança fora das 2 zonas do perfil. O ovo fica cinza. Se a última semana terminar assim, a seed do ovo sorteia 1 aspecto do par da música. Ver [[Personalidade]].
+
+**Aspecto de personalidade**: traço do monstro com custo e benefício. Fica fixo por toda a vida. Todo monstro tem 3 (incubação, mãe, pai), diferentes e sem opostos. Ver [[Personalidade]].
 
 **Aspecto oposto**: aspecto que não pode existir no mesmo monstro que o seu par (ex.: Rebelde e Leal). Ver [[Personalidade]].
 

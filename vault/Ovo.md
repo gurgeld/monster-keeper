@@ -23,7 +23,7 @@ Parte da criação de monstro, junto com [[Palavra]] e [[Personalidade|incubaç�
 Decidido no mapa de design (ticket "Rancho"). Ver [[Progressão]].
 
 - O jogador guarda ovos **sem limite e sem prazo**. O ovo guardado não ocupa vaga.
-- Para começar a incubação, o jogador precisa de 1 vaga livre. O ovo em incubação ocupa essa vaga até chocar. A duração fica na decisão de incubação.
+- Para começar a incubação, o jogador precisa de 1 vaga livre. O ovo em incubação ocupa essa vaga até chocar, durante 4 semanas. Ver [[Personalidade]].
 - O jogador pode vender um ovo guardado. Ele não pode vender um ovo em incubação. Ver [[Progressão]], seção "Venda".
 
 **Por quê:** o jogador nunca perde um ovo por falta de vaga, e a vaga continua a ser um limite real.
