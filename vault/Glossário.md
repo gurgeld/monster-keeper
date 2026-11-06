@@ -21,6 +21,13 @@ _Evitar_: crescimento, potencial, facilidade (usar só "taxa de ganho").
 
 **Ponto (de palavra)**: unidade do efeito da palavra. 1 ponto = 0,05 na taxa de ganho.
 
+**Uso (de palavra)**: cada ovo em que o jogador lança a palavra, no início da incubação. O estudo não conta como uso. Ver [[Palavra]].
+
+**Desgaste (da palavra)**: queda permanente do efeito da palavra a cada uso, no save inteiro. Não muda monstros que já nasceram. Ver [[Palavra]].
+_Evitar_: efeito recessivo (faz pensar em genética, e a palavra não é genética).
+
+**Caderno de palavras**: lista das palavras já usadas ou estudadas, com os 2 stats afetados, o número de usos e a força atual. Ver [[Palavra]].
+
 **Incubação**: período entre lançar a palavra e o ovo chocar. Também é onde se forma 1 aspecto de personalidade. Ver [[Personalidade]].
 
 **Aspecto de personalidade**: traço do monstro com custo e benefício. Fica fixo por toda a vida. Todo monstro tem 3 (mãe, pai, incubação), diferentes e sem opostos. Ver [[Personalidade]].
