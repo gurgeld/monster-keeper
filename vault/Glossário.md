@@ -39,6 +39,9 @@ _Evitar_: felicidade.
 
 **Fadiga**: atributo de 0 a 100. Sobe com treino, desce com descanso, reduz o ganho do treino. Ver [[Treino semanal]].
 
+**Estresse**: atributo de 0 a 100. Pressão acumulada: sobe devagar com treino cansado e derrota, desce com descanso e vitória. Só reduz a obediência. Ver [[Atributos de estado]].
+_Evitar_: tensão, nervosismo.
+
 **Torneio**: evento com uma série de batalhas. O jogador inscreve um monstro, luta e pode ganhar prêmio. Ver [[Batalha]].
 _Evitar_: campeonato.
 

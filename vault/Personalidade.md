@@ -19,7 +19,7 @@ Inclui a incubação, que é a parte da criação de monstro que molda a persona
 
 ## Lista de aspectos
 
-Números iniciais, para ajustar no balanceamento. O tamanho dos efeitos em estresse e obediência fica nas decisões desses atributos.
+Números iniciais, para ajustar no balanceamento. O tamanho dos efeitos em estresse (±50%) está em [[Atributos de estado]]. O de obediência fica na decisão de obediência.
 
 | Aspecto | Benefício | Custo | Oposto |
 |---|---|---|---|
