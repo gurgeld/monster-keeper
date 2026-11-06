@@ -13,8 +13,8 @@ Parte da criação de monstro, junto com [[Palavra]] e [[Personalidade|incubaç�
   - ganha em torneios;
   - gera procriando monstros (ver [[Procriação]]).
 - **Todo ovo tem pai e mãe.** Ovos que não vêm de procriação (comprados, achados, ganhos) são gerados a partir de um pai e uma mãe **fictícios**. Assim existe uma regra só para criar monstros: a [[Procriação]].
-- **Pais fictícios:** mesma raça do ovo. Cada alelo = base da raça × (1 ± 10%), sorteado com [[Aleatoriedade determinística]].
-- O jogador vê só as informações dos pais do ovo (raça, taxas etc.). O resultado é probabilístico.
+- **Pais fictícios:** mesma raça do ovo. Cada alelo = base da raça × (1 ± 10%), sorteado com [[Aleatoriedade determinística]]. Cada um tem 3 aspectos diferentes e sem opostos, sorteados da lista em [[Personalidade]].
+- O jogador vê só as informações dos pais do ovo (raça, taxas, os 3 aspectos de cada um etc.). O resultado é probabilístico.
 - A rolagem do ovo também decide a [[Mutação]].
 - Stats iniciais do recém-nascido: base da raça ±10% (ver [[Stats]]).
 

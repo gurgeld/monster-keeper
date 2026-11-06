@@ -14,6 +14,18 @@ Parte de [[Visão geral]]. O ovo define a raça (ver [[Ovo]]).
 | **Vulpi** | Raposa do vento: cauda dupla, se move como rajada de ar | Ágil | Velocidade, Precisão |
 | **Runoxa** | Coruja de olhos rúnicos: olhos brilham com símbolos | Místico | Inteligência |
 
+### Tipos de dano (proposta inicial)
+
+Regras em [[Batalha]]. Cada raça tem 1 fraqueza, 1 resistência e 1 neutro. Formam um ciclo.
+
+| Raça | Resiste (×0,5) | Neutro (×1,0) | Fraco (×1,5) |
+|---|---|---|---|
+| Tatuço | cortante | perfurante | impactante |
+| Vulpi | impactante | cortante | perfurante |
+| Runoxa | perfurante | impactante | cortante |
+
+Cada raça tem 1 habilidade básica sem espera, além das outras habilidades. Cada habilidade tem tipo de dano, stat de escala e espera.
+
 ## Proposta inicial de números (ajustar em teste)
 
 ### Taxa de ganho base
