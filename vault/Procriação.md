@@ -4,7 +4,9 @@ Forma de criar novos monstros a partir de dois pais. Parte de [[Visão geral]].
 
 ## Decidido
 
-- Mistura a linhagem: stats e habilidades de batalha dos pais, ponderados.
+- As **habilidades não são herdadas**. A raça define a lista (ver [[Raças]]). A linhagem age de forma indireta: um filho com taxa de ganho alta chega mais cedo ao stat mínimo de uma habilidade.
+  *Mudança (ticket "Habilidades das raças"):* antes, a procriação misturava as habilidades dos pais com pesos. No teste, alelos de peso quase não mudaram a luta: com ±10% não houve mudança de uso, e com ±50% a habilidade favorecida ganhou só de 1 a 3 pontos. Herdar a habilidade já liberada contraria a regra de não herdar poder acumulado.
+- A herança de stats é uma questão separada (ver "Em aberto").
 - O filho herda a **facilidade de progresso** (taxa de ganho, ver [[Stats]]), não o poder acumulado.
 - O filho herda **um aspecto de personalidade aleatório de cada pai**. O aspecto do pai não pode repetir o da mãe nem ser o oposto dele (ver [[Personalidade]]).
 - O resultado da procriação é um [[Ovo]].

@@ -21,6 +21,7 @@ Decidido no mapa de design (ticket "Formato da simulação de batalha").
 ### Ações
 
 - O monstro só usa **habilidades**. Todo golpe é uma habilidade.
+- A lista de habilidades de cada raça e a regra para liberar cada uma estão em [[Raças]].
 - Cada raça tem 1 **habilidade básica sem espera**. As outras têm **espera** depois do uso, contada em **ações do próprio monstro**. Assim o monstro nunca fica sem opção.
   *Mudança (protótipo de batalha):* antes, a espera era em ticks. Com ticks, o monstro rápido agia mais vezes durante a mesma espera e usava menos as habilidades fortes, e a variedade caía conforme ele treinava Velocidade.
 - O monstro escolhe a habilidade por **sorteio com pesos**, pela seed. A estratégia do jogador muda os pesos. A Inteligência define quanto o monstro segue os pesos e se escolhe a habilidade que explora o ponto fraco do oponente.
@@ -34,7 +35,7 @@ Decidido no mapa de design (ticket "Formato da simulação de batalha").
 | Vida | Pontos de vida. |
 | Força | Aumenta o dano dos golpes que escalam com ela. |
 | Inteligência | Escolha da habilidade e obediência. Escala habilidades da Runoxa. |
-| Precisão | Chance de acertar. |
+| Precisão | Chance de acertar. Escala a 4ª habilidade de toda raça. |
 | Velocidade | Frequência de ação. Entra também na esquiva. |
 | Defesa | Reduz o dano recebido. |
 
@@ -126,4 +127,8 @@ Decidido no mapa de design (ticket "Torneio e níveis"). Os números são inicia
 - Quais estratégias o jogador pode escolher? (ticket de estratégia e obediência)
 - Como a obediência muda e como decide a ação? Ela é um atributo próprio, e os aspectos de [[Personalidade]] só a modificam. Ver [[Atributos de estado]].
 - O jogador vê os tipos e fraquezas do oponente antes da luta?
-- Números: dano, acerto, esquiva, limite de ticks, tamanho das esperas. No teste, Inteligência e Precisão renderam pouco em algumas raças. O protótipo está na branch `prototype/battle-sim`.
+- Números: dano, acerto, esquiva, limite de ticks, tamanho das esperas. O protótipo está na branch `prototype/battle-sim`. Resultados do teste com a lista de habilidades de [[Raças]], em um modelo com as fórmulas do protótipo:
+  - **Duração:** o espelho do Tatuço leva 58 ações e o da Runoxa, 27. Runoxa contra Vulpi leva 12. O alvo é de 13 a 25.
+  - **Velocidade:** domina. Em um espelho com 30% a mais, vence de 83% a 99%.
+  - **Fórmula de acerto:** uma inclinação maior valoriza a Precisão. Com 1,0, Runoxa contra Vulpi cai para 53% e o ciclo fica fraco. Manter abaixo de 1,0.
+- **Os pesos mudam pouco a escolha da habilidade.** Com pesos ±50%, a habilidade favorecida ganha só de 1 a 3 pontos de uso, porque as esperas decidem o que está disponível. Como a estratégia muda esses pesos, ela pode ficar fraca. Resolver no ticket de estratégia e obediência.
