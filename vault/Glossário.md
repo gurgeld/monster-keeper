@@ -21,6 +21,13 @@ _Evitar_: crescimento, potencial, facilidade (usar só "taxa de ganho").
 
 **Ponto (de palavra)**: unidade do efeito da palavra. 1 ponto = 0,05 na taxa de ganho.
 
+**Uso (de palavra)**: cada ovo em que o jogador lança a palavra, no início da incubação. O estudo não conta como uso. Ver [[Palavra]].
+
+**Desgaste (da palavra)**: queda permanente do efeito da palavra a cada uso, no save inteiro. Não muda monstros que já nasceram. Ver [[Palavra]].
+_Evitar_: efeito recessivo (faz pensar em genética, e a palavra não é genética).
+
+**Caderno de palavras**: lista das palavras já usadas ou estudadas, com os 2 stats afetados, o número de usos e a força atual. Ver [[Palavra]].
+
 **Incubação**: período entre lançar a palavra e o ovo chocar. Também é onde se forma 1 aspecto de personalidade. Ver [[Personalidade]].
 
 **Aspecto de personalidade**: traço do monstro com custo e benefício. Fica fixo por toda a vida. Todo monstro tem 3 (mãe, pai, incubação), diferentes e sem opostos. Ver [[Personalidade]].
@@ -57,7 +64,16 @@ _Evitar_: ataque, golpe, magia.
 **Tipo de dano**: cortante, perfurante ou impactante. Cada habilidade tem um. Cada raça tem 1 fraqueza, 1 resistência e 1 neutro. Ver [[Batalha]].
 _Evitar_: elemento.
 
-**Semana**: unidade de tempo do jogo. Cada semana tem uma ação.
+**Semana**: unidade de tempo do jogo. Todos os monstros usam a mesma semana. Cada monstro tem uma ação por semana. Ver [[Treino semanal]].
+
+**Rancho**: lugar dos monstros do jogador. Ver [[Progressão]].
+
+**Vaga**: lugar para 1 monstro vivo ou 1 ovo em incubação no rancho. Ver [[Progressão]].
+_Evitar_: slot.
+
+**Rotina**: plano de ações de um monstro, com uma lista que se repete e regras. O jogo executa a rotina quando a semana passa. Ver [[Treino semanal]].
+
+**Regra (da rotina)**: condição da rotina, na forma "se a fadiga ou o estresse for N ou mais, fazer a ação X". Ver [[Treino semanal]].
 
 **Fase (de idade)**: um dos 3 períodos da vida do monstro: jovem, auge e velho. Cada fase muda o ganho do treino. Ver [[Treino semanal]].
 _Evitar_: estágio, era.
