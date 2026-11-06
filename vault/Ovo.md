@@ -10,7 +10,7 @@ Parte da criação de monstro, junto com [[Palavra]] e [[Personalidade|incubaç�
 - O jogador consegue ovos de 5 formas:
   - compra em uma loja (no início do jogo, é a única forma);
   - encontra em expedições;
-  - ganha em torneios;
+  - ganha em torneios (só o campeão; a qualidade sobe com o nível, ver [[Batalha]]);
   - gera procriando monstros (ver [[Procriação]]).
 - **Todo ovo tem pai e mãe.** Ovos que não vêm de procriação (comprados, achados, ganhos) são gerados a partir de um pai e uma mãe **fictícios**. Assim existe uma regra só para criar monstros: a [[Procriação]].
 - **Pais fictícios:** mesma raça do ovo. Cada alelo = base da raça × (1 ± 10%), sorteado com [[Aleatoriedade determinística]]. Cada um tem 3 aspectos diferentes e sem opostos, sorteados da lista em [[Personalidade]].

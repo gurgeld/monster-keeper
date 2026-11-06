@@ -15,7 +15,7 @@ Parte de [[Visão geral]].
 Decidido no mapa de design (ticket "Rancho"). Os limites são iniciais, para ajustar no balanceamento.
 
 - **Relógio único:** todos os monstros usam a mesma semana e envelhecem juntos.
-- **Cada monstro tem 1 ação por semana:** treinar ou descansar.
+- **Cada monstro tem 1 ação por semana:** treinar, descansar ou lutar em um torneio.
 - **Cada clique passa 1 semana.** O jogo executa a rotina de todos os monstros.
 - Cada monstro tem uma **rotina** com 2 partes:
   - uma **lista** de até 8 passos, que se repete; cada passo é um treino ou um descanso;
@@ -39,7 +39,18 @@ Decidido no mapa de design (ticket "Rancho"). Os limites são iniciais, para aju
 
 **Risco a testar:** o jogador pode encontrar uma rotina que serve para todos os monstros e deixar de pensar na fadiga. O protótipo jogável deve testar isso.
 
-**Fica para outras decisões:** como a luta usa a semana, e o que acontece com a rotina nessa semana (ticket de torneio); a tela da rotina e a opção "avançar até um aviso" (fluxo de telas).
+**Fica para outras decisões:** a tela da rotina e a opção "avançar até um aviso" (fluxo de telas).
+
+### Semana de torneio
+
+Decidido no mapa de design (ticket "Torneio e níveis"). Ver [[Batalha]], seção "Torneio".
+
+- O torneio inteiro gasta **1 semana** e usa a ação dessa semana do monstro inscrito.
+- A inscrição tem prioridade sobre as regras da rotina, porque o jogador escolheu lutar. A lista não anda nessa semana.
+- O torneio soma **+20 de fadiga**, igual a um treino, e não dá ganho de stat. A fadiga muda só no fim do torneio.
+- Os outros monstros seguem a rotina normal.
+
+**Por quê:** lutar tem um custo real, porque o monstro perde uma semana de treino.
 
 ## Protótipo jogável (versão 1)
 
@@ -72,7 +83,7 @@ Decidido no mapa de design (ticket "Tempo de vida"). Substitui o limite fixo de 
 | Velho | 111 a 156 | O treino rende menos. Os stats caem devagar. |
 
 - No fim das 156 semanas o monstro **morre e some**. O jogo avisa a partir da fase velha.
-- Ao morrer, o jogador ganha um registro na tela "memorial": nome, raça, stats finais e vitórias. O registro não tem efeito no jogo.
+- Ao morrer, o jogador ganha um registro na tela "memorial": nome, raça, stats finais, vitórias (lutas ganhas) e títulos (torneios ganhos). O registro não tem efeito no jogo.
 - Se o jogador fica sem monstro e sem ovo, ele compra um ovo na loja. Sem dinheiro, recebe um ovo grátis de qualidade baixa. Os valores ficam na decisão de economia. Assim o jogo nunca trava. A venda não pode abrir este caminho: ver [[Progressão]], seção "Venda".
 - Só pode procriar quem está vivo e na fase auge ou velho. Ver [[Procriação]].
 
