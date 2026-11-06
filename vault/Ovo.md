@@ -18,6 +18,16 @@ Parte da criação de monstro, junto com [[Palavra]] e [[Personalidade|incubaç�
 - A rolagem do ovo também decide a [[Mutação]].
 - Stats iniciais do recém-nascido: base da raça ±10% (ver [[Stats]]).
 
+## Ovos e vagas
+
+Decidido no mapa de design (ticket "Rancho"). Ver [[Progressão]].
+
+- O jogador guarda ovos **sem limite e sem prazo**. O ovo guardado não ocupa vaga.
+- Para começar a incubação, o jogador precisa de 1 vaga livre. O ovo em incubação ocupa essa vaga até chocar. A duração fica na decisão de incubação.
+- O jogador pode vender um ovo guardado. Ele não pode vender um ovo em incubação. Ver [[Progressão]], seção "Venda".
+
+**Por quê:** o jogador nunca perde um ovo por falta de vaga, e a vaga continua a ser um limite real.
+
 ## Loja (versão 2 do protótipo)
 
 - O jogo começa com **1000** de dinheiro.
