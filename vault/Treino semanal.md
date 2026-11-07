@@ -93,7 +93,7 @@ Decidido no mapa de design (ticket "Tempo de vida"). Substitui o limite fixo de 
 
 - No fim das 156 semanas o monstro **morre e some**. O jogo avisa a partir da fase velha.
 - Ao morrer, o jogador ganha um registro na tela "memorial": nome, raça, stats finais, vitórias (lutas ganhas) e títulos (torneios ganhos). O registro não tem efeito no jogo.
-- Se o jogador fica sem monstro e sem ovo, ele compra um ovo na loja. Sem dinheiro, recebe um ovo grátis de qualidade baixa. Os valores ficam na decisão de economia. Assim o jogo nunca trava. A venda não pode abrir este caminho: ver [[Progressão]], seção "Venda".
+- Se o jogador fica sem monstro e sem ovo, ele compra um ovo na loja. Sem dinheiro para o ovo mais barato, recebe um ovo grátis de qualidade baixa (ver [[Economia]]). Assim o jogo nunca trava. A venda não pode abrir este caminho: ver [[Progressão]], seção "Venda".
 - Só pode procriar quem está vivo e na fase auge ou velho. Ver [[Procriação]].
 
 **Por quê:** a morte cria o prazo que faz o jogador procriar. A fase jovem curta e o auge longo dão tempo para competir. O número exato de cada fase e o tamanho do bônus ou da perda são números iniciais, para ajustar no balanceamento.

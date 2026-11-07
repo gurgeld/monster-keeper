@@ -73,8 +73,11 @@ Os alelos do rancho só vêm dos pais, e a procriação só escolhe entre valore
 
 | Origem do ovo | Faixa do alelo | Soma máxima das 6 taxas |
 |---|---|---|
+| Ovo grátis (ver [[Economia]]) | −10% a 0% da base | 6,0 |
 | Loja e Regional | −10% a +10% da base | 6,6 |
 | Nacional | 0% a +20% da base | 7,2 |
 | Mundial | +10% a +30% da base | 7,8 |
+
+O ovo de prêmio tem a raça do monstro campeão (ver [[Batalha]]). **Por quê:** o par precisa ser da mesma raça, então esta é a forma de os alelos melhores chegarem à linhagem.
 
 **Por quê:** com ±10% em todo ovo, a melhor linhagem fica só 10% acima da base. Com esta tabela, ganhar um torneio dá um ovo melhor, e a procriação junta os melhores alelos na linhagem. Uma variação a cada herança daria progresso sem limite claro, mas ficaria parecida com a [[Mutação]], que está fora desta versão.

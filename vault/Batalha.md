@@ -100,8 +100,10 @@ Decidido no mapa de design (ticket "Torneio e níveis"). Os números são inicia
 
 ### Prêmio
 
-- O campeão e o vice recebem dinheiro. Os valores ficam na decisão de economia.
-- Só o campeão recebe ovo, de pais fictícios. A qualidade do ovo sobe com o nível. Ver [[Ovo]].
+- O campeão e o vice recebem dinheiro. Os valores e as taxas de inscrição ficam em [[Economia]].
+- Só o campeão recebe ovo, de pais fictícios, e só quando luta no **nível atual** dele. Em um nível abaixo, ele recebe só o dinheiro.
+  *Mudança (ticket "Economia"):* antes, todo título dava ovo. Com isso, a venda de ovos virava a maior fonte de renda.
+- O ovo tem a **raça do monstro campeão** e o sexo sorteado. A qualidade do ovo sobe com o nível. Ver [[Ovo]].
 
 ### Efeito no tempo e no estado
 
@@ -121,6 +123,8 @@ Decidido no mapa de design (ticket "Torneio e níveis"). Os números são inicia
 **Por quê 1 monstro por edição:** 2 monstros do mesmo jogador se enfrentariam, e ele poderia combinar o resultado na tabela.
 
 **Por quê o Regional é grátis:** um jogador sem dinheiro precisa de um modo de ganhar dinheiro. Ver [[Progressão]], seção "Níveis".
+
+**Por quê a raça do campeão:** o par precisa ser da mesma raça, então os alelos melhores só chegam à linhagem por um ovo da raça dela. A raça predominante não serve, porque o monstro que vence costuma ter vantagem contra ela. A primeira vitória também pode dar o par, com 50% de chance de o ovo ter o outro sexo.
 
 ## Em aberto
 
