@@ -64,7 +64,7 @@ Cada raça tem 4 habilidades, com a mesma estrutura de 4 posições:
 
 **Por quê a posição 4 usa Precisão:** em um espelho com 30% a mais de Precisão, as vitórias subiram de 65% a 67% para 70% a 84%. Um campo de "acerto próprio", com golpe forte que erra mais, não mudou esse valor (60% a 68%) e foi descartado.
 
-**Por quê a Inteligência não escala em Tatuço e Vulpi:** isso enfraqueceria o arquétipo Místico da Runoxa. Nessas raças, a Inteligência age na escolha da habilidade e na obediência. Reavaliar depois da fórmula de obediência.
+**Por quê a Inteligência não escala em Tatuço e Vulpi:** isso enfraqueceria o arquétipo Místico da Runoxa. Nessas raças, a Inteligência age na escolha da habilidade e na obediência. Reavaliado com a fórmula de obediência: não recebe outros efeitos agora. Ver o risco em [[Atributos de estado]], seção "Obediência".
 
 ### Habilidade liberada
 

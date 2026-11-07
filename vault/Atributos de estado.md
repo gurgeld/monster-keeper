@@ -10,7 +10,7 @@ Esta versão tem **3 atributos de estado**. Outro atributo só entra com uma nov
 |---|---|
 | **Fadiga** | Definida em [[Treino semanal]]. |
 | **Estresse** | Definido abaixo. |
-| **Obediência** | Em aberto. É um atributo próprio. Os aspectos só a modificam. Ver [[Batalha]]. |
+| **Obediência** | Definida abaixo. É calculada na hora, sem valor guardado. |
 
 Os aspectos de [[Personalidade]] mudam como esses atributos sobem e descem.
 
@@ -46,7 +46,7 @@ Decidido no mapa de design (ticket "Estresse"). Números iniciais, para ajustar 
 
   O resultado é arredondado ao inteiro mais próximo (0,5 sobe). Ex.: Calmo perde uma luta: +8. Sensível perde: +23.
 - **No torneio:** cada luta conta, mas o jogo aplica a soma só no fim do torneio. As 3 lutas usam o mesmo estresse inicial. O resultado vai de −30 (3 vitórias) a +45 (3 derrotas), antes dos aspectos. Ver [[Batalha]], seção "Torneio".
-- **Efeito do estresse alto: só reduz a [[Batalha|obediência]].** Não muda o treino (a fadiga já faz isso) nem dano ou acerto. Quanto reduz, e a partir de qual valor, fica na decisão de obediência.
+- **Efeito do estresse: só reduz a obediência.** Não muda o treino (a fadiga já faz isso) nem dano ou acerto. Ver a seção "Obediência".
 - Em 100 não há efeito extra: sem doença e sem recusa de treino.
 
 **Por quê:** dois ponteiros com ritmos diferentes dão ao jogador uma segunda decisão (descansar mesmo sem fadiga alta). Limitar o efeito à obediência evita um segundo sistema igual à fadiga e liga o custo do excesso de treino à parte da luta que é do monstro. Derrota pesa mais que vitória para criar o ciclo "perdeu, estressou, desobedece, perde" que o descanso desfaz.
@@ -55,8 +55,39 @@ Decidido no mapa de design (ticket "Estresse"). Números iniciais, para ajustar 
 
 **Fora de escopo:** doença, frustração, recusa de treino por estresse, efeito do estresse no ganho do treino.
 
-**Depende de outras decisões:** quanto o estresse reduz a obediência (ticket de estratégia e obediência).
+## Obediência
 
-## Em aberto
+Decidido no mapa de design (ticket "Estratégia antes da luta e obediência"). Números iniciais, para ajustar no balanceamento. O efeito na luta está em [[Batalha]], seção "Estratégia e obediência".
 
-- Como a obediência muda durante a vida do monstro, o que a faz subir e como decide se ele segue a estratégia.
+O jogo calcula a obediência na hora, sem guardar o valor. O resultado vai de 0 a 100 e é arredondado.
+
+```
+Obediência = 40
+           + Inteligência ÷ 5 (no máximo +40)
+           − 10 se o monstro está na fase jovem
+           + 15 se é Leal, − 15 se é Rebelde
+           − estresse ÷ 4
+           − (fadiga − 60) ÷ 2, só com fadiga acima de 60
+```
+
+- **No torneio:** as 3 lutas usam o mesmo valor, calculado com o estado inicial. Ver [[Batalha]], seção "Torneio".
+- **O que o jogador vê:** o número, as partes da conta e um aviso abaixo de 50. O aviso diz que o monstro pode parar durante a luta. Exemplo: "Obediência 32: Inteligência +4, estresse −12".
+
+Monstro no auge, sem aspecto de obediência e com fadiga até 60:
+
+| Raça e Inteligência | Sem estresse | Estresse 50 | Estresse 100 |
+|---|---|---|---|
+| Tatuço, Int 20 (sem treino) | 44, pula 3% | 32, pula 9% | 19, pula 15,5% |
+| Vulpi, Int 40 (sem treino) | 48, pula 1% | 36, pula 7% | 23, pula 13,5% |
+| Runoxa, Int 85 (sem treino) | 57, não pula | 45, pula 2,5% | 32, pula 9% |
+| Tatuço, Int 125 (com treino) | 65, não pula | 52, não pula | 40, pula 5% |
+| Vulpi, Int 175 (com treino) | 75, não pula | 62, não pula | 50, não pula |
+| Runoxa, Int 295 (com treino) | 80, não pula | 68, não pula | 55, não pula |
+
+**Por quê calculada na hora:** o jogador sobe a obediência com decisões que já existem: treinar Inteligência e descansar. Um valor acumulado subiria sozinho, sem decisão do jogador, e seria mais um número para controlar.
+
+**Por quê a fadiga entra na obediência:** o jogador vê um só número antes de lutar. A alternativa era uma chance própria de pular a ação por fadiga.
+
+**Por quê a Inteligência pesa assim:** quem não treina Inteligência paga pelo estresse, e quem treina fica quase protegido. Isso dá uma razão para gastar semanas com esse stat.
+
+**Risco a testar:** a Inteligência quase não muda a luta de Tatuço e Vulpi quando o monstro já obedece. Com +30% e sem estresse, as vitórias no espelho ficam em 51%. Com estresse 100, o Tatuço sobe para 60%, e o Vulpi fica em 51%. Ela não recebe outros efeitos agora. O protótipo jogável deve verificar se o jogador treina esse stat.

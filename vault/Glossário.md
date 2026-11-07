@@ -58,11 +58,14 @@ _Evitar_: perfil de combinação.
 **Atributo de estado**: variável que muda durante a vida do monstro e afeta treinos e batalhas: fadiga, estresse e obediência. Não é stat. Ver [[Atributos de estado]].
 _Evitar_: estado mental, humor.
 
-**Obediência**: atributo de estado que influencia se o monstro segue a estratégia. Ver [[Atributos de estado]] e [[Batalha]].
+**Obediência**: atributo de estado de 0 a 100, calculado na hora com Inteligência, fase de idade, aspectos, estresse e fadiga. Decide se o monstro segue a estratégia e, abaixo de 50, se pula a ação. Ver [[Atributos de estado]] e [[Batalha]].
+
+**Estratégia**: escolha do jogador para uma edição: Equilibrada, Ataque ou Guarda. Vale enquanto o monstro obedece. Ver [[Batalha]].
+_Evitar_: postura, tática.
 
 **Mutação**: bônus raro rolado no ovo, não herdado. Ver [[Mutação]].
 
-**Fadiga**: atributo de 0 a 100. Sobe com treino, desce com descanso, reduz o ganho do treino. Ver [[Treino semanal]].
+**Fadiga**: atributo de 0 a 100. Sobe com treino, desce com descanso, reduz o ganho do treino. Acima de 60, também reduz a obediência. Ver [[Treino semanal]].
 
 **Estresse**: atributo de 0 a 100. Pressão acumulada: sobe devagar com treino cansado e derrota, desce com descanso e vitória. Só reduz a obediência. Ver [[Atributos de estado]].
 _Evitar_: tensão, nervosismo.

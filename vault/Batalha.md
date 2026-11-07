@@ -24,8 +24,9 @@ Decidido no mapa de design (ticket "Formato da simulação de batalha").
 - A lista de habilidades de cada raça e a regra para liberar cada uma estão em [[Raças]].
 - Cada raça tem 1 **habilidade básica sem espera**. As outras têm **espera** depois do uso, contada em **ações do próprio monstro**. Assim o monstro nunca fica sem opção.
   *Mudança (protótipo de batalha):* antes, a espera era em ticks. Com ticks, o monstro rápido agia mais vezes durante a mesma espera e usava menos as habilidades fortes, e a variedade caía conforme ele treinava Velocidade.
-- O monstro escolhe a habilidade por **sorteio com pesos**, pela seed. A estratégia do jogador muda os pesos. A Inteligência define quanto o monstro segue os pesos e se escolhe a habilidade que explora o ponto fraco do oponente.
-- O monstro **pode pular a ação** por fadiga ou desobediência. A fórmula fica no ticket de obediência.
+- O monstro escolhe a habilidade por **sorteio com pesos**, pela seed. Os pesos são fixos. A Inteligência define se ele escolhe a habilidade que explora o ponto fraco do oponente.
+  *Mudança (ticket "Estratégia antes da luta e obediência"):* antes, a estratégia mudava os pesos. Ver a seção "Estratégia e obediência".
+- O monstro **pode pular a ação** por desobediência. A fadiga age por meio da obediência. Ver a seção "Estratégia e obediência".
 - **Defesa e esquiva são passivas**: reagem ao golpe do oponente. Não existe ação "Defender".
 
 ### Papel dos stats
@@ -70,6 +71,56 @@ Decidido no mapa de design (ticket "Protótipo de batalha simulada no terminal")
 
 **Por quê manter ×1,5 e ×0,5:** com pesos menores, o ciclo entre as raças se quebrou no teste, e o Tatuço passou a vencer a Runoxa e a empatar com o Vulpi. Isso tira o sentido de escolher a raça certa. O custo é que a raça errada quase sempre perde com o mesmo treino, e venceu 96% a 100% com 25% a mais em todos os stats. O jogador vê a raça predominante no calendário e pode se preparar.
 
+## Estratégia e obediência
+
+Decidido no mapa de design (ticket "Estratégia antes da luta e obediência"). Os números são iniciais, para ajustar no balanceamento. A fórmula da obediência está em [[Atributos de estado]].
+
+### Estratégia
+
+- O jogador escolhe **1 estratégia por edição**, na inscrição, e pode mudar até o clique que passa a semana. O jogo sugere a última estratégia usada pelo monstro.
+- Há 3 estratégias: **Equilibrada**, **Ataque** e **Guarda**.
+
+| Estratégia | Efeito no teste |
+|---|---|
+| Equilibrada | Nenhum. |
+| Ataque | +20% de dano, −40% de Defesa. |
+| Guarda | −20% de dano, +40% de Defesa. |
+
+**Por quê não pesos:** o teste com as 4 habilidades de [[Raças]] mostrou que os pesos quase não mudam a luta, porque a espera decide o que está pronto. Com peso ×1000, a Forte do Tatuço sobe só de 25% para 31% de uso, e as vitórias mudam no máximo cerca de 8 pontos. Com esperas menores (0/1/1/2), o foco ×3 leva a Cobertura a cerca de 50% de uso, mas as vitórias mudam no máximo 11 pontos, e na maioria dos casos bem menos. Essa opção também mudaria a decisão das habilidades.
+
+**Por quê 1 estratégia por edição:** a decisão é preparar o monstro para a raça predominante e aceitar o risco do terceiro oponente.
+
+**Risco para o balanceamento:** com os valores de teste, só o Ataque do Vulpi é melhor que a Equilibrada no espelho (59%). O Ataque do Tatuço vence 25%, e a Guarda vence de 31% a 43%. Os valores precisam fazer a melhor estratégia depender do oponente.
+
+**Fora desta versão, por enquanto:** estratégias de Velocidade e Precisão. No espelho, +25% de Velocidade com −25% de Precisão venceu de 56% a 96%, e o inverso venceu de 2% a 32%. Rever depois que a Velocidade deixar de dominar a luta.
+
+### O que acontece a cada ação
+
+O jogo verifica a obediência quando chega a vez do monstro, pela seed ([[Aleatoriedade determinística]]):
+
+1. **Segue a estratégia?** A chance em % é igual à obediência. O resultado vale até a próxima ação do monstro. Se ele ignora a estratégia, usa os valores normais nesse período, sem bônus e sem penalidade.
+2. **Pula a ação?** Só acontece com obediência abaixo de 50. A chance em % é (50 − obediência) ÷ 2, com máximo de 25%.
+
+- **Ação pulada conta para a espera,** porque continua a ser uma vez do monstro.
+- O registro da luta mostra as 2 formas de desobediência: "ignora a estratégia" e "ignora a ordem e não faz nada".
+
+**Por quê 2 níveis:** ignorar a estratégia custa pouco (muda as vitórias em no máximo 9 pontos). Pular custa muito: em um espelho, pular 10% das ações leva a 27% a 39% de vitórias, e pular 25% leva a 6% a 22%. Só pular castigaria demais a obediência média. Só ignorar deixaria a obediência quase sem efeito.
+
+**Por quê a ação pulada conta para a espera:** o monstro já perde a ação. Atrasar também as habilidades dobraria o castigo.
+
+### Oponentes
+
+- Os oponentes **não têm obediência**. Sempre usam a Equilibrada e nunca pulam ações.
+- Na inscrição, o jogador vê a **raça e os tipos de dano dos 3 oponentes**, e a faixa de stats do nível. Os stats de cada oponente ficam escondidos.
+
+**Por quê sem obediência:** o jogador não veria esses valores, então eles só dariam variação sem explicação. A dificuldade vem da faixa de stats do nível.
+
+**Por quê mostrar os tipos:** o tipo é fixo por raça. Esconder só obrigaria o jogador a decorar uma tabela.
+
+**Por quê esconder os stats:** com os stats visíveis, o jogador pode calcular o resultado antes da luta.
+
+**Fora de escopo:** foco em uma habilidade escolhida pelo jogador; uma estratégia para cada oponente.
+
 ## Torneio
 
 Decidido no mapa de design (ticket "Torneio e níveis"). Os números são iniciais, para ajustar no balanceamento. Os níveis ficam em [[Progressão]].
@@ -89,7 +140,7 @@ Decidido no mapa de design (ticket "Torneio e níveis"). Os números são inicia
 ### Oponentes
 
 - O jogo gera os oponentes pela seed. Cada nível tem uma faixa fixa de stats, que não acompanha a força do jogador.
-- O jogador sabe a raça predominante antes da luta. O que mais ele vê sobre os oponentes fica no ticket de estratégia e obediência.
+- O jogador sabe a raça predominante pelo calendário. O que mais ele vê sobre os oponentes está na seção "Estratégia e obediência".
 
 ### Inscrição
 
@@ -128,11 +179,7 @@ Decidido no mapa de design (ticket "Torneio e níveis"). Os números são inicia
 
 ## Em aberto
 
-- Quais estratégias o jogador pode escolher? (ticket de estratégia e obediência)
-- Como a obediência muda e como decide a ação? Ela é um atributo próprio, e os aspectos de [[Personalidade]] só a modificam. Ver [[Atributos de estado]].
-- O jogador vê os tipos e fraquezas do oponente antes da luta?
 - Números: dano, acerto, esquiva, limite de ticks, tamanho das esperas. O protótipo está na branch `prototype/battle-sim`. Resultados do teste com a lista de habilidades de [[Raças]], em um modelo com as fórmulas do protótipo:
   - **Duração:** o espelho do Tatuço leva 58 ações e o da Runoxa, 27. Runoxa contra Vulpi leva 12. O alvo é de 13 a 25.
   - **Velocidade:** domina. Em um espelho com 30% a mais, vence de 83% a 99%.
   - **Fórmula de acerto:** uma inclinação maior valoriza a Precisão. Com 1,0, Runoxa contra Vulpi cai para 53% e o ciclo fica fraco. Manter abaixo de 1,0.
-- **Os pesos mudam pouco a escolha da habilidade.** Com pesos ±50%, a habilidade favorecida ganha só de 1 a 3 pontos de uso, porque as esperas decidem o que está disponível. Como a estratégia muda esses pesos, ela pode ficar fraca. Resolver no ticket de estratégia e obediência.
