@@ -35,7 +35,7 @@ Decidido no mapa de design (ticket "Rancho"). Os limites são iniciais, para aju
 
 **Por quê rotina:** com 6 monstros durante 156 semanas, o jogador teria cerca de 936 decisões.
 
-**Por quê as regras só leem fadiga e estresse:** o treino e o descanso mudam estes dois valores. Regras com fase de idade ou stats fariam o jogo quase jogar sozinho. A satisfação pode entrar se a decisão dela der um motivo.
+**Por quê as regras só leem fadiga e estresse:** o treino e o descanso mudam estes dois valores. Regras com fase de idade ou stats fariam o jogo quase jogar sozinho.
 
 **Risco a testar:** o jogador pode encontrar uma rotina que serve para todos os monstros e deixar de pensar na fadiga. O protótipo jogável deve testar isso.
 

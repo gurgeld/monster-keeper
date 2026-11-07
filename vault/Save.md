@@ -21,7 +21,7 @@ O save é uma **foto do estado atual**, em JSON. O jogo não guarda a lista de a
 - **Valores calculados:** ex.: a letra da taxa de ganho.
 - **Histórico de lutas:** só vitórias e títulos de cada monstro.
 
-As listas de monstro e ovo crescem com as decisões seguintes (ex.: satisfação).
+As listas de monstro e ovo crescem com as decisões seguintes (ex.: obediência).
 
 **Por quê foto:** se o save repetisse as ações, uma mudança de balanceamento alteraria o passado. Um monstro poderia "renascer" com outros stats.
 
