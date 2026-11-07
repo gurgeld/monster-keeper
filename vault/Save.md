@@ -9,7 +9,7 @@ O save é uma **foto do estado atual**, em JSON. O jogo não guarda a lista de a
 **Guarda:**
 
 - **Partida:** seed da partida (como texto), semana, dinheiro, vagas, calendário de torneios e loja.
-- **Caderno de palavras:** usos de cada palavra normalizada. Ver [[Palavra]].
+- **Caderno de palavras:** cada palavra normalizada já usada ou estudada, com o número de usos. Uma palavra só estudada tem 0 usos. Ver [[Palavra]].
 - **Monstros vivos:** ID fixo, sexo, raça, stats, alelos, taxas de ganho, aspectos, atributos de estado, idade, nível, habilidades liberadas, rotina, inscrição em torneio, vitórias, títulos, palavra e força da palavra. Na mãe, também a gestação e a recuperação. Ver [[Procriação]].
 - **Ovos:** raça, sexo, seed, dados dos pais (cópia) e, se estiver em incubação, o estado da incubação.
 - **Memorial:** os registros dos monstros mortos.
@@ -28,7 +28,7 @@ As listas de monstro e ovo crescem com as decisões seguintes. A obediência nã
 ## Quando salva
 
 - **Só salvamento automático.** Não há botão de salvar.
-- O jogo salva depois de cada semana e de cada ação imediata: comprar, vender, lançar palavra, mudar rotina, inscrever em torneio.
+- O jogo salva depois de cada semana e de cada ação imediata: comprar, vender, estudar palavra, lançar palavra, mudar rotina, inscrever em torneio.
 - **Ordem da semana:** o jogo calcula a semana inteira, salva e só depois mostra o relatório. Se a aba fechar durante uma luta, o resultado não muda, e o relatório aparece quando o jogador voltar.
 
 **Por quê sem salvamento manual:** o jogador poderia salvar, lançar uma palavra e carregar de novo se não gostasse do resultado. Isso anularia o Desgaste e a regra que impede a venda do ovo em incubação.

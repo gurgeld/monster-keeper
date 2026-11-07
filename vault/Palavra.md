@@ -41,9 +41,32 @@ Parte da criação de monstro, junto com [[Ovo]] e [[Personalidade|incubação]]
 
 ## Estudo de palavras
 
-- O jogador paga um custo (tempo ou dinheiro) para testar uma palavra e aprender o efeito dela sem gastar um ovo.
+Decidido no mapa de design (ticket "Estudo de palavras"). O preço é um número inicial, para ajustar no balanceamento.
+
+- O jogador paga para aprender o efeito de uma palavra sem gastar um ovo.
 - O estudo **não conta como uso**. Ele mostra o efeito na força atual e coloca a palavra no [[#Caderno de palavras|caderno]].
 - Uma palavra que já está no caderno não precisa de estudo, e o jogo não cobra por ela.
+- **Custo:** **100** de dinheiro, sempre o mesmo valor.
+- **Fluxo:** o efeito aparece na hora. O estudo não usa a ação de um monstro, e a semana não passa. O jogador não precisa ter monstro nem ovo.
+- **Sem limite:** o dinheiro é o único limite. Não há limite por semana.
+- **Telas:** o jogador estuda no caderno, para planejar, e na tela de lançar a palavra, antes de decidir. Nesta tela, uma palavra fora do caderno mostra "efeito desconhecido" e 2 botões: Estudar e Lançar sem estudar. Depois do estudo, o jogador ainda pode digitar outra palavra.
+- O botão de estudo fica desligado se a palavra for inválida ou se o dinheiro não chegar a 100. O saldo nunca fica negativo.
+
+**Por quê só dinheiro:** o dinheiro sobra no fim do jogo (ver [[Economia]]), e só um custo em dinheiro reduz esta sobra. Com 6 monstros, 1 ação custa pouco. Um custo em ação também exigiria um passo novo na rotina (ver [[Treino semanal]]) e impediria o estudo sem monstro.
+
+**Por quê 100 fixo:** o preço pesa no início, porque depois do primeiro ovo sobram de 100 a 600. Ele continua a pesar no fim do jogo, porque uma palavra boa é rara e o [[#Desgaste|desgaste]] faz o jogador procurar palavras novas. Custo médio com 100:
+
+| Palavra procurada | Chance por estudo | Em qualquer stat | No stat que o jogador quer |
+|---|---|---|---|
+| Soma +1 ou melhor | 20% | 500 | 3.000 |
+| Soma +2 ou melhor | 5% | 2.000 | 12.000 |
+| Soma +3 | 1% | 10.000 | 60.000 |
+
+As alternativas foram 50 fixo (o jogador poderia digitar centenas de palavras, uma por vez) e um preço que sobe a cada estudo (castiga a exploração no fim do jogo, quando as palavras já estão gastas, e exige mais um contador no save).
+
+**Por quê sem limite:** um limite faz o jogador passar semanas só para estudar mais, e reduz a saída de dinheiro.
+
+**Por quê gastar tudo em estudos não é um problema:** a regra do ovo grátis impede que o jogo trave (ver [[Economia]]). Ela não vira vantagem, porque o ovo grátis é de qualidade baixa e o jogador já gastou o dinheiro.
 
 ## Desgaste
 
@@ -70,5 +93,4 @@ Decidido no mapa de design (ticket "Efeito recessivo"). Substitui o nome "efeito
 
 ## Em aberto
 
-- Custo e fluxo do estudo de palavras (dependem da economia).
 - Estudo de palavras, desgaste e caderno ainda não estão no protótipo.
