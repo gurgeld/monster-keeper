@@ -119,3 +119,10 @@ _Evitar_: estágio, era.
 **Memorial**: tela com o registro dos monstros que morreram. Não tem efeito no jogo. Ver [[Treino semanal]].
 
 **Seed da partida**: número que define toda a aleatoriedade de uma partida. Também serve como "variável do save" da palavra. Ver [[Aleatoriedade determinística]].
+
+**Seed por evento**: seed de um sorteio, calculada a partir da seed da partida, da semana, do ID do monstro ou ovo e do tipo de sorteio. Ver [[Aleatoriedade determinística]].
+
+**Save**: foto do estado atual da partida. Há 1 save por navegador, e o jogo salva sozinho. Ver [[Save]].
+_Evitar_: slot, jogo salvo.
+
+**Relatório da semana**: resultado da semana que o jogador ainda não viu. Fica no save. Ver [[Save]].

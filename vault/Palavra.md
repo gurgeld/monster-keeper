@@ -37,7 +37,7 @@ Parte da criação de monstro, junto com [[Ovo]] e [[Personalidade|incubação]]
   **Por quê +4:** com soma +3 e trade-off obrigatório (pelo menos −1), o positivo precisa chegar a +4.
 - **Como a palavra vira efeito:** hash da palavra junto com a variável do save → seed de um sorteio determinístico.
 - Normalização: o jogo ignora maiúsculas ("Fogo" = "fogo"). Aceita só letras (com acento).
-- Por enquanto, a "variável do save" é a seed da partida (ainda não existe save).
+- A "variável do save" é a seed da partida. Ver [[Save]].
 
 ## Estudo de palavras
 
