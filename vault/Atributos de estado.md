@@ -4,16 +4,17 @@ Variáveis que mudam durante a vida do monstro e afetam o resultado de treinos e
 
 ## Decidido
 
-Esta versão tem **4 atributos de estado**. Outro atributo só entra com uma nova decisão.
+Esta versão tem **3 atributos de estado**. Outro atributo só entra com uma nova decisão.
 
 | Atributo | Situação |
 |---|---|
 | **Fadiga** | Definida em [[Treino semanal]]. |
 | **Estresse** | Definido abaixo. |
-| **Satisfação** | Em aberto. |
 | **Obediência** | Em aberto. É um atributo próprio. Os aspectos só a modificam. Ver [[Batalha]]. |
 
 Os aspectos de [[Personalidade]] mudam como esses atributos sobem e descem.
+
+*Mudança (ticket "Satisfação"):* antes eram 4 atributos. A **satisfação** saiu desta versão. Sem regras próprias, ela seria o estresse invertido. As alternativas (variedade de treino ou gostos do monstro) trazem mais um valor para controlar, e o ciclo completo funciona sem ele. Se o protótipo jogável mostrar que uma rotina serve para todos os monstros (ver [[Treino semanal]]), os gostos do monstro voltam como nova decisão.
 
 **Por quê uma lista fechada:** cada atributo precisa de regras para subir e descer e de um efeito no jogo.
 
@@ -58,5 +59,4 @@ Decidido no mapa de design (ticket "Estresse"). Números iniciais, para ajustar 
 
 ## Em aberto
 
-- Como a satisfação sobe e desce, e o que faz. Ela é diferente do estresse e não é a frustração, que está fora de escopo.
-- Como a obediência muda durante a vida do monstro, e como decide se ele segue a estratégia.
+- Como a obediência muda durante a vida do monstro, o que a faz subir e como decide se ele segue a estratégia.

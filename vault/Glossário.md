@@ -55,11 +55,8 @@ _Evitar_: perfil de combinação.
 
 **Aspecto oposto**: aspecto que não pode existir no mesmo monstro que o seu par (ex.: Rebelde e Leal). Ver [[Personalidade]].
 
-**Atributo de estado**: variável que muda durante a vida do monstro e afeta treinos e batalhas: fadiga, estresse, satisfação e obediência. Não é stat. Ver [[Atributos de estado]].
+**Atributo de estado**: variável que muda durante a vida do monstro e afeta treinos e batalhas: fadiga, estresse e obediência. Não é stat. Ver [[Atributos de estado]].
 _Evitar_: estado mental, humor.
-
-**Satisfação**: atributo de estado. As regras ainda estão em aberto. Ver [[Atributos de estado]].
-_Evitar_: felicidade.
 
 **Obediência**: atributo de estado que influencia se o monstro segue a estratégia. Ver [[Atributos de estado]] e [[Batalha]].
 
