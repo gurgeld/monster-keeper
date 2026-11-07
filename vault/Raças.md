@@ -41,16 +41,22 @@ Decidido no mapa de design (ticket "Habilidades das raças"). Cada raça usa só
 
 ### Habilidades
 
-Decidido no mapa de design (ticket "Habilidades das raças"). Os números são iniciais, para ajustar no balanceamento.
+Decidido no mapa de design (ticket "Habilidades das raças"). Os números vêm do ticket "Balanceamento numérico da batalha" e são iniciais.
 
 Cada raça tem 4 habilidades, com a mesma estrutura de 4 posições:
 
 | Posição | Tipo de dano | Stat de escala | Espera | Peso | Potência |
 |---|---|---|---|---|---|
-| 1. Básica | principal | stat da raça | 0 | 1 | 30 (Tatuço: 40) |
-| 2. Forte | principal | stat forte da raça | 2 | 3 | 45 |
-| 3. Cobertura | secundário | Força | 3 | 3 | 55 |
-| 4. Precisa | principal | Precisão | 4 | 2 | 60 |
+| 1. Básica | principal | stat da raça | 0 | 1 | 36 (Tatuço: 48) |
+| 2. Forte | principal | stat forte da raça | 1 | 3 | 50 (Tatuço: 35) |
+| 3. Cobertura | secundário | Força | 1 | 3 | 80 |
+| 4. Precisa | principal | Precisão | 2 | 2 | 60 |
+
+*Mudança (ticket "Balanceamento numérico da batalha"):* antes, a potência era 30 (Tatuço: 40), 45, 55 e 60, e as esperas eram 0, 2, 3 e 4.
+
+**Por quê a Cobertura é forte:** no espelho, ela é o único golpe que não é resistido, e causa ×1,5. Contra outra raça, ela é neutra ou resistida. Com potência maior e espera menor, ela encurta principalmente o espelho.
+
+**Por quê a Forte do Tatuço fica abaixo da básica:** ela escala com a Defesa, que é muito alta nessa raça.
 
 | Raça | 1. Básica | 2. Forte | 3. Cobertura | 4. Precisa |
 |---|---|---|---|---|
@@ -58,7 +64,7 @@ Cada raça tem 4 habilidades, com a mesma estrutura de 4 posições:
 | Vulpi | Rajada (Velocidade) | Vendaval (Velocidade) | Mordida | Ciclone certeiro |
 | Runoxa | Dardo rúnico (Inteligência) | Lança de runas (Inteligência) | Garra de coruja | Olhar rúnico |
 
-**Por quê 4 habilidades e estes pesos:** com 3 habilidades e pesos 5/3/2, a básica ficou em 71% a 74% das ações contra outra raça. Com a lista atual, ficou em 38% a 40%, e em 30% a 34% no espelho. A meta é ficar abaixo de 50% no monstro com todas as habilidades liberadas.
+**Por quê 4 habilidades e estes pesos:** com 3 habilidades e pesos 5/3/2, a básica ficou em 71% a 74% das ações contra outra raça. Com a lista atual, ela fica em 10% a 38% das ações com 50 e 100 semanas de treino (ver [[Batalha]], seção "Números da luta"). Com 15 semanas, sobe para 51% a 72%, porque quase nada está liberado. A meta é ficar abaixo de 50% no monstro com todas as habilidades liberadas.
 
 **Por quê a Cobertura usa Força:** a Força fica média em todas as raças, e assim tem uso em todas.
 
@@ -76,10 +82,12 @@ Cada raça tem 4 habilidades, com a mesma estrutura de 4 posições:
 | Posição | Stat | Treinos desde a base | Tatuço | Vulpi | Runoxa |
 |---|---|---|---|---|---|
 | 2. Forte | stat de escala | cerca de 5 | Defesa 155 | Velocidade 145 | Inteligência 155 |
-| 3. Cobertura | Força | cerca de 5 | Força 100 | Força 100 | Força 60 |
+| 3. Cobertura | Força | cerca de 1 a 2 | Força 60 | Força 60 | Força 35 |
 | 4. Precisa | Precisão | cerca de 10 | Precisão 120 | Precisão 200 | Precisão 185 |
 
 Os mínimos usam a taxa de ganho da raça e o ganho de 10 × taxa por treino (ver [[Treino semanal]]), para que o esforço seja igual em toda raça.
+
+*Mudança (ticket "Balanceamento numérico da batalha"):* antes, a Cobertura pedia cerca de 5 treinos (Força 100, 100 e 60). Sem ela, todo golpe do espelho é resistido, e o espelho do Tatuço passava de 120 ações no Regional.
 
 **Por quê desbloqueio por stat:** mostra progresso na luta, dá um objetivo de treino e não cria uma regra nova na rotina.
 

@@ -114,6 +114,8 @@ _Evitar_: elemento.
 
 **Semana**: unidade de tempo do jogo. Todos os monstros usam a mesma semana. Cada monstro tem uma ação por semana. Ver [[Treino semanal]].
 
+**Semana de treino**: medida do balanceamento. 1 semana sobe cada stat em cerca de 1 × a taxa de ganho, com a rotina de 3 treinos e 1 descanso e o treino dividido por igual. Define a força dos oponentes. Ver [[Batalha]].
+
 **Rancho**: lugar dos monstros do jogador. Ver [[Progressão]].
 
 **Vaga**: lugar para 1 monstro vivo ou 1 ovo em incubação no rancho. Ver [[Progressão]].
