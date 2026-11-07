@@ -21,4 +21,5 @@ Versão atual: [[Protótipo jogável]].
 - [[Raças]]
 - [[Mutação]]
 - [[Aleatoriedade determinística]]
+- [[Save]]
 - [[Exportação web]]

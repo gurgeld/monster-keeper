@@ -13,3 +13,4 @@ Parte de [[Visão geral]]. O jogo é exportado em HTML e publicado no GitHub Pag
 ## Consequências
 
 - Não usar threads no código do jogo.
+- O save fica no armazenamento do navegador e pode se perder. Regras em [[Save]].
