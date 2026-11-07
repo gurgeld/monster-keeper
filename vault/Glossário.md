@@ -37,6 +37,9 @@ _Evitar_: descanso (é uma ação da semana), espera (é da habilidade).
 
 **Uso (de palavra)**: cada ovo em que o jogador lança a palavra, no início da incubação. O estudo não conta como uso. Ver [[Palavra]].
 
+**Estudo (de palavra)**: compra imediata do conhecimento do efeito de uma palavra, por 100 de dinheiro. Coloca a palavra no caderno e não conta como uso. Ver [[Palavra]].
+_Evitar_: teste, pesquisa.
+
 **Desgaste (da palavra)**: queda permanente do efeito da palavra a cada uso, no save inteiro. Não muda monstros que já nasceram. Ver [[Palavra]].
 _Evitar_: efeito recessivo (faz pensar em genética, e a palavra não é genética).
 
