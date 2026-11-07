@@ -17,6 +17,13 @@ _Evitar_: crescimento, potencial, facilidade (usar só "taxa de ganho").
 
 **Pai fictício**: pai ou mãe gerado pelo jogo para um ovo que não veio de procriação (loja, expedição, torneio).
 
+**Concepção**: semana em que um par do rancho procria. Usa a ação da semana dos 2 pais. Ver [[Procriação]].
+
+**Gestação**: as 9 semanas entre a concepção e a saída do ovo. A mãe pode treinar e competir. Ver [[Procriação]].
+
+**Recuperação**: as 3 semanas depois da saída do ovo, em que a mãe não procria. Ver [[Procriação]].
+_Evitar_: descanso (é uma ação da semana), espera (é da habilidade).
+
 **Palavra**: encantamento de 3 a 7 letras lançado no início da incubação. Muda a taxa de ganho de 2 stats. Não é genética. Ver [[Palavra]].
 
 **Ponto (de palavra)**: unidade do efeito da palavra. 1 ponto = 0,05 na taxa de ganho.

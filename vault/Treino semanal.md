@@ -15,7 +15,7 @@ Parte de [[Visão geral]].
 Decidido no mapa de design (ticket "Rancho"). Os limites são iniciais, para ajustar no balanceamento.
 
 - **Relógio único:** todos os monstros usam a mesma semana e envelhecem juntos.
-- **Cada monstro tem 1 ação por semana:** treinar, descansar ou lutar em um torneio.
+- **Cada monstro tem 1 ação por semana:** treinar, descansar, lutar em um torneio ou procriar.
 - **Cada clique passa 1 semana.** O jogo executa a rotina de todos os monstros.
 - Cada monstro tem uma **rotina** com 2 partes:
   - uma **lista** de até 8 passos, que se repete; cada passo é um treino ou um descanso;
@@ -51,6 +51,15 @@ Decidido no mapa de design (ticket "Torneio e níveis"). Ver [[Batalha]], seçã
 - Os outros monstros seguem a rotina normal.
 
 **Por quê:** lutar tem um custo real, porque o monstro perde uma semana de treino.
+
+### Semana de concepção
+
+Decidido no mapa de design (ticket "Procriação"). Ver [[Procriação]].
+
+- A concepção usa a ação da semana dos 2 pais. Ela não soma fadiga.
+- Como no torneio, a concepção tem prioridade sobre as regras da rotina, porque o jogador a escolheu. A lista não anda nessa semana.
+- Um monstro inscrito em um torneio não pode procriar na mesma semana, porque só tem 1 ação.
+- A gestação não usa ações. Durante a gestação, a mãe segue a rotina e pode lutar em torneios.
 
 ## Protótipo jogável (versão 1)
 

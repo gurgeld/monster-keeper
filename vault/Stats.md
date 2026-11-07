@@ -8,7 +8,7 @@ Parte de [[Visão geral]].
 - Cada stat tem uma **taxa de ganho**: diz quanto o treino aumenta aquele stat. Ver [[Treino semanal]].
 - A taxa de ganho vem de duas partes:
   1. **Base da raça**: nota fixa por stat (E a A), igual para todos da mesma raça.
-  2. **Variação individual**: vem dos **alelos herdados dos pais** (ver [[Procriação]]). Pais fictícios têm alelos na base ±10% (ver [[Ovo]]).
+  2. **Variação individual**: vem dos **alelos herdados dos pais** (ver [[Procriação]]). Pais fictícios têm alelos em uma faixa em torno da base (ver [[Ovo]]).
      *Mudança (versão 2):* antes, cada ovo rolava ±10% direto sobre a base. Trocado para alelos para que todo ovo siga a mesma regra da procriação.
 - O jogo guarda a taxa como **número**. A tela mostra uma **letra** (E a A).
 - Faixa da taxa: **0,5 a 1,5**. O número multiplica o ganho do treino (1,0 = ganho normal). Letras (limite inferior incluso):
@@ -34,4 +34,4 @@ Parte de [[Visão geral]].
 
 ## Em aberto
 
-- Qual letra mostrar para taxa acima de 1,5 ou abaixo de 0,5? (uma letra S?)
+- Qual letra mostrar para taxa acima de 1,5 ou abaixo de 0,5? (uma letra S?) Com ovos do Mundial, a taxa genética chega a cerca de 1,82 (ver [[Procriação]]).
