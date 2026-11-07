@@ -17,6 +17,13 @@ _Evitar_: crescimento, potencial, facilidade (usar só "taxa de ganho").
 
 **Pai fictício**: pai ou mãe gerado pelo jogo para um ovo que não veio de procriação (loja, expedição, torneio).
 
+**Loja**: lugar onde o jogador compra ovos. Mostra 5 ovos e troca os não comprados a cada 4 semanas. Ver [[Economia]].
+
+**Ovo grátis**: ovo de qualidade baixa que o jogador recebe quando não tem monstro, não tem ovo e não pode comprar o ovo mais barato da loja. Ver [[Economia]].
+
+**Taxa de inscrição**: dinheiro que o jogador paga para inscrever um monstro no Nacional ou no Mundial. Ver [[Economia]].
+_Evitar_: "taxa" sozinha (é a taxa de ganho).
+
 **Concepção**: semana em que um par do rancho procria. Usa a ação da semana dos 2 pais. Ver [[Procriação]].
 
 **Gestação**: as 9 semanas entre a concepção e a saída do ovo. A mãe pode treinar e competir. Ver [[Procriação]].

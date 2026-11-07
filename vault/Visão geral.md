@@ -11,7 +11,7 @@ Plataforma: exportação HTML, publicada no GitHub Pages.
 3. Competir e explorar → [[Batalha]]
 4. Criar novos monstros para progredir → [[Procriação]]
 
-Como o jogo cresce com o tempo: [[Progressão]].
+Como o jogo cresce com o tempo: [[Progressão]]. De onde vem e para onde vai o dinheiro: [[Economia]].
 
 Versão atual: [[Protótipo jogável]].
 

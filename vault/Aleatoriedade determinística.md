@@ -21,4 +21,4 @@ Decidido no mapa de design (ticket "Saves"). Ver [[Save]].
 
 **Mudança no código:** hoje, `game.gd` usa um único gerador. Isso muda quando o save for implementado.
 
-Usado em: [[Ovo]], [[Palavra]], [[Personalidade]], [[Mutação]], [[Procriação]].
+Usado em: [[Ovo]], [[Palavra]], [[Personalidade]], [[Mutação]], [[Procriação]], [[Economia]] (troca da loja).
