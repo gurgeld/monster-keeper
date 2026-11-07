@@ -13,7 +13,9 @@ Parte da criação de monstro, junto com [[Palavra]] e [[Personalidade|incubaç�
   - ganha em torneios (só o campeão; a qualidade sobe com o nível, ver [[Batalha]]);
   - gera procriando monstros (ver [[Procriação]]).
 - **Todo ovo tem pai e mãe.** Ovos que não vêm de procriação (comprados, achados, ganhos) são gerados a partir de um pai e uma mãe **fictícios**. Assim existe uma regra só para criar monstros: a [[Procriação]].
-- **Pais fictícios:** mesma raça do ovo. Cada alelo = base da raça × (1 ± 10%), sorteado com [[Aleatoriedade determinística]]. Cada um tem 3 aspectos diferentes e sem opostos, sorteados da lista em [[Personalidade]].
+- **Pais fictícios:** mesma raça do ovo. Cada alelo = base da raça × um fator sorteado com [[Aleatoriedade determinística]]. Na loja e no Regional, o fator vai de −10% a +10%. No Nacional e no Mundial, a faixa é maior (tabela em [[Procriação]], seção "Limite da linhagem"). Cada um tem 3 aspectos diferentes e sem opostos, sorteados da lista em [[Personalidade]].
+  *Mudança (ticket "Procriação"):* antes, todo pai fictício usava ±10%. A qualidade do ovo de torneio não tinha definição, e a linhagem ficava só 10% acima da base.
+- Todo ovo tem **sexo**, sorteado na criação com 50% para cada lado. O jogador vê o sexo em qualquer lugar onde vê o ovo. Ver [[Procriação]].
 - O jogador vê só as informações dos pais do ovo (raça, taxas, os 3 aspectos de cada um etc.). O resultado é probabilístico.
 - A rolagem do ovo também decide a [[Mutação]].
 - Stats iniciais do recém-nascido: base da raça ±10% (ver [[Stats]]).
