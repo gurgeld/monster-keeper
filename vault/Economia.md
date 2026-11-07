@@ -82,5 +82,5 @@ As regras que limitam a venda ficam em [[Progressão]], seção "Venda".
 
 ## Riscos a testar
 
-- **O modelo usa suposições.** As chances de vitória do modelo não vêm da batalha real, porque ela ainda não tem balanceamento. Rever os números depois disso.
+- **O modelo usa suposições.** As chances de vitória do modelo não vêm da batalha real. As chances medidas agora estão em [[Batalha]], seção "Torneio". A revisão destes números ainda falta, e depende dos números das fases de idade (ver [[Treino semanal]]).
 - **Dinheiro sobrando:** no modelo, o jogador acumula de 9 a 19 mil até a semana 312, porque depois da 6ª vaga sobram poucas saídas. O estudo de palavras custa 100, sem limite, o que dá de 90 a 190 estudos com esta sobra (ver [[Palavra]]). Nada obriga o jogador a estudar, então o protótipo jogável deve medir se o dinheiro ainda sobra.
