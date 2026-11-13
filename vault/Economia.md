@@ -2,7 +2,7 @@
 
 De onde vem e para onde vai o dinheiro. Parte de [[Visão geral]].
 
-Decidido no mapa de design (ticket "Economia"). Os números são iniciais, para ajustar no balanceamento.
+Decidido no mapa de design (ticket "Economia") e revisto com as chances reais de título (ticket "Rever a economia com as chances reais de título"). Os números são iniciais, para ajustar no balanceamento.
 
 ## Fontes e saídas
 
@@ -18,7 +18,8 @@ Decidido no mapa de design (ticket "Economia"). Os números são iniciais, para 
 
 - O jogo começa com **1000** de dinheiro. Em geral, o jogador compra 1 ovo, e o primeiro objetivo é conseguir o segundo.
 
-**Por quê 1000:** com este valor, a escolha do preço pesa desde o início, porque um ovo barato deixa mais dinheiro para o segundo. A alternativa era 1500, que compra um par em quase toda loja que tem um. O custo de 1000 é um atraso: o segundo monstro chega ao auge depois do primeiro. O auge dura 70 semanas, então os dois ainda se encontram.
+**Por quê 1000:** com este valor, a escolha do preço pesa desde o início, porque um ovo barato deixa mais dinheiro para o segundo. A alternativa era 1500, que compra um par em quase toda loja que tem um. O custo de 1000 é um atraso: com as chances reais, o dinheiro chega a cerca de 370 na semana 60, e o segundo ovo vem entre as semanas 60 e 90. O segundo monstro chega ao auge perto da semana 110, quando o primeiro fica velho. Os dois ainda podem procriar, porque a procriação vale do auge até a morte (ver [[Procriação]]).
+  *Mudança (ticket "Rever a economia"):* antes, o texto dizia que os dois se encontravam no auge. A alternativa de começar com 1500 traz o segundo ovo mais cedo, mas aumenta a sobra no fim (ver "Riscos a testar").
 
 ## Loja
 
@@ -50,11 +51,12 @@ Decidido no mapa de design (ticket "Economia"). Os números são iniciais, para 
 
 | Vaga | Preço |
 |---|---|
-| 4ª | 1500 |
-| 5ª | 3000 |
-| 6ª | 6000 |
+| 4ª | 1000 |
+| 5ª | 2000 |
+| 6ª | 4000 |
 
-**Por quê estes preços:** no modelo, a 6ª vaga chega perto do fim da 1ª geração ou na 2ª (semana 152 a 204). Cada vaga aumenta o trabalho e a renda possível de venda, então ela deve vir devagar.
+**Por quê estes preços:** com as chances reais, a 4ª vaga chega por volta da semana 125, quando a procriação começa e o jogador precisa de espaço para os filhos. A 5ª chega por volta da 166 e a 6ª por volta da 211, na 2ª geração. Cada vaga aumenta o trabalho e a renda possível de venda, então ela deve vir devagar.
+  *Mudança (ticket "Rever a economia"):* antes, os preços eram 1500, 3000 e 6000. Com as chances reais, a 6ª vaga chegava na semana 243, depois do alvo (semanas 152 a 204).
 
 ## Venda
 
@@ -82,5 +84,5 @@ As regras que limitam a venda ficam em [[Progressão]], seção "Venda".
 
 ## Riscos a testar
 
-- **O modelo usa suposições.** As chances de vitória do modelo não vêm da batalha real. As chances medidas agora estão em [[Batalha]], seção "Torneio". A revisão destes números ainda falta, e depende dos números das fases de idade (ver [[Treino semanal]]).
-- **Dinheiro sobrando:** no modelo, o jogador acumula de 9 a 19 mil até a semana 312, porque depois da 6ª vaga sobram poucas saídas. O estudo de palavras custa 100, sem limite, o que dá de 90 a 190 estudos com esta sobra (ver [[Palavra]]). Nada obriga o jogador a estudar, então o protótipo jogável deve medir se o dinheiro ainda sobra.
+- **Modelo de renda:** o modelo usa as chances medidas na batalha ([[Batalha]], seção "Torneio") e as fases de idade ([[Treino semanal]]). O monstro luta só no nível atual, só com raça predominante favorável ou espelho. Um monstro da 1ª geração rende cerca de 3400 líquidos na vida (de 1500 a 5500), e um da geração seguinte cerca de 5200. Mais da metade chega na fase velha, com títulos do Mundial. As taxas levam cerca de 40% do bruto, mas a inscrição ainda dá lucro. O modelo não inclui a venda de ovos de prêmio, a volta ao Regional para ganhar dinheiro nem o estudo de palavras. Protótipo na branch `prototype/battle-balance`.
+- **Dinheiro sobrando:** no modelo, o jogador acumula de 11 a 23 mil até a semana 312, porque depois da 6ª vaga sobram poucas saídas. O estudo de palavras custa 100, sem limite, o que dá de 110 a 230 estudos com esta sobra (ver [[Palavra]]). Nada obriga o jogador a estudar, então o protótipo jogável deve medir se o dinheiro ainda sobra.
