@@ -96,6 +96,7 @@ A rotina fica na mesma tela da ficha. De cima para baixo:
 
 - O nascimento aparece como cartão no relatório: o efeito da palavra, os 3 aspectos com a origem, os stats e as taxas.
 - O jogo **sorteia o nome**. O jogador pode mudar o nome no cartão ou na ficha, a qualquer momento.
+- O nome sai de uma **lista fixa de nomes** em um arquivo de dados, pela seed do ovo (decidido na spec da versão 3 do [[Protótipo jogável]]).
 
 **Por quê:** um campo de nome obrigatório interromperia o "Avançar até um aviso" a cada ovo.
 

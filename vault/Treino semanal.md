@@ -61,6 +61,20 @@ Decidido no mapa de design (ticket "Procriação"). Ver [[Procriação]].
 - Um monstro inscrito em um torneio não pode procriar na mesma semana, porque só tem 1 ação.
 - A gestação não usa ações. Durante a gestação, a mãe segue a rotina e pode lutar em torneios.
 
+### Ordem dentro da semana
+
+Decidido na spec da versão 3 do [[Protótipo jogável]]. Quando o jogador passa a semana, o jogo faz estes passos, nesta ordem:
+
+1. **Decide a ação de cada monstro**, com os valores do início da semana: inscrição em torneio, depois concepção, depois a primeira regra verdadeira da rotina, depois o próximo passo da lista.
+2. **Executa as ações:** treino, descanso, concepção e torneios. Prêmios, ovos de prêmio e subida de nível entram aqui.
+3. **Idade:** cada monstro fica 1 semana mais velho. Troca de fase, queda da velhice e morte acontecem aqui. A morte cancela as inscrições futuras e devolve a taxa.
+4. **Procriação:** a gestação e a recuperação andam. No fim da gestação, o ovo vai para os ovos guardados.
+5. **Incubação:** a incubação anda. Depois da 4ª semana, o ovo choca.
+6. **Mundo:** a semana do jogo sobe 1. A loja troca os ovos a cada 4 semanas. O jogo verifica a regra do ovo grátis.
+7. **Relatório e save:** o jogo monta o relatório e salva. Só depois a tela mostra o relatório (ver [[Save]]).
+
+**Por quê:** a ação usa o estado do início da semana, como as regras da rotina já pedem. A idade vem depois da ação, então o monstro na última semana de vida ainda faz a ação dessa semana.
+
 ## Protótipo jogável (versão 1)
 
 Regras simples para a primeira versão jogável. Ver [[Protótipo jogável]].
