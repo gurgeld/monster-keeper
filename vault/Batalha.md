@@ -149,6 +149,8 @@ Decidido no mapa de design (ticket "Torneio e níveis"). Os números são inicia
 
 - O calendário é **fixo** e o jogador vê as próximas edições com antecedência.
 - Cada nível tem seu intervalo: Regional a cada 4 semanas, Nacional a cada 8, Mundial a cada 12.
+- A edição acontece nas **semanas múltiplas do intervalo**: Regional nas semanas 4, 8, 12…; Nacional nas 8, 16…; Mundial nas 12, 24…. Na semana 24, por exemplo, há os 3 níveis. Decidido na spec da versão 3 do [[Protótipo jogável]].
+  **Por quê:** é a regra mais simples, e o jogador prevê as datas sem olhar o calendário.
 - Cada edição tem uma **raça predominante**, que aparece no calendário. 2 dos 3 oponentes são dessa raça. O terceiro é sorteado pela seed entre todas as raças.
 
 ### Oponentes

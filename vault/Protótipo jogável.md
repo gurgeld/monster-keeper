@@ -2,7 +2,15 @@
 
 Versão jogável do jogo, que cresce em etapas. Parte de [[Visão geral]].
 
-## Versão 2 (atual): ovo, palavra e incubação
+## Versão 3 (próxima): ciclo completo
+
+Objetivo: jogar um ciclo inteiro, que é criar, treinar, competir em torneios e procriar a próxima geração, com save no navegador. Todas as regras de design vêm do mapa de design (DAN-5) e das notas deste vault. O monstro ainda aparece só como texto e números.
+
+Spec: [DAN-27](https://linear.app/daniel-gurgel-space/issue/DAN-27/spec-prototipo-jogavel-versao-3-ciclo-completo). A spec tem as user stories, os módulos e os testes. Os tickets de implementação saem dela.
+
+O protótipo deve medir estes riscos: uma rotina que serve para todos os monstros ([[Treino semanal]]), Força forte demais ([[Batalha]]), Inteligência sem uso ([[Atributos de estado]]) e dinheiro sobrando ([[Economia]]).
+
+## Versão 2: ovo, palavra e incubação
 
 Objetivo: testar a criação de monstro com genética e palavra.
 

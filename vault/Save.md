@@ -21,6 +21,8 @@ O save é uma **foto do estado atual**, em JSON. O jogo não guarda a lista de a
 - **Valores calculados:** ex.: a letra da taxa de ganho.
 - **Histórico de lutas:** só vitórias e títulos de cada monstro.
 
+O calendário guardado tem só as **próximas edições** que a tela mostra. O jogo gera as edições seguintes, pela seed por evento, quando a semana chega perto. Decidido na spec da versão 3 do [[Protótipo jogável]]. **Por quê:** a partida não tem fim, então um calendário inteiro não cabe no save.
+
 As listas de monstro e ovo crescem com as decisões seguintes. A obediência não entra, porque é um valor calculado. O monstro guarda a última estratégia usada, e a inscrição guarda a estratégia da edição.
 
 **Por quê foto:** se o save repetisse as ações, uma mudança de balanceamento alteraria o passado. Um monstro poderia "renascer" com outros stats.
