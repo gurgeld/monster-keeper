@@ -6,6 +6,7 @@ const BREED_PATHS: Array[String] = [
 	"res://data/breeds/vulpi.tres",
 	"res://data/breeds/runoxa.tres",
 ]
+const RULES_PATH := "res://data/rules.tres"
 const SEEDS_TO_CHECK := 200
 const EPSILON := 0.0001
 
@@ -26,14 +27,18 @@ func _initialize() -> void:
 		"test_word_depends_on_save_seed",
 		"test_word_effect_rules",
 		"test_word_sum_distribution",
-		"test_shop_and_purchase",
-		"test_incubation_takes_4_weeks",
 		"test_training_gain_uses_growth_rate",
 		"test_fatigue_reduces_gain",
 		"test_fatigue_stays_between_0_and_100",
 		"test_stats_cap_at_999",
-		"test_game_ends_after_52_weeks",
 		"test_grade_letters",
+		"test_new_game_starts_at_week_1",
+		"test_advance_week_has_no_end",
+		"test_first_pending_is_buy_an_egg",
+		"test_entity_ids_are_unique",
+		"test_event_seed",
+		"test_same_seed_and_commands_give_same_state",
+		"test_save_round_trip",
 	]
 	for t: String in tests:
 		if call(t) != true:
@@ -238,43 +243,6 @@ func test_word_sum_distribution() -> bool:
 	return true
 
 
-# --- Game flow (vault/Protótipo jogável.md) ---
-
-func test_shop_and_purchase() -> bool:
-	var game := Game.new(555, load_breeds())
-	check(game.money == 1000, "game starts with 1000")
-	check(game.shop.size() == 5, "shop has 5 eggs")
-	var all_prices_ok := true
-	for egg: Egg in game.shop:
-		if egg.price < 400 or egg.price > 900 or egg.price % 10 != 0:
-			all_prices_ok = false
-	check(all_prices_ok, "shop prices are 400-900, in tens")
-	var price := game.shop[2].price
-	game.buy(2)
-	check(game.money == 1000 - price, "buying pays the egg price")
-	check(game.egg == game.shop[2], "bought egg is kept")
-	return true
-
-
-func start_incubation(game_seed: int) -> Game:
-	var game := Game.new(game_seed, load_breeds())
-	game.buy(0)
-	game.start_incubation("fogo")
-	return game
-
-
-func test_incubation_takes_4_weeks() -> bool:
-	var game := start_incubation(1)
-	check(game.week == 1 and game.monster == null, "incubation starts at week 1 with no monster")
-	for i in 3:
-		game.wait_week()
-	check(game.week == 4 and game.monster == null, "no monster after 3 weeks")
-	game.wait_week()
-	check(game.week == 5 and game.monster != null, "monster hatches at week 5")
-	check(game.monster.breed == game.egg.breed, "monster has the egg breed")
-	return true
-
-
 # --- Training (vault/Treino semanal.md) ---
 
 # A monster with known values, so the expected numbers are easy to compute.
@@ -324,21 +292,6 @@ func test_stats_cap_at_999() -> bool:
 	return true
 
 
-func test_game_ends_after_52_weeks() -> bool:
-	var game := start_incubation(3)
-	for i in 4:
-		game.wait_week()
-	for i in 47:
-		if i % 2 == 0:
-			game.train(Monster.Stat.LIFE)
-		else:
-			game.rest()
-	check(game.week == 52 and not game.is_over(), "week 52 is still playable")
-	game.rest()
-	check(game.is_over(), "game is over after week 52")
-	return true
-
-
 func test_grade_letters() -> bool:
 	check(Monster.grade(0.5) == "E", "0.5 is E")
 	check(Monster.grade(0.7) == "D", "0.7 is D")
@@ -346,4 +299,91 @@ func test_grade_letters() -> bool:
 	check(Monster.grade(1.1) == "B", "1.1 is B")
 	check(Monster.grade(1.3) == "A", "1.3 is A")
 	check(Monster.grade(1.54) == "A", "above 1.5 shows A for now")
+	return true
+
+
+# --- Game, version 3 (vault/Protótipo jogável.md, vault/Treino semanal.md) ---
+
+func new_game(game_seed: int) -> Game:
+	return Game.new(load(RULES_PATH) as GameRules, game_seed)
+
+
+func test_new_game_starts_at_week_1() -> bool:
+	var game := new_game(1)
+	check(game.week == 1, "new game starts at week 1")
+	check(game.money == 1000, "new game starts with 1000 money")
+	check(game.slots == 3, "new game starts with 3 slots")
+	return true
+
+
+func test_advance_week_has_no_end() -> bool:
+	var game := new_game(1)
+	var report := game.advance_week()
+	check(game.week == 2, "advancing a week adds 1 to the week")
+	check(report["week"] == 1, "the report tells which week was played")
+	for i in 60:
+		game.advance_week()
+	check(game.week == 62, "the game goes on after week 52")
+	return true
+
+
+func test_first_pending_is_buy_an_egg() -> bool:
+	var pending := new_game(1).pending()
+	check(pending.size() == 1, "a new game has 1 pending item")
+	check(pending[0]["text"] == "Compre um ovo na loja", "the pending item is to buy an egg")
+	check(pending[0]["screen"] == "shop", "the pending item opens the shop")
+	return true
+
+
+func test_entity_ids_are_unique() -> bool:
+	var game := new_game(1)
+	var ids := {}
+	for i in 20:
+		ids[game.new_entity_id()] = true
+	check(ids.size() == 20, "20 new entities get 20 different IDs")
+	return true
+
+
+func test_event_seed() -> bool:
+	var base := Game.event_seed(42, 5, 7, "hatch")
+	check(base == Game.event_seed(42, 5, 7, "hatch"), "same inputs give the same seed")
+	check(base != Game.event_seed(43, 5, 7, "hatch"), "another game seed gives another seed")
+	check(base != Game.event_seed(42, 6, 7, "hatch"), "another week gives another seed")
+	check(base != Game.event_seed(42, 5, 8, "hatch"), "another entity ID gives another seed")
+	check(base != Game.event_seed(42, 5, 7, "shop"), "another roll kind gives another seed")
+	# Swapped numbers must not collide (e.g. week 5 / ID 7 and week 7 / ID 5).
+	check(base != Game.event_seed(42, 7, 5, "hatch"), "swapping week and ID gives another seed")
+	return true
+
+
+## Runs the same commands on a game: some weeks, with new entities on the way.
+func play_weeks(game: Game, weeks: int) -> void:
+	for i in weeks:
+		if i % 3 == 0:
+			game.new_entity_id()
+		game.advance_week()
+
+
+func test_same_seed_and_commands_give_same_state() -> bool:
+	var a := new_game(2024)
+	var b := new_game(2024)
+	play_weeks(a, 10)
+	play_weeks(b, 10)
+	check(a.to_dict() == b.to_dict(), "same seed and commands give the same state after 10 weeks")
+	return true
+
+
+func test_save_round_trip() -> bool:
+	# Above 2^53: a JSON number would lose the last digits, the text must not.
+	var big_seed := 9007199254740993
+	var original := new_game(big_seed)
+	play_weeks(original, 5)
+	var json := JSON.stringify(original.to_dict())
+	var loaded := Game.from_dict(JSON.parse_string(json), load(RULES_PATH) as GameRules)
+	check(loaded.game_seed == big_seed, "the game seed survives the JSON as text")
+	check(loaded.to_dict() == original.to_dict(), "to_dict -> JSON -> from_dict gives the same state")
+	play_weeks(original, 5)
+	play_weeks(loaded, 5)
+	check(loaded.to_dict() == original.to_dict(), "the weeks after loading give the same result")
+	check(loaded.new_entity_id() == original.new_entity_id(), "the ID counter survives the save")
 	return true
