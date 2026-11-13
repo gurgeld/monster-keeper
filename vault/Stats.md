@@ -32,6 +32,11 @@ Parte de [[Visão geral]].
 
 **Por quê número interno:** a [[Procriação]] precisa misturar taxas dos pais. A média de duas letras não existe; a média de dois números existe.
 
-## Em aberto
+## Letra fora da faixa
 
-- Qual letra mostrar para taxa acima de 1,5 ou abaixo de 0,5? (uma letra S?) Com ovos do Mundial, a taxa genética chega a cerca de 1,82 (ver [[Procriação]]).
+Decidido no mapa de design (ticket "Fluxo de telas do ciclo completo").
+
+- Taxa de **1,5 ou mais**: letra **S**. Com ovos do Mundial, a taxa genética chega a cerca de 1,82 (ver [[Procriação]]).
+- Taxa **abaixo de 0,5**: letra **F**. Isso acontece com o ovo grátis e uma palavra ruim (ex.: 0,6 × 0,9 − 0,15 ≈ 0,39).
+
+**Por quê:** são só 2 letras novas, e o jogador já conhece o padrão S de outros jogos. As alternativas foram A+ e E−; S e SS (a partir de 1,7), que faz a taxa S parecer comum; e a letra com o número ao lado, que mostra a genética escondida de forma muito direta.
