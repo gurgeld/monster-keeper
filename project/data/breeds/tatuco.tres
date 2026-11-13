@@ -1,9 +1,56 @@
 [gd_resource type="Resource" script_class="Breed" format=3]
 
 [ext_resource type="Script" path="res://scripts/logic/breed.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/logic/battle_skill.gd" id="2"]
+
+[sub_resource type="Resource" id="skill_1"]
+script = ExtResource("2")
+name = "Garrada"
+damage_type = 0
+scale_stat = 1
+cooldown = 0
+weight = 1.0
+power = 48.0
+unlock_min = 0
+
+[sub_resource type="Resource" id="skill_2"]
+script = ExtResource("2")
+name = "Rolo blindado"
+damage_type = 0
+scale_stat = 5
+cooldown = 1
+weight = 3.0
+power = 35.0
+unlock_min = 155
+
+[sub_resource type="Resource" id="skill_3"]
+script = ExtResource("2")
+name = "Cabeçada"
+damage_type = 2
+scale_stat = 1
+cooldown = 1
+weight = 3.0
+power = 80.0
+unlock_min = 60
+
+[sub_resource type="Resource" id="skill_4"]
+script = ExtResource("2")
+name = "Lâmina de placa"
+damage_type = 0
+scale_stat = 3
+cooldown = 2
+weight = 2.0
+power = 60.0
+unlock_min = 120
 
 [resource]
 script = ExtResource("1")
 name = "Tatuço"
 growth_rates = Array[float]([1.4, 1.0, 0.7, 0.8, 0.7, 1.4])
 initial_stats = Array[int]([80, 50, 20, 40, 25, 85])
+resistance = 0
+neutral = 1
+weakness = 2
+primary_type = 0
+secondary_type = 2
+skills = Array[ExtResource("2")]([SubResource("skill_1"), SubResource("skill_2"), SubResource("skill_3"), SubResource("skill_4")])

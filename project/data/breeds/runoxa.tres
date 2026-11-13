@@ -1,9 +1,56 @@
 [gd_resource type="Resource" script_class="Breed" format=3]
 
 [ext_resource type="Script" path="res://scripts/logic/breed.gd" id="1"]
+[ext_resource type="Script" path="res://scripts/logic/battle_skill.gd" id="2"]
+
+[sub_resource type="Resource" id="skill_1"]
+script = ExtResource("2")
+name = "Dardo rúnico"
+damage_type = 1
+scale_stat = 2
+cooldown = 0
+weight = 1.0
+power = 36.0
+unlock_min = 0
+
+[sub_resource type="Resource" id="skill_2"]
+script = ExtResource("2")
+name = "Lança de runas"
+damage_type = 1
+scale_stat = 2
+cooldown = 1
+weight = 3.0
+power = 50.0
+unlock_min = 155
+
+[sub_resource type="Resource" id="skill_3"]
+script = ExtResource("2")
+name = "Garra de coruja"
+damage_type = 0
+scale_stat = 1
+cooldown = 1
+weight = 3.0
+power = 80.0
+unlock_min = 35
+
+[sub_resource type="Resource" id="skill_4"]
+script = ExtResource("2")
+name = "Olhar rúnico"
+damage_type = 1
+scale_stat = 3
+cooldown = 2
+weight = 2.0
+power = 60.0
+unlock_min = 185
 
 [resource]
 script = ExtResource("1")
 name = "Runoxa"
 growth_rates = Array[float]([0.8, 0.7, 1.4, 1.2, 1.0, 0.9])
 initial_stats = Array[int]([40, 25, 85, 65, 50, 35])
+resistance = 1
+neutral = 2
+weakness = 0
+primary_type = 1
+secondary_type = 0
+skills = Array[ExtResource("2")]([SubResource("skill_1"), SubResource("skill_2"), SubResource("skill_3"), SubResource("skill_4")])
