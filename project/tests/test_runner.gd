@@ -34,6 +34,16 @@ func _initialize() -> void:
 		"test_stats_cap_at_999",
 		"test_game_ends_after_52_weeks",
 		"test_grade_letters",
+		"test_breed_battle_data_follows_rules",
+		"test_same_fight_seed_gives_same_result_and_log",
+		"test_battle_life_is_stat_plus_90",
+		"test_type_multipliers",
+		"test_guard_cancels_weakness",
+		"test_skipped_action_counts_for_cooldown",
+		"test_battle_stops_at_600_ticks",
+		"test_10_percent_stronger_wins_mirror",
+		"test_favored_breed_wins_with_equal_training",
+		"test_most_fights_last_9_to_30_actions",
 	]
 	for t: String in tests:
 		if call(t) != true:
@@ -346,4 +356,217 @@ func test_grade_letters() -> bool:
 	check(Monster.grade(1.1) == "B", "1.1 is B")
 	check(Monster.grade(1.3) == "A", "1.3 is A")
 	check(Monster.grade(1.54) == "A", "above 1.5 shows A for now")
+	return true
+
+
+# --- Battle (vault/Batalha.md) ---
+
+const BATTLE_RULES_PATH := "res://data/battle_rules.tres"
+
+
+## A fighter after some weeks of training split evenly (vault/Batalha.md, "Números da luta").
+func make_fighter(breed: Breed, weeks: float, multiplier := 1.0,
+		strategy: Battle.Strategy = Battle.Strategy.BALANCED, obedience := 100) -> Fighter:
+	var stats: Array[int] = []
+	for i in Monster.STAT_COUNT:
+		var value: float = (breed.initial_stats[i] + breed.growth_rates[i] * weeks) * multiplier
+		stats.append(mini(roundi(value), Monster.MAX_STAT))
+	return Fighter.create(breed, stats, breed.skills_unlocked_by(stats), obedience, strategy)
+
+
+func test_breed_battle_data_follows_rules() -> bool:
+	for breed: Breed in load_breeds():
+		check(breed.skills.size() == 4, "%s has 4 skills" % breed.name)
+		var types := [breed.resistance, breed.neutral, breed.weakness]
+		check(types.has(BattleSkill.DamageType.CUTTING) and types.has(BattleSkill.DamageType.PIERCING)
+			and types.has(BattleSkill.DamageType.IMPACT), "%s has 1 resistance, 1 neutral, 1 weakness" % breed.name)
+		check(breed.secondary_type == breed.weakness, "%s secondary type is its own weakness" % breed.name)
+		var expected_types := [breed.primary_type, breed.primary_type, breed.secondary_type, breed.primary_type]
+		var all_ok := true
+		for i in breed.skills.size():
+			if breed.skills[i].damage_type != expected_types[i]:
+				all_ok = false
+		check(all_ok, "%s skills use primary, primary, secondary, primary" % breed.name)
+		check(breed.skills[0].cooldown == 0 and breed.skills[0].unlock_min == 0, "%s basic skill is free" % breed.name)
+		check(breed.skills[2].scale_stat == Monster.Stat.POWER, "%s cover skill scales with Força" % breed.name)
+		check(breed.skills[3].scale_stat == Monster.Stat.SKILL, "%s precise skill scales with Precisão" % breed.name)
+	return true
+
+
+func test_same_fight_seed_gives_same_result_and_log() -> bool:
+	var rules := battle_rules()
+	var breeds := load_breeds()
+	var a := make_fighter(breeds[0], 50, 1.0, Battle.Strategy.ATTACK, 30)
+	var b := make_fighter(breeds[2], 50)
+	var first := Battle.fight(a, b, 777, rules)
+	var second := Battle.fight(a, b, 777, rules)
+	check(first.winner == second.winner, "same seed, same winner")
+	check(first.life_percent == second.life_percent, "same seed, same life left")
+	check(first.actions == second.actions, "same seed, same number of actions")
+	check(first.events == second.events and first.events.size() > 0, "same seed, same log")
+	var differs := false
+	for seed_value in range(1, 20):
+		if Battle.fight(a, b, seed_value, rules).events != first.events:
+			differs = true
+	check(differs, "other seeds give other fights")
+	return true
+
+
+func battle_rules() -> BattleRules:
+	return load(BATTLE_RULES_PATH)
+
+
+func fighter_with_stats(breed: Breed, stats: Array[int],
+		strategy: Battle.Strategy = Battle.Strategy.BALANCED, obedience := 100) -> Fighter:
+	var all_skills: Array[int] = []
+	for i in breed.skills.size():
+		all_skills.append(i)
+	return Fighter.create(breed, stats, all_skills, obedience, strategy)
+
+
+func test_battle_life_is_stat_plus_90() -> bool:
+	var breeds := load_breeds()
+	var stats: Array[int] = [100, 60, 20, 60, 40, 80]
+	var result := Battle.fight(fighter_with_stats(breeds[0], stats), make_fighter(breeds[1], 0), 3, battle_rules())
+	check(result.max_life[0] == 190, "Life 100 gives 190 in battle (got %d)" % result.max_life[0])
+	check(result.max_life[1] == 135, "Vulpi base Life 45 gives 135 in battle (got %d)" % result.max_life[1])
+	return true
+
+
+## Skill name -> set of multipliers seen in hits by the first fighter.
+func multipliers_seen(attacker: Fighter, target: Fighter, after_target_acts := false) -> Dictionary:
+	var seen := {}
+	for seed_value in 30:
+		var target_acted := false
+		for entry: Dictionary in Battle.fight(attacker, target, seed_value, battle_rules()).events:
+			if entry.actor == 1:
+				target_acted = true
+			elif entry.kind == "hit" and (target_acted or not after_target_acts):
+				if not seen.has(entry.skill):
+					seen[entry.skill] = {}
+				seen[entry.skill][entry.multiplier] = true
+	return seen
+
+
+func test_type_multipliers() -> bool:
+	var breeds := load_breeds()
+	var tatuco := make_fighter(breeds[0], 100)
+	# Tatuço uses cutting (Garrada, Rolo blindado, Lâmina de placa) and impact (Cabeçada).
+	var against_runoxa := multipliers_seen(tatuco, make_fighter(breeds[2], 100))
+	check(against_runoxa.get("Garrada", {}).keys() == [1.5], "cutting on Runoxa is weakness ×1.5")
+	check(against_runoxa.get("Cabeçada", {}).keys() == [1.0], "impact on Runoxa is neutral ×1.0")
+	var mirror := multipliers_seen(tatuco, make_fighter(breeds[0], 100))
+	check(mirror.get("Garrada", {}).keys() == [0.5], "cutting on Tatuço is resisted ×0.5")
+	check(mirror.get("Cabeçada", {}).keys() == [1.5], "impact on Tatuço is weakness ×1.5")
+	return true
+
+
+func test_guard_cancels_weakness() -> bool:
+	var breeds := load_breeds()
+	var tatuco := make_fighter(breeds[0], 100)
+	var guarding := make_fighter(breeds[0], 100, 1.0, Battle.Strategy.GUARD)
+	var seen := multipliers_seen(tatuco, guarding, true)
+	check(seen.get("Cabeçada", {}).keys() == [1.0], "Guard turns weakness ×1.5 into ×1.0")
+	check(seen.get("Garrada", {}).keys() == [0.5], "Guard keeps resistance ×0.5")
+	return true
+
+
+## A breed with one basic skill that is almost never drawn and one strong skill
+## with cooldown 1 that is drawn whenever it is ready.
+func make_cooldown_breed() -> Breed:
+	var breed := Breed.new()
+	breed.name = "Test"
+	var basic := BattleSkill.new()
+	basic.name = "basic"
+	basic.weight = 0.000001
+	basic.power = 10
+	var strong := BattleSkill.new()
+	strong.name = "strong"
+	strong.cooldown = 1
+	strong.weight = 1000000
+	strong.power = 10
+	breed.skills.assign([basic, strong])
+	return breed
+
+
+func test_skipped_action_counts_for_cooldown() -> bool:
+	var breed := make_cooldown_breed()
+	var stats: Array[int] = [999, 50, 0, 999, 50, 999]
+	var disobedient := fighter_with_stats(breed, stats, Battle.Strategy.BALANCED, 0)
+	var target := fighter_with_stats(breed, stats)
+	var turns: Array[String] = []
+	for seed_value in 20:
+		for entry: Dictionary in Battle.fight(disobedient, target, seed_value, battle_rules()).events:
+			if entry.actor == 0:
+				turns.append("skip" if entry.kind == "skip" else entry.skill)
+		turns.append("end")
+	var strong_after_skip := false
+	var strong_twice := false
+	for i in turns.size() - 2:
+		if turns[i] == "strong" and turns[i + 1] == "skip" and turns[i + 2] == "strong":
+			strong_after_skip = true
+		if turns[i] == "strong" and turns[i + 1] == "strong":
+			strong_twice = true
+	check(strong_after_skip, "strong skill is ready again right after a skipped turn")
+	check(not strong_twice, "cooldown 1 still blocks the next turn")
+	var skip_share := turns.count("skip") / float(turns.size() - turns.count("end"))
+	check(skip_share > 0.2 and skip_share < 0.3, "obedience 0 skips about 25%% (got %.3f)" % skip_share)
+	return true
+
+
+func test_battle_stops_at_600_ticks() -> bool:
+	# Both skills scale with Força 1: every hit does 1 damage, so nobody falls.
+	var breed := make_cooldown_breed()
+	var wall: Array[int] = [999, 1, 0, 999, 0, 999]
+	var weaker_wall: Array[int] = [900, 1, 0, 999, 0, 999]
+	var result := Battle.fight(fighter_with_stats(breed, wall), fighter_with_stats(breed, weaker_wall),
+		5, battle_rules())
+	check(result.timed_out and result.ticks == 600, "fight stops at the 600 tick limit")
+	var expected := 0 if result.life_percent[0] > result.life_percent[1] else 1
+	check(result.winner == expected, "at the limit, the higher Life %% wins")
+	return true
+
+
+func win_share(a: Fighter, b: Fighter, fights: int) -> float:
+	var wins := 0
+	for seed_value in fights:
+		if Battle.fight(a, b, seed_value, battle_rules()).winner == 0:
+			wins += 1
+	return wins / float(fights)
+
+
+# Statistical tests use fixed seeds and wide margins. Reference numbers:
+# vault/Batalha.md, "Por quê sem sistema de sorte" and "Por quê manter ×1,5 e ×0,5".
+func test_10_percent_stronger_wins_mirror() -> bool:
+	for breed: Breed in load_breeds():
+		var share := win_share(make_fighter(breed, 50, 1.1), make_fighter(breed, 50), 200)
+		check(share > 0.7, "%s with +10%% wins the mirror (got %.2f)" % [breed.name, share])
+	return true
+
+
+func test_favored_breed_wins_with_equal_training() -> bool:
+	var breeds := load_breeds()
+	# Tatuço > Runoxa > Vulpi > Tatuço (vault/Raças.md).
+	for pair: Array[int] in [[0, 2], [2, 1], [1, 0]] as Array[Array]:
+		var winner := breeds[pair[0]]
+		var loser := breeds[pair[1]]
+		var share := win_share(make_fighter(winner, 50), make_fighter(loser, 50), 200)
+		check(share > 0.7, "%s beats %s (got %.2f)" % [winner.name, loser.name, share])
+	return true
+
+
+func test_most_fights_last_9_to_30_actions() -> bool:
+	var inside := 0
+	var total := 0
+	for a: Breed in load_breeds():
+		for b: Breed in load_breeds():
+			for weeks: int in [50, 100]:
+				for seed_value in 50:
+					var actions := Battle.fight(make_fighter(a, weeks), make_fighter(b, weeks),
+						seed_value, battle_rules()).actions
+					total += 1
+					if actions >= 9 and actions <= 30:
+						inside += 1
+	var share := inside / float(total)
+	check(share > 0.6, "most fights last 9 to 30 actions (got %.2f)" % share)
 	return true

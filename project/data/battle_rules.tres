@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="BattleRules" format=3]
+
+[ext_resource type="Script" path="res://scripts/logic/battle_rules.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+gauge_full = 100.0
+gauge_per_tick = 20.0
+gauge_per_speed = 0.05
+tick_limit = 600
+life_bonus = 90
+hit_base = 0.85
+hit_slope = 0.35
+hit_min = 0.35
+hit_max = 0.98
+damage_scale = 0.5
+defense_weight = 0.4
+damage_variation = 0.1
+weakness_multiplier = 1.5
+resistance_multiplier = 0.5
+attack_damage = 1.15
+attack_defense = 0.7
+guard_damage = 0.85
+smart_choice_offset = 100.0
+skip_threshold = 50
+skip_divisor = 2.0
+skip_max = 25.0
