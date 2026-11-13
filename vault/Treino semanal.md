@@ -85,11 +85,11 @@ Decidido no mapa de design (ticket "Tempo de vida"). Substitui o limite fixo de 
 - O monstro vive **156 semanas** (3 anos de jogo), contadas a partir do dia em que o ovo choca. Igual para todos: sem diferença por raça ou genética.
 - A idade tem **3 fases**:
 
-| Fase | Semanas | Efeito |
-|---|---|---|
-| Jovem | 1 a 40 | O treino rende mais. |
-| Auge | 41 a 110 | O treino rende o normal. Melhor fase para competir. |
-| Velho | 111 a 156 | O treino rende menos. Os stats caem devagar. |
+| Fase | Semanas | Fator da fase | Efeito |
+|---|---|---|---|
+| Jovem | 1 a 40 | 1,25 | O treino rende mais. |
+| Auge | 41 a 110 | 1,0 | O treino rende o normal. A força máxima fica no fim do auge. |
+| Velho | 111 a 156 | 0,5 | O treino rende menos. Os stats caem devagar. |
 
 - No fim das 156 semanas o monstro **morre e some**. O jogo avisa a partir da fase velha.
 - Ao morrer, o jogador ganha um registro na tela "memorial": nome, raça, stats finais, vitórias (lutas ganhas) e títulos (torneios ganhos). O registro não tem efeito no jogo.
@@ -99,6 +99,49 @@ Decidido no mapa de design (ticket "Tempo de vida"). Substitui o limite fixo de 
 **Por quê:** a morte cria o prazo que faz o jogador procriar. A fase jovem curta e o auge longo dão tempo para competir. O número exato de cada fase e o tamanho do bônus ou da perda são números iniciais, para ajustar no balanceamento.
 
 **Fora de escopo:** duração diferente por raça ou genética; bônus ou item depois da morte.
+
+### Números das fases
+
+Decidido no mapa de design (ticket "Números das fases de idade"). São valores iniciais, para ajustar no balanceamento.
+
+- **Ganho do treino:**
+
+  ```
+  Ganho = 10 × taxa de ganho × fator de fadiga × (1 + efeitos dos aspectos) × fator da fase
+  ```
+
+  O resultado é arredondado. O fator da fase multiplica o ganho. Ele não entra na soma dos aspectos.
+- **Troca de fase:** o fator muda de uma vez, nas semanas 41 e 111. Não há mudança gradual.
+- **Queda da velhice:** na fase velha, a cada 4 semanas (semanas 114, 118 e assim por diante), cada stat perde **2%** do valor, com arredondamento normal. A queda acontece com qualquer ação da semana.
+  - O stat continua a ser um número inteiro.
+  - Um stat alto perde mais pontos que um stat baixo. Um stat muito baixo pode não cair (20 × 2% = 0,4, que arredonda para 0).
+  - O stat nunca chega a zero, então não há valor mínimo.
+  - Habilidades liberadas não se perdem (ver [[Raças]]).
+- A fase não muda a fadiga nem o estresse. Na obediência, a fase jovem tira 10 (ver [[Atributos de estado]]).
+
+Medido com o modelo da batalha (ver [[Batalha]], seção "Torneio"), com os scripts `age.js` e `age2.js` da branch `prototype/battle-balance`. O monstro luta só em edições com raça favorável ou espelho, e o treino é dividido por igual. O modelo não tem estresse, aspectos nem genética melhor.
+
+| Medida (1ª geração) | Valor |
+|---|---|
+| Mundial abre (título do Nacional) | cerca da semana 56 |
+| 1º título Mundial | semanas 96 a 108 |
+| Título Mundial até a semana 110 | 67% a 78% dos monstros |
+| Título Mundial até a semana 156 | 95% a 98% dos monstros |
+| Chance de título Mundial por edição (raça favorável), semana 108 → 156, se treina | 80% a 93% → 50% a 82% |
+| Mesma chance se só descansa na fase velha | 80% a 93% → 11% a 37% |
+| Mesma chance no espelho, se treina | 51% a 66% → 23% a 25% |
+
+Com taxas 20% maiores (próxima geração), o 1º título Mundial vem por volta da semana 84.
+
+**Por quê 1,25 na fase jovem:** com ×1,0, só 40% a 57% ganham o Mundial até o fim do auge. Com ×2,0, a 1ª geração ganha o título nas semanas 72 a 84, e a próxima geração quase não mostra ganho.
+
+**Por quê 0,5 e 2% a cada 4 semanas na fase velha:** os stats caem devagar mesmo com treino. O monstro velho ainda compete, mas a chance cai a cada edição, e isso cria pressão para procriar. Treinar na fase velha continua a valer a pena: na semana 156, a soma dos stats fica cerca de 110 pontos acima da soma de quem só descansa. Com platô (×0,5 e queda menor), a fase velha não perde força. Com queda forte (×0,25 e 0,8% por semana), a chance de título cai para 2% a 14% na semana 156.
+
+**Por quê a cada 4 semanas, e não toda semana:** 0,5% por semana daria parte decimal nos stats. No teste, as 2 formas tiveram quase o mesmo resultado.
+
+**Por quê multiplicar:** somar a fase aos aspectos mudaria o valor de um aspecto conforme a idade.
+
+*Mudança:* antes, a nota dizia que o auge é a "melhor fase para competir". Na 1ª geração, a força máxima fica na troca entre auge e velho (semanas 108 a 120), e as primeiras edições da fase velha são quase iguais às últimas do auge.
 
 ## Em aberto
 

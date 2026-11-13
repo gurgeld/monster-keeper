@@ -163,7 +163,8 @@ Decidido no mapa de design (ticket "Torneio e níveis"). Os números são inicia
 | Nacional | 40 a 65 | 540 a 690 | 41% a 68% com 50 semanas |
 | Mundial | 80 a 110 | 780 a 960 | 38% a 73% com 90 semanas |
 
-**Por quê estas faixas:** com elas, a 1ª geração chega ao Mundial no fim do auge. A próxima geração deve chegar antes, porque as taxas de ganho sobem, mas isso não foi simulado. O modelo não tem o efeito das fases de idade.
+**Por quê estas faixas:** com elas, a 1ª geração chega ao Mundial no fim do auge. Com as fases de idade, ela ganha o 1º título Mundial entre as semanas 96 e 108. Com taxas 20% maiores, a próxima geração ganha por volta da semana 84. Ver [[Treino semanal]], seção "Números das fases".
+  *Mudança (ticket "Números das fases de idade"):* antes, o modelo não tinha as fases de idade, e a próxima geração não tinha sido simulada.
 
 ### Inscrição
 
@@ -233,5 +234,5 @@ Medido com treino dividido por igual:
 
 - **Força:** agora é o stat mais forte na maioria dos espelhos: +30% vence de 68% a 92%. O protótipo jogável deve medir se ela pesa demais.
 - **Inteligência:** em Tatuço e Vulpi, +30% fica em cerca de 50%. Ver [[Atributos de estado]].
-- **Limites do modelo:** o treino está sempre dividido por igual. Monstros especializados foram medidos só em parte. A genética melhor e as fases de idade não foram medidas.
+- **Limites do modelo:** o treino está sempre dividido por igual. Monstros especializados foram medidos só em parte. A genética melhor foi medida só como taxa 20% maior. As fases de idade estão em [[Treino semanal]].
 - **Golpe grande:** o maior golpe medido nas lutas entre raças diferentes tira 38% da Vida. Monstros especializados podem passar disso.

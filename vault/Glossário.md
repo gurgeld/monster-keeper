@@ -114,6 +114,13 @@ _Evitar_: elemento.
 
 **Semana**: unidade de tempo do jogo. Todos os monstros usam a mesma semana. Cada monstro tem uma ação por semana. Ver [[Treino semanal]].
 
+**Fase (de idade)**: jovem (semanas 1 a 40), auge (41 a 110) ou velho (111 a 156). Muda o ganho do treino pelo fator da fase. Ver [[Treino semanal]].
+_Evitar_: estágio, idade (para a fase).
+
+**Fator da fase**: número que multiplica o ganho do treino: 1,25 no jovem, 1,0 no auge, 0,5 no velho. Ver [[Treino semanal]].
+
+**Queda da velhice**: na fase velha, cada stat perde 2% a cada 4 semanas. Ver [[Treino semanal]].
+
 **Semana de treino**: medida do balanceamento. 1 semana sobe cada stat em cerca de 1 × a taxa de ganho, com a rotina de 3 treinos e 1 descanso e o treino dividido por igual. Define a força dos oponentes. Ver [[Batalha]].
 
 **Rancho**: lugar dos monstros do jogador. Ver [[Progressão]].
