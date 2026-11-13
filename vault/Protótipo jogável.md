@@ -27,4 +27,4 @@ Escolher 1 de 3 raças, chocar na hora (base da raça ±10%) e treinar 52 semana
 
 ## Em aberto
 
-- Letra para taxa acima de 1,5 ou abaixo de 0,5: por enquanto a tela mostra "A" ou "E". Ver [[Stats]].
+- A tela mostra "A" ou "E" para taxa fora de 0,5 a 1,5. A regra decidida é S e F (ver [[Stats]]). As telas do ciclo completo estão em [[Fluxo de telas]].

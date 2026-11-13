@@ -144,4 +144,10 @@ _Evitar_: estágio, era.
 **Save**: foto do estado atual da partida. Há 1 save por navegador, e o jogo salva sozinho. Ver [[Save]].
 _Evitar_: slot, jogo salvo.
 
-**Relatório da semana**: resultado da semana que o jogador ainda não viu. Fica no save. Ver [[Save]].
+**Relatório da semana**: resultado da semana que o jogador ainda não viu. Fica no save. Aparece no topo da tela da Semana. Ver [[Save]] e [[Fluxo de telas]].
+
+**Pendência**: decisão possível que a tela da Semana mostra, com um botão para a tela certa (ex.: ovo guardado e vaga livre). Não impede de passar a semana. Ver [[Fluxo de telas]].
+_Evitar_: tarefa, alerta.
+
+**Aviso**: evento que faz o "Avançar até um aviso" parar (ex.: ovo chocou). A lista é fixa. Ver [[Fluxo de telas]].
+_Evitar_: alerta, notificação.

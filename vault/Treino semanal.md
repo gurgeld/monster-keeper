@@ -39,7 +39,7 @@ Decidido no mapa de design (ticket "Rancho"). Os limites são iniciais, para aju
 
 **Risco a testar:** o jogador pode encontrar uma rotina que serve para todos os monstros e deixar de pensar na fadiga. O protótipo jogável deve testar isso.
 
-**Fica para outras decisões:** a tela da rotina e a opção "avançar até um aviso" (fluxo de telas).
+**Telas:** a rotina fica na ficha do monstro, e o jogador pode passar várias semanas com "Avançar até um aviso". Ver [[Fluxo de telas]].
 
 ### Semana de torneio
 

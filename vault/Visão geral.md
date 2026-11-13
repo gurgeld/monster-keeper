@@ -13,7 +13,7 @@ Plataforma: exportação HTML, publicada no GitHub Pages.
 
 Como o jogo cresce com o tempo: [[Progressão]]. De onde vem e para onde vai o dinheiro: [[Economia]].
 
-Versão atual: [[Protótipo jogável]].
+Versão atual: [[Protótipo jogável]]. Ordem das telas: [[Fluxo de telas]].
 
 ## Regras transversais
 
