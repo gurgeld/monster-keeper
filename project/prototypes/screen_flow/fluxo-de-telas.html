@@ -1,0 +1,501 @@
+<!doctype html>
+<!--
+  PROTÓTIPO DESCARTÁVEL (ticket "Fluxo de telas do ciclo completo").
+  Pergunta: em que ordem o jogador vê as telas e o que cada tela mostra?
+  3 variantes de navegação na mesma página, trocadas por ?variant=A|B|C e pela barra preta embaixo.
+  As regras vêm do vault, mas a luta, a obediência e os nomes são simplificados (números de mentira).
+  Não é código do jogo. Abrir com dois cliques no navegador.
+-->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PROTÓTIPO · Fluxo de telas</title>
+<style>
+  :root{--bg:#f4f1ea;--card:#fff;--ink:#222;--mut:#777;--line:#ddd5c7;--acc:#2f6f4f;--warn:#b5562b;--soft:#efe9dd}
+  *{box-sizing:border-box}
+  body{margin:0;font:14px/1.4 system-ui,sans-serif;background:var(--bg);color:var(--ink);padding-bottom:90px}
+  button{font:inherit;padding:5px 10px;border:1px solid var(--line);background:#fff;border-radius:6px;cursor:pointer}
+  button.pri{background:var(--acc);color:#fff;border-color:var(--acc)}
+  button.big{padding:10px 18px;font-size:16px}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  input,select{font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:5px;background:#fff}
+  h1,h2,h3{margin:.2em 0 .5em} h2{font-size:18px} h3{font-size:15px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+  .mut{color:var(--mut)} .warn{color:var(--warn)} .small{font-size:12px}
+  table{border-collapse:collapse;width:100%} td,th{padding:3px 6px;border-bottom:1px solid var(--soft);text-align:left;vertical-align:top}
+  .chip{display:inline-block;padding:1px 7px;border-radius:10px;font-size:12px;background:var(--soft);margin:1px}
+  .asp{display:inline-block;padding:1px 7px;border-radius:10px;font-size:12px;color:#fff;margin:1px}
+  .bar{height:6px;background:var(--soft);border-radius:3px;overflow:hidden;width:90px;display:inline-block;vertical-align:middle}
+  .bar>i{display:block;height:100%;background:var(--acc)} .bar.hot>i{background:var(--warn)}
+  .letter{font-weight:700;display:inline-block;min-width:22px}
+  .topbar{position:sticky;top:0;z-index:5;background:#263b30;color:#fff;padding:8px 14px;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  .topbar b{font-size:16px} .topbar .sp{flex:1}
+  .topbar button{background:#ffffff18;color:#fff;border-color:#ffffff40}
+  .topbar button.pri{background:#e9b949;color:#222;border-color:#e9b949}
+  /* A */
+  .A-wrap{display:flex;min-height:calc(100vh - 50px)}
+  .A-side{width:190px;background:#e8e2d4;padding:10px;flex-shrink:0}
+  .A-side button{display:block;width:100%;text-align:left;margin-bottom:4px;background:transparent;border-color:transparent}
+  .A-side button.on{background:#fff;border-color:var(--line);font-weight:600}
+  .A-main{flex:1;padding:14px;max-width:1000px}
+  /* B */
+  .B-tools{display:flex;gap:6px;padding:8px 14px;background:#e8e2d4;flex-wrap:wrap}
+  .B-tl{padding:14px;overflow-x:auto}
+  .B-tl table{min-width:900px;background:#fff;border:1px solid var(--line)}
+  .B-tl td,.B-tl th{border:1px solid var(--soft);font-size:12px;height:38px;min-width:64px;text-align:center}
+  .B-tl th.now,.B-tl td.now{background:#fff8e0}
+  .B-tl td.name{text-align:left;min-width:170px;cursor:pointer}
+  .B-drawer{position:fixed;right:0;top:50px;bottom:70px;width:min(560px,100%);background:var(--bg);border-left:2px solid #263b30;overflow:auto;padding:14px;box-shadow:-6px 0 20px #0002;z-index:6}
+  .cell-t{background:#e9b949;border-radius:5px;padding:2px;cursor:pointer}
+  .cell-r{color:var(--mut)}
+  .cell-g{background:#f6d7e4} .cell-x{background:#333;color:#fff}
+  /* C */
+  .C-main{max-width:720px;margin:0 auto;padding:14px}
+  .C-task{display:flex;gap:10px;align-items:center;border-left:5px solid var(--acc)}
+  .C-task.w{border-left-color:var(--warn)} .C-task .tx{flex:1}
+  .C-menu{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+  /* barra do protótipo */
+  #proto{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);background:#111;color:#fff;border-radius:30px;padding:7px 14px;display:flex;gap:10px;align-items:center;box-shadow:0 4px 18px #0006;z-index:20;font-size:13px;white-space:nowrap}
+  #proto button{background:#333;color:#fff;border-color:#555;border-radius:20px;padding:3px 10px}
+  #proto select{background:#222;color:#fff;border-color:#555;font-size:12px}
+  .modal-bg{position:fixed;inset:0;background:#0005;z-index:8;display:flex;align-items:flex-start;justify-content:center;padding:60px 10px 80px;overflow:auto}
+  .modal{background:var(--bg);border-radius:12px;padding:16px;width:min(820px,100%)}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="proto"></div>
+<script>
+// ================= dados de design (resumo do vault) =================
+const STATS=['Vida','Força','Intel.','Precisão','Veloc.','Defesa'];
+const RACES={
+  tatuco:{name:'Tatuço',rates:[1.4,1,.7,.8,.7,1.4],base:[80,50,20,40,25,85],types:['cortante','impactante'],weak:'impactante',resist:'cortante',
+    skills:[['Garrada','cortante',null,0],['Rolo blindado','cortante',5,155],['Cabeçada','impactante',1,60],['Lâmina de placa','cortante',3,120]]},
+  vulpi:{name:'Vulpi',rates:[.8,1,.9,1.3,1.4,.6],base:[45,50,40,70,75,20],types:['impactante','perfurante'],weak:'perfurante',resist:'impactante',
+    skills:[['Rajada','impactante',null,0],['Vendaval','impactante',4,145],['Mordida','perfurante',1,60],['Ciclone certeiro','impactante',3,200]]},
+  runoxa:{name:'Runoxa',rates:[.8,.7,1.4,1.2,1,.9],base:[40,25,85,65,50,35],types:['perfurante','cortante'],weak:'cortante',resist:'perfurante',
+    skills:[['Dardo rúnico','perfurante',null,0],['Lança de runas','perfurante',2,155],['Garra de coruja','cortante',1,35],['Olhar rúnico','perfurante',3,185]]},
+};
+const RK=Object.keys(RACES);
+const ASP={
+  'Esforçado':{opp:'Preguiçoso',good:'Treino rende +10%',bad:'Treino soma +5 de fadiga',color:'#e07b1a'},
+  'Preguiçoso':{opp:'Esforçado',good:'Descanso tira +15 de fadiga',bad:'Treino rende −10%',color:'#5fb3d9'},
+  'Rebelde':{opp:'Leal',good:'Treino rende +10%',bad:'Obediência menor',color:'#c73030'},
+  'Leal':{opp:'Rebelde',good:'Obediência maior',bad:'Treino rende −5%',color:'#1d3c8f'},
+  'Calmo':{opp:'Ansioso',good:'Estresse sobe mais devagar',bad:'Treino rende −5%',color:'#3a9a3a'},
+  'Ansioso':{opp:'Calmo',good:'Treino rende +10%',bad:'Estresse sobe mais rápido',color:'#c9a800'},
+  'Robusto':{opp:null,good:'Treino soma −5 de fadiga',bad:'Descanso tira −10 de fadiga',color:'#8b5a2b'},
+  'Sensível':{opp:null,good:'Estresse desce mais rápido',bad:'Estresse sobe mais rápido',color:'#d9709d'},
+  'Indefinido':{color:'#999'},
+};
+const TRAINMOD={'Esforçado':.1,'Preguiçoso':-.1,'Rebelde':.1,'Leal':-.05,'Calmo':-.05,'Ansioso':.1};
+const MUSICS=['Ninar','Marcha','Tambores','Harpa'];
+const PAIRS=[['Esforçado','Preguiçoso'],['Rebelde','Leal'],['Calmo','Ansioso'],['Robusto','Sensível']];
+const TEMPS=['muito frio','frio','morno','quente','muito quente'];
+const HUMS=['muito seco','seco','médio','úmido','muito úmido'];
+const LV=['Regional','Nacional','Mundial'], RANGE=[[330,450],[540,690],[780,960]], FEE=[0,150,400], PRIZE=[[120,50],[600,250],[1500,600]], EVERY=[4,8,12];
+const SLOT_PRICE={4:1000,5:2000,6:4000}, SELL=[100,300,800];
+const NAMES=['Bolota','Trovão','Pipa','Zéfiro','Brasa','Nina','Toco','Lume','Garoa','Fuxico','Pingo','Runa','Sabiá','Cacau','Vento','Oliva'];
+
+// ================= utilidades =================
+let R=Math.random;
+const rnd=(a,b)=>a+R()*(b-a), ri=n=>Math.floor(R()*n), pick=a=>a[ri(a.length)];
+const sum=a=>a.reduce((s,x)=>s+x,0), clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const fmt=x=>(Math.round(x*100)/100).toString().replace('.',',');
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=ri(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+function hashStr(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function mulberry(a){return()=>{a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const compatible=(list,a)=>!list.includes(a)&&!list.some(x=>ASP[x].opp===a||ASP[a].opp===x);
+function pick3(){const o=[];for(const a of shuffle(PAIRS.flat())){if(compatible(o,a))o.push(a);if(o.length===3)break}return o}
+
+// ================= letra da taxa (pergunta aberta do ticket) =================
+const baseLetter=r=>r<.7?'E':r<.9?'D':r<1.1?'C':r<1.3?'B':'A';
+const LETTERS={
+  s:{name:'S acima de 1,5 · F abaixo de 0,5',f:r=>r>=1.5?'S':r<.5?'F':baseLetter(r)},
+  plus:{name:'A+ acima de 1,5 · E− abaixo de 0,5',f:r=>r>=1.5?'A+':r<.5?'E−':baseLetter(r)},
+  ss:{name:'S (1,5 a 1,7) · SS (1,7 ou mais) · F',f:r=>r>=1.7?'SS':r>=1.5?'S':r<.5?'F':baseLetter(r)},
+  num:{name:'Letra até A/E + número',f:r=>baseLetter(r)+' <span class="mut small">'+fmt(r)+'</span>'},
+};
+const L=r=>`<span class="letter">${LETTERS[U.letter].f(r)}</span>`;
+
+// ================= estado =================
+let S, U={variant:'A',screen:'home',sel:null,letter:'s',report:null,modal:null,entry:null,wordDraft:''};
+const ALERTS={
+  nascimento:['Ovo chocou',true], ovo:['Ovo saiu da gestação',true], torneio:['Resultado de torneio',true],
+  inscricao:['Edição do nível do monstro na próxima semana, sem inscrição',true], nivel:['Monstro subiu de nível',true],
+  fase:['Monstro mudou de fase de idade',true], velho_aviso:['Faltam 8 semanas de vida',true], morte:['Monstro morreu',true],
+  habilidade:['Habilidade liberada',false], fadiga:['Fadiga 80 ou mais',true], estresse:['Estresse 70 ou mais',true],
+  incubacao:['Semana de incubação (pode ajustar)',true], recuperacao:['Mãe pode procriar de novo',false], loja:['Loja trocou os ovos',false],
+};
+function newGame(){
+  S={seed:Math.floor(Math.random()*1e9),week:1,money:1000,slots:3,monsters:[],eggs:[],notebook:{},memorial:[],entries:{},nextId:1,
+     musicMap:shuffle(PAIRS),alertsOn:Object.fromEntries(Object.entries(ALERTS).map(([k,v])=>[k,v[1]])),seen:true};
+  S.shop=[0,1,2,3,4].map(()=>makeEgg(pick(RK),'loja'));
+  U.report=null;U.screen='home';U.sel=null;U.modal=null;
+}
+const byId=id=>S.monsters.find(m=>m.id===id);
+const eggById=id=>S.eggs.concat(S.shop).find(e=>e.id===id);
+const incubating=()=>S.eggs.filter(e=>e.inc);
+const usedSlots=()=>S.monsters.length+incubating().length;
+const phase=m=>m.age<=40?'jovem':m.age<=110?'auge':'velho';
+const phaseF=m=>({jovem:1.25,auge:1,velho:.5})[phase(m)];
+
+// ================= ovo e genética =================
+const RANGE_O={free:[-.1,0],loja:[-.1,.1],Regional:[-.1,.1],Nacional:[0,.2],Mundial:[.1,.3]};
+function makeParent(race,origin){const [lo,hi]=RANGE_O[origin];return{alleles:RACES[race].rates.map(b=>[b*(1+rnd(lo,hi)),b*(1+rnd(lo,hi))]),aspects:pick3()}}
+const prate=(p,i)=>(p.alleles[i][0]+p.alleles[i][1])/2;
+function priceOf(e){const q=sum([0,1,2,3,4,5].map(i=>prate(e.father,i)+prate(e.mother,i)))/2;return clamp(Math.round((650+(q-6)*1250)/10)*10,400,900)}
+function makeEgg(race,origin,father,mother){const e={id:S.nextId++,race,sex:R()<.5?'M':'F',origin,father:father||makeParent(race,origin),mother:mother||makeParent(race,origin)};e.price=priceOf(e);return e}
+
+// ================= palavra =================
+const normWord=w=>w.trim().toLowerCase();
+const validWord=w=>/^[a-záàâãéêíóôõúüç]{3,7}$/i.test(w.trim());
+function wordEffect(w){const r=mulberry(hashStr(normWord(w)+'|'+S.seed));const x=r();const s=x<.8?0:x<.95?1:x<.99?2:3;
+  const neg=1+Math.floor(r()*Math.min(3,4-s));const ps=Math.floor(r()*6);let ns=Math.floor(r()*5);if(ns>=ps)ns++;return{pos:ps,neg:ns,posPts:neg+s,negPts:neg}}
+const inBook=w=>!!S.notebook[normWord(w)];
+const strength=w=>Math.pow(.75,(S.notebook[normWord(w)]||{uses:0}).uses);
+function effText(w,st){const e=wordEffect(w);st=st??strength(w);return `<b>+${fmt(e.posPts*st)}</b> ${STATS[e.pos]} · <b>−${fmt(e.negPts*st)}</b> ${STATS[e.neg]} <span class="mut">(força ${Math.round(st*100)}%)</span>`}
+
+// ================= incubação =================
+function startIncubation(e,w){
+  const st=strength(w);const k=normWord(w);S.notebook[k]=S.notebook[k]||{uses:0,studied:false};S.notebook[k].uses++;
+  let zA,zB;do{zA=[ri(5),ri(5)];zB=[ri(5),ri(5)]}while(Math.abs(zA[0]-zB[0])+Math.abs(zA[1]-zB[1])<3);
+  e.inc={word:w,strength:st,week:0,music:pick(MUSICS),temp:2,hum:2,adjusted:false,last:null,zA,zB};
+}
+function aspectAt(inc){const pair=S.musicMap[MUSICS.indexOf(inc.music)];const d=z=>Math.abs(z[0]-inc.temp)+Math.abs(z[1]-inc.hum);
+  return d(inc.zA)<=1?pair[0]:d(inc.zB)<=1?pair[1]:'Indefinido'}
+function hatch(e){const inc=e.inc;const alle=[0,1,2,3,4,5].map(i=>[pick(e.mother.alleles[i]),pick(e.father.alleles[i])]);
+  const rates=alle.map(a=>(a[0]+a[1])/2);const ef=wordEffect(inc.word);rates[ef.pos]+=ef.posPts*.05*inc.strength;rates[ef.neg]-=ef.negPts*.05*inc.strength;
+  const a1=inc.last==='Indefinido'?pick(S.musicMap[MUSICS.indexOf(inc.music)]):inc.last;const asp=[a1];
+  asp.push(pick(e.mother.aspects.filter(a=>compatible(asp,a)))||'Robusto');asp.push(pick(e.father.aspects.filter(a=>compatible(asp,a)))||'Sensível');
+  const r=RACES[e.race];
+  return{id:e.id,name:pick(NAMES),race:e.race,sex:e.sex,age:1,stats:r.base.map(b=>Math.round(b*rnd(.9,1.1))),rates,alleles:alle,aspects:asp,
+    fatigue:0,stress:0,level:0,wins:0,titles:0,routine:{list:['rest'],rules:[],idx:0},lastStrategy:'Equilibrada',
+    word:{text:inc.word,...ef,strength:inc.strength},wasIndef:inc.last==='Indefinido',pregnant:null,recovery:0,conceive:null,unlocked:[0]};
+}
+
+// ================= semana =================
+function obedience(m){let o=40+m.stats[2]/10;if(phase(m)==='jovem')o-=10;if(m.aspects.includes('Leal'))o+=15;if(m.aspects.includes('Rebelde'))o-=15;
+  o-=m.stress/4;if(m.fatigue>60)o-=(m.fatigue-60)/2;return Math.round(clamp(o,0,100))}
+const actName=a=>a==='rest'?'Descansar':'Treino de '+STATS[+a];
+function chooseAction(m){for(const r of m.routine.rules){const v=r.attr==='fadiga'?m.fatigue:m.stress;if(v>=r.n)return{a:r.act,why:`regra: ${r.attr} ${v} ≥ ${r.n}`}}
+  const l=m.routine.list;const a=l[m.routine.idx%l.length];m.routine.idx++;return{a,why:'lista'}}
+function apply(m,a){const has=x=>m.aspects.includes(x);const sm=(up)=>up?(has('Ansioso')||has('Sensível')?1.5:has('Calmo')?.5:1):(has('Sensível')?1.5:1);
+  if(a==='rest'){m.fatigue=clamp(m.fatigue-(40+(has('Preguiçoso')?15:0)-(has('Robusto')?10:0)),0,100);m.stress=clamp(m.stress-10*sm(false),0,100);return 'descansou'}
+  const i=+a;const mod=sum(m.aspects.map(x=>TRAINMOD[x]||0));const g=Math.round(10*m.rates[i]*(1-m.fatigue/200)*(1+mod)*phaseF(m));
+  if(m.fatigue>=60)m.stress=clamp(m.stress+10*sm(true),0,100);
+  m.stats[i]=Math.min(999,m.stats[i]+g);m.fatigue=clamp(m.fatigue+20+(has('Esforçado')?5:0)-(has('Robusto')?5:0),0,100);return `${STATS[i]} +${g}`}
+const predRace=(w,lv)=>RK[hashStr('p'+w+'-'+lv+'-'+S.seed)%3], thirdRace=(w,lv)=>RK[hashStr('t'+w+'-'+lv+'-'+S.seed)%3];
+const editionsAt=w=>[0,1,2].filter(lv=>w%EVERY[lv]===0);
+const hits=(a,b)=>RACES[a].types.includes(RACES[b].weak);
+function runTournament(m,lv,en,ev){
+  const w=S.week, ops=[predRace(w,lv),predRace(w,lv),thirdRace(w,lv)].map(r=>({name:pick(NAMES)+' (CPU)',race:r,sum:Math.round(rnd(...RANGE[lv])),pts:0,hp:0}));
+  const P=[{name:m.name,race:m.race,sum:sum(m.stats),me:true,pts:0,hp:0},...ops];const ob=obedience(m);const fights=[];let wins=0;
+  for(let i=0;i<4;i++)for(let j=i+1;j<4;j++){const a=P[i],b=P[j];let s=(a.sum-b.sum)/70+(hits(a.race,b.race)?.9:0)-(hits(b.race,a.race)&&!(a.me&&en.strategy==='Guarda')?.9:0);
+    if(a.me){s+=en.strategy==='Ataque'?.2:en.strategy==='Guarda'?-.15:0;s-=Math.max(0,50-ob)/25}
+    const aw=R()<1/(1+Math.exp(-s));const W=aw?a:b;W.pts++;W.hp+=ri(80)+10;
+    if(a.me){const ign=Math.round((100-ob)/12*R()),skip=ob<50?ri(4):0;if(aw)wins++;
+      fights.push(`${aw?'Venceu':'Perdeu de'} ${b.name} (${RACES[b.race].name}) em ${9+ri(22)} ações · ignorou a estratégia ${ign}× · ficou parado ${skip}×`)}}
+  P.sort((x,y)=>y.pts-x.pts||y.hp-x.hp);const place=P.findIndex(p=>p.me);
+  m.wins+=wins;m.fatigue=clamp(m.fatigue+20,0,100);m.stress=clamp(m.stress+15*(3-wins)-10*wins,0,100);m.lastStrategy=en.strategy;
+  let extra='';
+  if(place===0){S.money+=PRIZE[lv][0];m.titles++;extra=` Prêmio: ${PRIZE[lv][0]}.`;
+    if(lv===m.level){const e=makeEgg(m.race,LV[lv]);S.eggs.push(e);extra+=` Ganhou um ovo ${RACES[m.race].name} ${e.sex==='M'?'♂':'♀'} (${LV[lv]}).`;
+      if(m.level<2){m.level++;ev('nivel',`${m.name} subiu para o ${LV[m.level]}.`,{mid:m.id})}}
+    else extra+=' Nível abaixo do atual: sem ovo.'}
+  else if(place===1){S.money+=PRIZE[lv][1];extra=` Prêmio de vice: ${PRIZE[lv][1]}.`}
+  ev('torneio',`${LV[lv]}: ${m.name} ficou em ${place+1}º (${wins} de 3 lutas).${extra}`,{mid:m.id,table:P,fights,strategy:en.strategy,ob});
+}
+function passWeek(){
+  const w=S.week, items=[], ev=(type,text,x={})=>items.push({type,text,week:w,...x}), busy=new Set();
+  for(const k of Object.keys(S.entries)){const [ew,lv]=k.split('-').map(Number);if(ew!==w)continue;const en=S.entries[k];const m=byId(en.mid);
+    if(m){runTournament(m,lv,en,ev);busy.add(m.id)}delete S.entries[k]}
+  for(const mom of S.monsters.filter(m=>m.sex==='F'&&m.conceive)){const dad=byId(mom.conceive);mom.conceive=null;if(!dad||busy.has(mom.id)||busy.has(dad.id))continue;dad.conceive=null;
+    busy.add(mom.id);busy.add(dad.id);mom.pregnant={left:9,egg:makeEgg(mom.race,'cria',{alleles:dad.alleles,aspects:dad.aspects.slice()},{alleles:mom.alleles,aspects:mom.aspects.slice()}),dad:dad.name};
+    ev('concepcao',`${mom.name} e ${dad.name} conceberam. Gestação de 9 semanas.`,{mid:mom.id})}
+  S.monsters.forEach(m=>m.conceive=null);
+  for(const m of S.monsters){if(busy.has(m.id))continue;const c=chooseAction(m);const r=apply(m,c.a);ev('semana',`${m.name}: ${r}`+(c.why!=='lista'?` <span class="mut">(${c.why})</span>`:''),{mid:m.id})}
+  for(const m of S.monsters.slice()){m.age++;
+    if(m.age===41)ev('fase',`${m.name} entrou no auge. Já pode procriar.`,{mid:m.id});
+    if(m.age===111)ev('fase',`${m.name} ficou velho: treino rende metade e os stats caem 2% a cada 4 semanas.`,{mid:m.id});
+    if(m.age===149)ev('velho_aviso',`${m.name}: faltam 8 semanas de vida.`,{mid:m.id});
+    if(m.age>=114&&(m.age-114)%4===0)m.stats=m.stats.map(s=>Math.round(s*.98));
+    RACES[m.race].skills.forEach((s,i)=>{if(!m.unlocked.includes(i)&&m.stats[s[2]]>=s[3]){m.unlocked.push(i);ev('habilidade',`${m.name} liberou ${s[0]}.`,{mid:m.id})}});
+    if(m.pregnant){if(--m.pregnant.left<=0){S.eggs.push(m.pregnant.egg);ev('ovo',`${m.name} botou um ovo ${RACES[m.race].name} ${m.pregnant.egg.sex==='M'?'♂':'♀'}. Está nos ovos guardados.`,{mid:m.id});m.pregnant=null;m.recovery=3}}
+    else if(m.recovery>0&&--m.recovery===0)ev('recuperacao',`${m.name} pode procriar de novo.`,{mid:m.id});
+    if(m.fatigue>=80)ev('fadiga',`${m.name} está com fadiga ${m.fatigue}.`,{mid:m.id});
+    if(m.stress>=70)ev('estresse',`${m.name} está com estresse ${Math.round(m.stress)}.`,{mid:m.id});
+    if(m.age>156){S.monsters=S.monsters.filter(x=>x!==m);S.memorial.push({name:m.name,race:m.race,stats:m.stats.slice(),wins:m.wins,titles:m.titles,week:w});
+      ev('morte',`${m.name} morreu com 156 semanas. Foi para o memorial.`);
+      if(m.pregnant)ev('morte',`O ovo da gestação de ${m.name} se perdeu.`)}}
+  for(const e of incubating()){const inc=e.inc;inc.week++;inc.last=aspectAt(inc);inc.adjusted=false;
+    if(inc.week>=4){const m=hatch(e);S.eggs=S.eggs.filter(x=>x!==e);S.monsters.push(m);ev('nascimento',`${m.name} nasceu!`,{mid:m.id,reveal:true})}
+    else ev('incubacao',`Ovo ${RACES[e.race].name}: semana ${inc.week} de 4. Com estes valores nasceria <span class="asp" style="background:${ASP[inc.last].color}">${inc.last}</span>`,{eid:e.id})}
+  S.week++;
+  if(S.week%4===1){S.shop=[0,1,2,3,4].map(()=>makeEgg(pick(RK),'loja'));ev('loja','A loja trocou os ovos.')}
+  for(const m of S.monsters)for(const lv of editionsAt(S.week))if(lv===m.level&&!Object.values(S.entries).some(en=>en.mid===m.id)&&!S.entries[S.week+'-'+lv])
+    ev('inscricao',`Semana ${S.week} tem ${LV[lv]} (nível de ${m.name}) e ninguém inscrito.`,{mid:m.id,lv,w:S.week});
+  if(!S.monsters.length&&!S.eggs.length&&S.money<Math.min(...S.shop.map(e=>e.price))){const e=makeEgg(pick(RK),'free');S.eggs.push(e);ev('ovo','Sem monstro, sem ovo e sem dinheiro: você recebeu um ovo grátis.')}
+  return items;
+}
+function advance(untilAlert){
+  const from=S.week, items=[];
+  for(let i=0;i<(untilAlert?60:1);i++){const r=passWeek();items.push(...r);
+    if(untilAlert&&r.some(x=>S.alertsOn[x.type]))break;
+    if(!S.monsters.length&&!incubating().length)break}
+  U.report={from,to:S.week-1,items,until:untilAlert};U.modal=null;U.screen='report';
+}
+
+// ================= ações =================
+const A={
+  go:d=>{U.screen=d.s;U.sel=d.id?+d.id:null;U.modal=null},
+  modal:d=>{U.modal=d.s;U.sel=d.id?+d.id:U.sel},
+  close:()=>{U.modal=null;U.entry=null},
+  week:()=>advance(false), until:()=>advance(true),
+  buy:d=>{const e=S.shop.find(x=>x.id===+d.id);if(S.money<e.price)return;S.money-=e.price;S.shop=S.shop.filter(x=>x!==e);S.eggs.push(e)},
+  sellEgg:d=>{const e=eggById(+d.id);if(!S.monsters.length&&S.eggs.length===1)return alert('Bloqueado: você ficaria sem monstro e sem ovo.');S.money+=Math.round(e.price*.2);S.eggs=S.eggs.filter(x=>x!==e)},
+  sellMon:d=>{const m=byId(+d.id);if(S.monsters.length===1&&!S.eggs.length)return alert('Bloqueado: você ficaria sem monstro e sem ovo.');
+    if(m.pregnant&&!confirm(`${m.name} está grávida. O ovo se perde. Vender?`))return;
+    const p=SELL[m.level]/(phase(m)==='velho'?2:1);S.money+=p;S.monsters=S.monsters.filter(x=>x!==m);for(const k in S.entries)if(S.entries[k].mid===m.id){S.money+=FEE[+k.split('-')[1]];delete S.entries[k]}U.screen='home';U.modal=null},
+  slot:()=>{const p=SLOT_PRICE[S.slots+1];if(p&&S.money>=p){S.money-=p;S.slots++}},
+  incub:d=>{U.sel=+d.id;U.wordDraft='';if(U.variant==='B')U.modal='incub';else U.screen='incub'},
+  study:()=>{const w=U.wordDraft;if(!validWord(w)||S.money<100||inBook(w))return;S.money-=100;S.notebook[normWord(w)]={uses:0,studied:true}},
+  launch:()=>{const e=eggById(U.sel);if(!validWord(U.wordDraft)||usedSlots()>=S.slots)return;startIncubation(e,U.wordDraft);U.wordDraft=''},
+  adjust:()=>{const e=eggById(U.sel);const g=id=>document.getElementById(id).value;e.inc.music=g('mus');e.inc.temp=+g('tmp');e.inc.hum=+g('hum');e.inc.adjusted=true},
+  addStep:d=>{const m=byId(+d.id);if(m.routine.list.length<8){m.routine.list.push('0');m.routine.idx=0}},
+  delStep:d=>{const m=byId(+d.id);if(m.routine.list.length>1){m.routine.list.splice(+d.i,1);m.routine.idx=0}},
+  addRule:d=>{const m=byId(+d.id);if(m.routine.rules.length<3)m.routine.rules.push({attr:'fadiga',n:60,act:'rest'})},
+  delRule:d=>{const m=byId(+d.id);m.routine.rules.splice(+d.i,1)},
+  copyRoutine:d=>{const m=byId(+d.id),src=byId(+document.getElementById('cp'+d.id).value);if(src){m.routine={list:src.routine.list.slice(),rules:src.routine.rules.map(r=>({...r})),idx:0}}},
+  entry:d=>{U.entry={w:+d.w,lv:+d.lv,mid:d.mid?+d.mid:null};U.modal='entry'},
+  confirmEntry:()=>{const e=U.entry;const mid=+document.getElementById('emid').value;const st=document.querySelector('input[name=st]:checked').value;const m=byId(mid);
+    if(!m)return;const key=e.w+'-'+e.lv;if(S.entries[key])S.money+=FEE[e.lv];if(S.money<FEE[e.lv])return alert('Sem dinheiro para a taxa.');
+    S.money-=FEE[e.lv];S.entries[key]={mid,strategy:st};m.lastStrategy=st;U.modal=null;U.entry=null},
+  cancelEntry:d=>{S.money+=FEE[+d.k.split('-')[1]];delete S.entries[d.k];U.modal=null;U.entry=null},
+  conceive:d=>{const a=byId(+d.f),b=byId(+d.m);a.conceive=b.id;b.conceive=a.id},
+  unconceive:d=>{const a=byId(+d.f),b=byId(+d.m);a.conceive=b.conceive=null},
+  rename:d=>{const m=byId(+d.id);const n=prompt('Nome do monstro:',m.name);if(n)m.name=n.slice(0,12)},
+  seen:()=>{U.report=null;U.screen='home';U.modal=null},
+  newGame:()=>{if(confirm('Novo jogo apaga o save atual. Continuar?'))newGame()},
+  stub:d=>alert(d.t),
+};
+const CH={
+  word:el=>{U.wordDraft=el.value;render();const i=document.getElementById('word');i.focus();i.setSelectionRange(99,99)},
+  step:el=>{const m=byId(+el.dataset.id);m.routine.list[+el.dataset.i]=el.value;m.routine.idx=0},
+  rule:el=>{const m=byId(+el.dataset.id);const r=m.routine.rules[+el.dataset.i];r[el.dataset.f]=el.dataset.f==='n'?+el.value:el.value},
+  alert:el=>{S.alertsOn[el.dataset.k]=el.checked},
+  letter:el=>{U.letter=el.value},
+  scen:el=>{scenario(el.value);el.value=''},
+};
+document.addEventListener('click',ev=>{const t=ev.target.closest('[data-a]');if(!t||t.disabled)return;A[t.dataset.a](t.dataset);render()});
+document.addEventListener('input',ev=>{const t=ev.target;if(t.dataset.ch==='word')CH.word(t)});
+document.addEventListener('change',ev=>{const t=ev.target;if(t.dataset.ch&&t.dataset.ch!=='word'){CH[t.dataset.ch](t);render()}});
+
+// ================= pedaços de tela (iguais nas 3 variantes) =================
+const sx=s=>s==='M'?'♂ macho':'♀ fêmea';
+const aspChip=(a,orig)=>`<span class="asp" style="background:${ASP[a].color}" title="${ASP[a].good||''} / ${ASP[a].bad||''}">${a}${orig?' · '+orig:''}</span>`;
+const bar=(v,hot)=>`<span class="bar ${v>=hot?'hot':''}"><i style="width:${v}%"></i></span> ${Math.round(v)}`;
+const raceTag=r=>`<b>${RACES[r].name}</b> <span class="mut small">(${RACES[r].types.join('/')}, fraco a ${RACES[r].weak})</span>`;
+function header(){return `<b>Semana ${S.week}</b><span>💰 ${S.money}</span><span>Vagas ${usedSlots()}/${S.slots}</span>`}
+function passButtons(){return `<button data-a="week">Passar 1 semana</button><button class="pri" data-a="until">Avançar até um aviso ⏩</button>`}
+function monLine(m){const inE=Object.entries(S.entries).find(([k,e])=>e.mid===m.id);
+  return `<div class="row"><b>${m.name}</b> ${RACES[m.race].name} ${m.sex==='M'?'♂':'♀'} <span class="chip">${phase(m)} · sem. ${m.age}/156</span><span class="chip">${LV[m.level]}</span>
+  ${m.pregnant?`<span class="chip">grávida (${m.pregnant.left} sem.)</span>`:''}${inE?`<span class="chip">🏆 sem. ${inE[0].split('-')[0]}</span>`:''}</div>
+  <div class="small">Fadiga ${bar(m.fatigue,80)} · Estresse ${bar(m.stress,70)} · Obediência ${obedience(m)}</div>
+  <div class="small mut">Rotina: ${m.routine.list.map(actName).join(' → ')}${m.routine.rules.length?` · ${m.routine.rules.length} regra(s)`:''}</div>`}
+function eggCard(e,mode){const par=(p,t)=>`<div class="small"><b>${t}</b> ${STATS.map((s,i)=>`${s} ${L(prate(p,i))}`).join(' · ')}<br>${p.aspects.map(a=>aspChip(a)).join('')}</div>`;
+  return `<div class="card"><div class="row"><b>Ovo ${RACES[e.race].name}</b> ${sx(e.sex)} <span class="chip">${e.origin}</span>
+  ${mode==='shop'?`<span class="sp"></span><b>${e.price}</b>`:''}</div>${par(e.mother,'Mãe')}${par(e.father,'Pai')}
+  ${e.inc?`<div class="small">Em incubação: semana ${e.inc.week}/4 · palavra "${e.inc.word}"</div>`:''}
+  <div class="row" style="margin-top:6px">
+  ${mode==='shop'?`<button class="pri" data-a="buy" data-id="${e.id}" ${S.money<e.price?'disabled':''}>Comprar</button>`:''}
+  ${mode==='stored'&&!e.inc?`<button class="pri" data-a="incub" data-id="${e.id}" ${usedSlots()>=S.slots?'disabled title="sem vaga livre"':''}>Incubar</button>
+     <button data-a="sellEgg" data-id="${e.id}">Vender (${Math.round(e.price*.2)})</button>`:''}
+  ${mode==='stored'&&e.inc?`<button class="pri" data-a="incub" data-id="${e.id}">Ver incubação</button>`:''}</div></div>`}
+function scShop(){return `<h2>Loja de ovos</h2><p class="mut small">A loja troca os ovos não comprados a cada 4 semanas (próxima troca: semana ${S.week+(4-((S.week-1)%4))}). As letras são as taxas de ganho dos pais.</p><div class="grid">${S.shop.map(e=>eggCard(e,'shop')).join('')||'<p>Loja vazia.</p>'}</div>`}
+function scEggs(){return `<h2>Ovos</h2><p class="mut small">Ovo guardado não ocupa vaga. Para incubar, precisa de 1 vaga livre.</p><div class="grid">${S.eggs.map(e=>eggCard(e,'stored')).join('')||'<p>Nenhum ovo.</p>'}</div>`}
+function scIncub(){const e=eggById(U.sel);if(!e)return '<p>Ovo não encontrado.</p>';
+  if(!e.inc){const w=U.wordDraft,ok=validWord(w),book=ok&&inBook(w);
+    return `<h2>Lançar a palavra</h2>${eggCard(e,'none')}<div class="card"><p>Escolha uma palavra de 3 a 7 letras. Ela não muda depois.</p>
+    <input id="word" data-ch="word" value="${w}" maxlength="7" placeholder="ex.: fogo"> ${!w?'':!ok?'<span class="warn">só letras, 3 a 7</span>':book?`Efeito conhecido: ${effText(w)}`:'<b>Efeito desconhecido</b>'}
+    <div class="row" style="margin-top:8px">${ok&&!book?`<button data-a="study" ${S.money<100?'disabled':''}>Estudar (100)</button>`:''}
+    <button class="pri" data-a="launch" ${!ok||usedSlots()>=S.slots?'disabled':''}>${ok&&!book?'Lançar sem estudar':'Lançar'}</button></div>
+    <p class="small mut">Lançar conta como 1 uso: a palavra perde 25% de força nos próximos ovos.</p></div>`}
+  const i=e.inc,opt=(arr,v,id)=>`<select id="${id}" ${i.adjusted?'disabled':''}>${arr.map((x,k)=>`<option value="${id==='mus'?x:k}" ${(id==='mus'?x===v:k===v)?'selected':''}>${x}</option>`).join('')}</select>`;
+  return `<h2>Incubação · semana ${i.week+1} de 4</h2><div class="card"><div>Palavra: <b>${i.word}</b> <span class="mut">(efeito aparece no nascimento${inBook(i.word)&&S.notebook[normWord(i.word)].studied?'; já estudada: '+effText(i.word,i.strength):''})</span></div>
+  <div style="margin:10px 0">Resultado da semana passada: ${i.last?aspChip(i.last):'<span class="mut">nenhum ainda</span>'}</div>
+  <div class="row">Música ${opt(MUSICS,i.music,'mus')} Temperatura ${opt(TEMPS,i.temp,'tmp')} Umidade ${opt(HUMS,i.hum,'hum')}
+  <button data-a="adjust" ${i.adjusted?'disabled':''}>${i.adjusted?'Ajuste feito nesta semana':'Aplicar ajuste'}</button></div>
+  <p class="small ${i.week===3?'warn':'mut'}">${i.week===3?'Última semana: os valores de agora decidem o aspecto.':'Só a última semana decide. A cor aparece quando a semana passa.'}</p></div>`}
+function scMonster(m){if(!m)return '<p>Monstro não encontrado.</p>';const r=RACES[m.race];
+  return `<h2>${m.name} <button data-a="rename" data-id="${m.id}" class="small">renomear</button></h2>
+  <div class="card">${monLine(m)}</div>
+  <div class="card"><h3>Stats e taxas de ganho</h3><table><tr><th>Stat</th><th>Valor</th><th>Taxa</th><th></th></tr>
+  ${STATS.map((s,i)=>`<tr><td>${s}</td><td>${m.stats[i]}</td><td>${L(m.rates[i])}</td><td class="small mut">${i===m.word.pos?'palavra +':i===m.word.neg?'palavra −':''}</td></tr>`).join('')}
+  <tr><td><b>Soma</b></td><td><b>${sum(m.stats)}</b></td><td></td><td></td></tr></table>
+  <div class="small mut">Palavra "${m.word.text}": ${effText(m.word.text,m.word.strength)}</div></div>
+  <div class="card"><h3>Aspectos</h3>${m.aspects.map((a,k)=>`<div>${aspChip(a,['incubação','mãe','pai'][k])} <span class="small">${ASP[a].good} · <span class="warn">${ASP[a].bad}</span></span></div>`).join('')}</div>
+  <div class="card"><h3>Habilidades</h3>${r.skills.map((s,i)=>`<div class="${m.unlocked.includes(i)?'':'mut'}">${i+1}. <b>${s[0]}</b> (${s[1]}) ${m.unlocked.includes(i)?'✔':`🔒 ${STATS[s[2]]} ${s[3]}`}</div>`).join('')}
+  <div class="small mut">Vitórias ${m.wins} · títulos ${m.titles}</div></div>
+  <div class="row">${U.variant!=='B'?`<button data-a="${U.variant==='C'?'go':'go'}" data-s="routine" data-id="${m.id}">Rotina</button>`:''}
+  <button data-a="sellMon" data-id="${m.id}">Vender (${SELL[m.level]/(phase(m)==='velho'?2:1)})</button></div>`}
+function scRoutine(m){const opts=v=>['rest','0','1','2','3','4','5'].map(o=>`<option value="${o}" ${o===v?'selected':''}>${actName(o)}</option>`).join('');
+  const l=m.routine.list,prev=[];let idx=m.routine.idx;for(let k=0;k<8;k++)prev.push(actName(l[(idx+k)%l.length]).replace('Treino de ',''));
+  const others=S.monsters.filter(x=>x!==m);
+  return `<h2>Rotina de ${m.name}</h2><div class="card small">${monLine(m)}</div>
+  <div class="card"><h3>Lista (repete, até 8 passos)</h3>${l.map((a,i)=>`<div class="row">${i+1}. <select data-ch="step" data-id="${m.id}" data-i="${i}">${opts(a)}</select>
+   ${i===idx%l.length?'<span class="chip">próximo</span>':''}<button data-a="delStep" data-id="${m.id}" data-i="${i}" ${l.length<2?'disabled':''}>✕</button></div>`).join('')}
+  <button data-a="addStep" data-id="${m.id}" ${l.length>=8?'disabled':''}>+ passo</button><p class="small mut">Mudar a lista recomeça do passo 1.</p></div>
+  <div class="card"><h3>Regras (até 3, a primeira verdadeira decide)</h3>${m.routine.rules.map((r,i)=>`<div class="row">Se
+   <select data-ch="rule" data-f="attr" data-id="${m.id}" data-i="${i}"><option ${r.attr==='fadiga'?'selected':''}>fadiga</option><option ${r.attr==='estresse'?'selected':''}>estresse</option></select>
+   for <input type="number" min="0" max="100" step="5" value="${r.n}" style="width:60px" data-ch="rule" data-f="n" data-id="${m.id}" data-i="${i}"> ou mais →
+   <select data-ch="rule" data-f="act" data-id="${m.id}" data-i="${i}">${opts(r.act)}</select><button data-a="delRule" data-id="${m.id}" data-i="${i}">✕</button></div>`).join('')||'<p class="mut">Nenhuma regra.</p>'}
+  <button data-a="addRule" data-id="${m.id}" ${m.routine.rules.length>=3?'disabled':''}>+ regra</button></div>
+  <div class="card small"><b>Próximas semanas pela lista</b> (sem contar regras, torneio e concepção): ${prev.join(' → ')}<br>
+   Agora: fadiga ${m.fatigue}, estresse ${Math.round(m.stress)}. ${chooseActionPreview(m)}</div>
+  ${others.length?`<div class="card small row">Copiar rotina de <select id="cp${m.id}">${others.map(o=>`<option value="${o.id}">${o.name}</option>`).join('')}</select><button data-a="copyRoutine" data-id="${m.id}">Copiar</button> <span class="mut">(ideia extra, ver pergunta 4)</span></div>`:''}`}
+function chooseActionPreview(m){for(const r of m.routine.rules){const v=r.attr==='fadiga'?m.fatigue:m.stress;if(v>=r.n)return `Na próxima semana a regra "${r.attr} ≥ ${r.n}" decide: ${actName(r.act)}.`}
+  return `Na próxima semana: ${actName(m.routine.list[m.routine.idx%m.routine.list.length])}.`}
+function upcoming(n){const out=[];for(let w=S.week;w<S.week+n;w++)for(const lv of editionsAt(w))out.push({w,lv});return out}
+function scCalendar(){return `<h2>Calendário de torneios</h2><table><tr><th>Semana</th><th>Nível</th><th>Oponentes</th><th>Taxa · prêmio</th><th>Inscrito</th><th></th></tr>
+  ${upcoming(24).map(({w,lv})=>{const k=w+'-'+lv,en=S.entries[k];return `<tr><td>${w}${w===S.week?' <span class="chip">esta</span>':''}</td><td>${LV[lv]}</td>
+  <td>2× ${RACES[predRace(w,lv)].name} + ${RACES[thirdRace(w,lv)].name}</td><td>${FEE[lv]} · ${PRIZE[lv][0]}/${PRIZE[lv][1]}</td><td>${en?byId(en.mid)?.name+' ('+en.strategy+')':'—'}</td>
+  <td><button data-a="entry" data-w="${w}" data-lv="${lv}">${en?'Mudar':'Inscrever'}</button></td></tr>`}).join('')}</table>
+  <p class="small mut">Regional a cada 4 semanas, Nacional a cada 8, Mundial a cada 12. O monstro luta no nível dele ou abaixo.</p>`}
+function scEntry(){const {w,lv}=U.entry,k=w+'-'+lv,en=S.entries[k];const busy=new Set(Object.entries(S.entries).filter(([kk,e])=>kk.split('-')[0]==w&&kk!==k).map(([,e])=>e.mid));
+  const ok=S.monsters.filter(m=>m.level>=lv&&!busy.has(m.id));const sel=en?.mid??U.entry.mid??ok[0]?.id;const m0=byId(sel);
+  const ops=[predRace(w,lv),predRace(w,lv),thirdRace(w,lv)];const st=en?.strategy??m0?.lastStrategy??'Equilibrada';
+  return `<h2>Inscrição · ${LV[lv]} da semana ${w}</h2>
+  <div class="card"><h3>Oponentes</h3>${ops.map(r=>`<div>${raceTag(r)}</div>`).join('')}<div class="small mut">Soma dos stats do nível: ${RANGE[lv][0]} a ${RANGE[lv][1]}. Stats de cada oponente: escondidos.</div></div>
+  <div class="card"><h3>Monstro</h3>${ok.length?`<select id="emid">${ok.map(m=>`<option value="${m.id}" ${m.id===sel?'selected':''}>${m.name} · ${RACES[m.race].name} · soma ${sum(m.stats)} · obediência ${obedience(m)}${m.level>lv?' · nível abaixo: sem ovo':''}</option>`).join('')}</select>
+   ${m0?`<div class="small" style="margin-top:4px">${m0.name} acerta a fraqueza de: ${ops.filter(r=>hits(m0.race,r)).map(r=>RACES[r].name).join(', ')||'ninguém'} · sofre fraqueza de: ${ops.filter(r=>hits(r,m0.race)).map(r=>RACES[r].name).join(', ')||'ninguém'}</div>`:''}`
+   :'<p class="warn">Nenhum monstro pode lutar neste nível.</p>'}</div>
+  <div class="card"><h3>Estratégia (vale para as 3 lutas)</h3>${[['Equilibrada','Nenhum efeito.'],['Ataque','+15% de dano, −30% de Defesa.'],['Guarda','−15% de dano. Fraqueza recebida vira ×1,0.']].map(([n,t])=>
+   `<label style="display:block"><input type="radio" name="st" value="${n}" ${n===st?'checked':''}> <b>${n}</b> <span class="small mut">${t}</span></label>`).join('')}
+   <div class="small mut">O monstro só segue a estratégia quando obedece.</div></div>
+  <div class="row"><button class="pri" data-a="confirmEntry" ${ok.length?'':'disabled'}>Confirmar${FEE[lv]?' (taxa '+FEE[lv]+')':''}</button>${en?`<button data-a="cancelEntry" data-k="${k}">Cancelar inscrição</button>`:''}<button data-a="close">Voltar</button></div>`}
+function pairs(){const out=[];const ok=m=>phase(m)!=='jovem'&&!(m.sex==='F'&&(m.pregnant||m.recovery>0||m.age>147));
+  for(const f of S.monsters.filter(m=>m.sex==='F'))for(const d of S.monsters.filter(m=>m.sex==='M'&&m.race===f.race))out.push({f,d,ok:ok(f)&&ok(d),why:!ok(f)?(phase(f)==='jovem'?`${f.name} é jovem`:f.pregnant?`${f.name} grávida`:f.recovery?`${f.name} em recuperação`:`${f.name} sem 9 semanas de vida`):!ok(d)?`${d.name} é jovem`:''});return out}
+function scBreed(){const ps=pairs();const preg=S.monsters.filter(m=>m.pregnant);
+  return `<h2>Procriação</h2><p class="small mut">Mesma raça, 1 macho e 1 fêmea, os 2 no auge ou velhos. A concepção usa a ação da semana dos 2. Gestação de 9 semanas.</p>
+  ${ps.map(({f,d,ok,why})=>`<div class="card"><div class="row"><b>${f.name} ♀ + ${d.name} ♂</b> (${RACES[f.race].name})<span class="sp"></span>
+   ${f.conceive===d.id?`<span class="chip">concepção marcada para esta semana</span><button data-a="unconceive" data-f="${f.id}" data-m="${d.id}">Desmarcar</button>`
+     :`<button class="pri" data-a="conceive" ${ok?'':'disabled'} data-f="${f.id}" data-m="${d.id}">Conceber nesta semana</button>`}</div>
+   ${ok?'':`<div class="small warn">${why}</div>`}
+   <div class="small">${STATS.map((s,i)=>`${s}: ${L(f.rates[i])} × ${L(d.rates[i])}`).join(' · ')}</div>
+   <div class="small">${f.aspects.map(a=>aspChip(a,'mãe')).join('')} ${d.aspects.map(a=>aspChip(a,'pai')).join('')}</div></div>`).join('')||'<p>Nenhum par possível no rancho.</p>'}
+  ${preg.length?`<h3>Gestações</h3>${preg.map(m=>`<div>${m.name} + ${m.pregnant.dad}: faltam ${m.pregnant.left} semanas</div>`).join('')}`:''}`}
+function scBook(){const w=U.wordDraft,ok=validWord(w);
+  return `<h2>Caderno de palavras</h2><div class="card row"><input id="word" data-ch="word" value="${w}" maxlength="7" placeholder="palavra">
+  ${ok&&!inBook(w)?`<button data-a="study" ${S.money<100?'disabled':''}>Estudar (100)</button>`:ok?'já no caderno':''}</div>
+  <table><tr><th>Palavra</th><th>Efeito agora</th><th>Usos</th></tr>${Object.entries(S.notebook).map(([k,v])=>`<tr><td>${k}</td><td>${effText(k)}</td><td>${v.uses}</td></tr>`).join('')||'<tr><td colspan=3 class="mut">Vazio.</td></tr>'}</table>`}
+function scMemorial(){return `<h2>Memorial</h2>${S.memorial.map(r=>`<div class="card"><b>${r.name}</b> · ${RACES[r.race].name} · morreu na semana ${r.week} · ${r.wins} vitórias · ${r.titles} títulos<div class="small">${STATS.map((s,i)=>`${s} ${r.stats[i]}`).join(' · ')}</div></div>`).join('')||'<p class="mut">Nenhum registro.</p>'}`}
+function scRanch(){return `<h2>Rancho</h2><div class="card row">Vagas: ${usedSlots()} de ${S.slots} usadas ${S.slots<6?`<button data-a="slot" ${S.money<SLOT_PRICE[S.slots+1]?'disabled':''}>Comprar ${S.slots+1}ª vaga (${SLOT_PRICE[S.slots+1]})</button>`:'(máximo)'}</div>
+  ${S.monsters.map(m=>`<div class="card">${monLine(m)}<div class="row" style="margin-top:6px"><button data-a="go" data-s="monster" data-id="${m.id}">Ficha</button><button data-a="go" data-s="routine" data-id="${m.id}">Rotina</button></div></div>`).join('')}
+  ${incubating().map(e=>`<div class="card">🥚 Ovo ${RACES[e.race].name} ${sx(e.sex)} em incubação · semana ${e.inc.week}/4 <button data-a="incub" data-id="${e.id}">Abrir</button></div>`).join('')}`}
+function scAlerts(){return `<h2>O que para o "Avançar até um aviso"</h2><p class="small mut">O jogo passa semanas até acontecer um destes eventos (máximo 60 semanas).</p>
+  ${Object.entries(ALERTS).map(([k,[t]])=>`<label style="display:block"><input type="checkbox" data-ch="alert" data-k="${k}" ${S.alertsOn[k]?'checked':''}> ${t}</label>`).join('')}`}
+function scSave(){return `<h2>Jogo</h2><p class="small">O jogo salva sozinho depois de cada semana e de cada ação.</p><div class="row">
+  <button data-a="stub" data-t="Baixaria um arquivo .json com o save.">Exportar</button><button data-a="stub" data-t="Pediria um arquivo, validaria e pediria confirmação.">Importar</button><button data-a="newGame">Novo jogo</button></div>`}
+function reveal(m){if(!m)return '<p class="mut">Monstro não está mais no rancho.</p>';return `<div class="card" style="border:2px solid var(--acc)"><h3>🐣 Nasceu: ${m.name} (${RACES[m.race].name} ${sx(m.sex)}) <button data-a="rename" data-id="${m.id}">dar nome</button></h3>
+  <div>Palavra "${m.word.text}": ${effText(m.word.text,m.word.strength)}</div>
+  <div>Aspectos: ${m.aspects.map((a,k)=>aspChip(a,['incubação','mãe','pai'][k])).join('')}${m.wasIndef?' <span class="small warn">(incubação terminou Indefinida: aspecto sorteado)</span>':''}</div>
+  <div class="small">${STATS.map((s,i)=>`${s} ${m.stats[i]} ${L(m.rates[i])}`).join(' · ')}</div>
+  <div class="small mut">Começa com a rotina "descansar". Monte a rotina para treinar.</div></div>`}
+function scReport(){const r=U.report;if(!r)return '<p>Sem relatório.</p>';const imp=r.items.filter(x=>x.type!=='semana'),wk=r.items.filter(x=>x.type==='semana');
+  const stop=r.until?r.items.filter(x=>S.alertsOn[x.type]):[];
+  return `<h2>Relatório · semana${r.from===r.to?' '+r.from:`s ${r.from} a ${r.to}`}</h2>
+  ${r.until?`<p class="small">${stop.length?'Parou por: <b>'+[...new Set(stop.map(x=>ALERTS[x.type][0]))].join(', ')+'</b>':'Parou: nada a avisar em 60 semanas, ou rancho vazio.'}</p>`:''}
+  ${imp.filter(x=>x.reveal).map(x=>reveal(byId(x.mid))).join('')}
+  ${imp.filter(x=>x.type==='torneio').map(x=>`<div class="card"><h3>🏆 ${x.text}</h3><div class="small mut">Estratégia ${x.strategy} · obediência ${x.ob}</div>
+    <table><tr><th>#</th><th>Monstro</th><th>Raça</th><th>Pontos</th></tr>${x.table.map((p,i)=>`<tr ${p.me?'style="font-weight:700"':''}><td>${i+1}</td><td>${p.name}</td><td>${RACES[p.race].name}</td><td>${p.pts}</td></tr>`).join('')}</table>
+    <div class="small">${x.fights.join('<br>')}</div></div>`).join('')}
+  <div class="card">${imp.filter(x=>!x.reveal&&x.type!=='torneio').map(x=>`<div>${S.alertsOn[x.type]?'⚠️':'·'} <span class="mut small">sem. ${x.week}</span> ${x.text}</div>`).join('')||'<span class="mut">Nada importante.</span>'}</div>
+  <details class="card"><summary>Ações de cada semana (${wk.length})</summary><div class="small">${wk.map(x=>`<div><span class="mut">sem. ${x.week}</span> ${x.text}</div>`).join('')}</div></details>
+  <button class="pri" data-a="seen">Ok</button>`}
+function screen(s){const m=byId(U.sel);return({shop:scShop,eggs:scEggs,incub:scIncub,monster:()=>scMonster(m),routine:()=>m?scRoutine(m):'',calendar:scCalendar,entry:scEntry,
+  breed:scBreed,book:scBook,memorial:scMemorial,ranch:scRanch,alerts:scAlerts,save:scSave,report:scReport})[s]?.()??''}
+
+// ================= Variante A: painel com menu lateral =================
+function VariantA(){if(U.screen==='home')U.screen='ranch';
+  const menu=[['ranch','🏠 Rancho'],['eggs',`🥚 Ovos (${S.eggs.length})`],['shop','🛒 Loja'],['calendar','🏆 Calendário'],['breed','💞 Procriação'],['book','📖 Caderno'],['memorial','🪦 Memorial'],['alerts','⏩ Avisos'],['save','💾 Jogo']];
+  return `<div class="topbar">${header()}<span class="sp"></span>${passButtons()}</div>
+  <div class="A-wrap"><div class="A-side">${menu.map(([k,t])=>`<button class="${U.screen===k?'on':''}" data-a="go" data-s="${k}">${t}</button>`).join('')}
+  <hr>${S.monsters.map(m=>`<button class="${U.sel===m.id&&['monster','routine'].includes(U.screen)?'on':''}" data-a="go" data-s="monster" data-id="${m.id}">${m.name} <span class="small mut">${phase(m)}</span></button>`).join('')}</div>
+  <div class="A-main">${U.modal==='entry'?scEntry():screen(U.screen)}</div></div>`}
+
+// ================= Variante B: linha do tempo =================
+function VariantB(){const W=12,ws=[...Array(W)].map((_,k)=>S.week+k);
+  const tools=[['shop','🛒 Loja'],['eggs',`🥚 Ovos (${S.eggs.length})`],['breed','💞 Procriação'],['calendar','🏆 Calendário completo'],['book','📖 Caderno'],['memorial','🪦 Memorial'],['ranch','🏠 Vagas e venda'],['alerts','⏩ Avisos'],['save','💾 Jogo']];
+  const cellM=(m,w,k)=>{const en=Object.entries(S.entries).find(([kk,e])=>e.mid===m.id&&+kk.split('-')[0]===w);const age=m.age+k;
+    if(age>156)return `<td class="cell-x">✝</td>`;
+    if(en)return `<td><div class="cell-t" data-a="entry" data-w="${w}" data-lv="${en[0].split('-')[1]}">🏆 ${LV[+en[0].split('-')[1]].slice(0,3)}</div></td>`;
+    if(k===0&&m.conceive)return `<td class="cell-g">💞</td>`;
+    const l=m.routine.list,a=l[(m.routine.idx+k)%l.length];const g=m.pregnant&&k<m.pregnant.left;
+    const mark=age===41?'<div class="small">→ auge</div>':age===111?'<div class="small">→ velho</div>':'';
+    return `<td class="${g?'cell-g':''} ${a==='rest'?'cell-r':''}">${a==='rest'?'💤':STATS[+a].slice(0,4)}${mark}</td>`};
+  const rows=S.monsters.map(m=>`<tr><td class="name" data-a="modal" data-s="monster" data-id="${m.id}"><b>${m.name}</b> ${RACES[m.race].name} ${m.sex==='M'?'♂':'♀'}<br><span class="small mut">${phase(m)} ${m.age}/156 · ${LV[m.level]} · F${m.fatigue} E${Math.round(m.stress)}</span></td>${ws.map((w,k)=>cellM(m,w,k)).join('')}</tr>`).join('');
+  const eggRows=incubating().map(e=>`<tr><td class="name" data-a="incub" data-id="${e.id}">🥚 Ovo ${RACES[e.race].name}<br><span class="small mut">incubação ${e.inc.week}/4 ${e.inc.adjusted?'':'· ajustar'}</span></td>${ws.map((w,k)=>`<td>${k<4-e.inc.week?(k===3-e.inc.week?'🐣':'🥚'):''}</td>`).join('')}</tr>`).join('');
+  const tRow=`<tr><td class="name"><b>Torneios</b></td>${ws.map(w=>`<td>${editionsAt(w).map(lv=>{const en=S.entries[w+'-'+lv];return `<div class="cell-t" style="margin:1px;${en?'':'background:#f3e3b5'}" data-a="entry" data-w="${w}" data-lv="${lv}" title="2× ${RACES[predRace(w,lv)].name}">${LV[lv].slice(0,3)} ${RACES[predRace(w,lv)].name.slice(0,3)}${en?' ✔':''}</div>`}).join('')}</td>`).join('')}</tr>`;
+  const modal=U.modal==='entry'?scEntry():U.modal==='monster'?scMonster(byId(U.sel))+scRoutine(byId(U.sel)):U.modal==='incub'?scIncub():U.modal?screen(U.modal):'';
+  const drawer=U.screen==='report'?scReport():(U.modal==='monster'||U.modal==='entry'||U.modal==='incub')?modal:'';
+  const over=U.modal&&!['monster','entry','incub'].includes(U.modal);
+  return `<div class="topbar">${header()}<span class="sp"></span>${passButtons()}</div>
+  <div class="B-tools">${tools.map(([k,t])=>`<button data-a="modal" data-s="${k}">${t}</button>`).join('')}</div>
+  <div class="B-tl"><table><tr><th></th>${ws.map((w,k)=>`<th class="${k?'':'now'}">${k?'sem. '+w:'esta semana ('+w+')'}</th>`).join('')}</tr>${tRow}${rows}${eggRows}</table>
+  <p class="small mut">Cada linha mostra o plano da rotina (as regras podem mudar na hora). Clique no nome para ficha + rotina; clique num torneio para inscrever. 💞 gestação · ✝ morte · → troca de fase.</p>
+  ${!S.monsters.length&&!incubating().length?'<div class="card">Rancho vazio. Abra a <button data-a="modal" data-s="shop">Loja</button> ou os <button data-a="modal" data-s="eggs">Ovos</button>.</div>':''}</div>
+  ${drawer?`<div class="B-drawer"><div class="row"><span class="sp"></span><button data-a="${U.screen==='report'?'seen':'close'}">✕</button></div>${drawer}</div>`:''}
+  ${over?`<div class="modal-bg"><div class="modal"><div class="row"><span class="sp"></span><button data-a="close">✕</button></div>${screen(U.modal)}</div></div>`:''}`}
+
+// ================= Variante C: semana guiada por pendências =================
+function tasks(){const t=[],add=(txt,btn,warn)=>t.push({txt,btn,warn});const free=S.slots-usedSlots();
+  if(!S.monsters.length&&!S.eggs.length)add('Você não tem monstro nem ovo. Compre um ovo na loja.',`<button class="pri" data-a="go" data-s="shop">Loja</button>`,1);
+  for(const e of S.eggs.filter(e=>!e.inc))if(free>0)add(`Ovo ${RACES[e.race].name} ${sx(e.sex)} guardado e ${free} vaga(s) livre(s).`,`<button data-a="incub" data-id="${e.id}">Incubar</button>`);
+  for(const e of incubating())if(!e.inc.adjusted)add(`Incubação do ovo ${RACES[e.race].name}: semana ${e.inc.week+1} de 4.${e.inc.week===3?' <b>Última: decide o aspecto.</b>':''}`,`<button data-a="incub" data-id="${e.id}">Ajustar</button>`,e.inc.week===3);
+  for(const m of S.monsters){if(m.routine.list.every(a=>a==='rest')&&!m.routine.rules.length)add(`${m.name} só descansa. Monte a rotina.`,`<button data-a="go" data-s="routine" data-id="${m.id}">Rotina</button>`,1);
+    if(m.fatigue>=80&&!m.routine.rules.some(r=>r.attr==='fadiga'))add(`${m.name} está com fadiga ${m.fatigue} e não tem regra de fadiga.`,`<button data-a="go" data-s="routine" data-id="${m.id}">Rotina</button>`,1)}
+  for(const {w,lv} of upcoming(2)){if(S.entries[w+'-'+lv])continue;const c=S.monsters.filter(m=>m.level===lv);if(c.length)
+    add(`${LV[lv]} na semana ${w}${w===S.week?' (esta semana)':''}: 2× ${RACES[predRace(w,lv)].name} + ${RACES[thirdRace(w,lv)].name}. Pode lutar: ${c.map(m=>m.name).join(', ')}.`,`<button data-a="entry" data-w="${w}" data-lv="${lv}">Inscrever</button>`)}
+  for(const p of pairs().filter(p=>p.ok&&!p.f.conceive))add(`Par pronto: ${p.f.name} ♀ + ${p.d.name} ♂.`,`<button data-a="go" data-s="breed">Ver</button>`);
+  return t}
+function VariantC(){const back=`<button data-a="go" data-s="home">← Voltar para a semana</button>`;
+  if(U.modal==='entry')return `<div class="topbar">${header()}</div><div class="C-main">${scEntry()}</div>`;
+  if(U.screen!=='home')return `<div class="topbar">${header()}<span class="sp"></span>${U.screen==='report'?'':back}</div><div class="C-main">${screen(U.screen)}${U.screen==='report'?'':'<p>'+back+'</p>'}</div>`;
+  const t=tasks();
+  return `<div class="topbar">${header()}</div><div class="C-main"><h2>Semana ${S.week}</h2>
+  <h3>Pendências (${t.length})</h3>${t.map(x=>`<div class="card C-task ${x.warn?'w':''}"><div class="tx">${x.txt}</div>${x.btn}</div>`).join('')||'<p class="mut">Nada pendente. A rotina cuida do resto.</p>'}
+  <h3>Monstros</h3>${S.monsters.map(m=>`<div class="card" data-a="go" data-s="monster" data-id="${m.id}" style="cursor:pointer">${monLine(m)}<div class="small">${chooseActionPreview(m)}</div></div>`).join('')||'<p class="mut">Nenhum.</p>'}
+  <div class="row" style="margin:16px 0">${passButtons()}</div>
+  <div class="C-menu"><span class="mut">Mais:</span>${[['shop','Loja'],['eggs','Ovos'],['calendar','Calendário'],['breed','Procriação'],['book','Caderno'],['ranch','Vagas e venda'],['memorial','Memorial'],['alerts','Avisos'],['save','Jogo']].map(([k,t])=>`<button data-a="go" data-s="${k}">${t}</button>`).join('')}</div></div>`}
+
+// ================= cenários (atalhos do protótipo) =================
+function mkMon(race,sex,age,lvl,origin,boost){const e=makeEgg(race,origin);e.sex=sex;startIncubation(e,pick(['sol','lua','mar','fogo']));e.inc.last=pick(PAIRS.flat());const m=hatch(e);
+  m.age=age;m.level=lvl;m.stats=m.stats.map((s,i)=>Math.min(999,Math.round(s+boost*m.rates[i])));RACES[race].skills.forEach((s,i)=>{if(i&&m.stats[s[2]]>=s[3])m.unlocked.push(i)});
+  m.routine={list:['1','5','0','rest'],rules:[{attr:'fadiga',n:60,act:'rest'}],idx:0};S.monsters.push(m);return m}
+function scenario(k){newGame();if(k==='auge'){S.week=72;S.money=1600;mkMon('tatuco','F',62,1,'loja',300);mkMon('tatuco','M',58,1,'loja',280);
+    const e=makeEgg('tatuco','Mundial');S.eggs.push(e);const w=mkMon('vulpi','M',30,0,'Mundial',120);w.rates[4]=1.78;w.rates[3]=1.52;}
+  if(k==='velho'){S.week=170;S.money=6200;S.slots=4;const m=mkMon('runoxa','M',138,2,'Nacional',820);m.titles=3;m.wins=17;mkMon('runoxa','F',44,1,'Mundial',330);const y=mkMon('runoxa','F',12,0,'Mundial',40);y.rates[2]=1.82;
+    S.memorial.push({name:'Bolota',race:'tatuco',stats:[512,300,120,210,160,530],wins:22,titles:4,week:150});S.notebook['luz']={uses:2,studied:false}}
+  U.screen='home'}
+
+// ================= barra do protótipo e render =================
+const VARS={A:'Painel com menu',B:'Linha do tempo',C:'Semana guiada'};
+function render(){
+  document.getElementById('app').innerHTML=({A:VariantA,B:VariantB,C:VariantC})[U.variant]();
+  const ks=Object.keys(VARS);
+  document.getElementById('proto').innerHTML=`<b>PROTÓTIPO</b><button onclick="cycle(-1)">←</button><span>${U.variant} (${VARS[U.variant]})</span><button onclick="cycle(1)">→</button>
+  <select data-ch="scen"><option value="">Cenário…</option><option value="start">Começo do jogo</option><option value="auge">Semana 72: par no auge + taxa S</option><option value="velho">Semana 170: velho + filha</option></select>
+  <select data-ch="letter" title="Letra para taxa fora de 0,5 a 1,5">${Object.entries(LETTERS).map(([k,v])=>`<option value="${k}" ${k===U.letter?'selected':''}>Letra: ${v.name}</option>`).join('')}</select>`;
+}
+function cycle(d){const ks=Object.keys(VARS);U.variant=ks[(ks.indexOf(U.variant)+d+ks.length)%ks.length];U.modal=null;if(U.screen==='home'&&U.variant==='A')U.screen='ranch';
+  if(U.variant!=='A'&&U.screen==='ranch')U.screen='home';const p=new URLSearchParams(location.search);p.set('variant',U.variant);history.replaceState(null,'','?'+p);render()}
+document.addEventListener('keydown',e=>{if(e.target.closest('input,select,textarea,[contenteditable]'))return;if(e.key==='ArrowLeft')cycle(-1);if(e.key==='ArrowRight')cycle(1)});
+U.variant=VARS[new URLSearchParams(location.search).get('variant')]?new URLSearchParams(location.search).get('variant'):'A';
+newGame();render();
+</script>
+</body>
+</html>
