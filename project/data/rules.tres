@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GameRules" format=3]
+
+[ext_resource type="Script" path="res://scripts/logic/game_rules.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+starting_money = 1000
+starting_slots = 3
